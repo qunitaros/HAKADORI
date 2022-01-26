@@ -13,6 +13,10 @@ import SignIn from "./components/pages/SignIn";
 
 import { getCurrentUser } from "./lib/api/auth";
 import { User } from "./interfaces/index";
+import NotFound from "./components/pages/NotFound";
+import ChatRoom from "./components/pages/ChatRoom";
+import ChatRooms from "./components/pages/ChatRooms";
+import Users from "./components/pages/Users";
 
 // グローバルで扱う変数・関数
 export const AuthContext = createContext(
@@ -87,7 +91,11 @@ const App: React.FC = () => {
             <Route exact path="/signin" component={SignIn} />
             <Private>
               <Switch>
-                <Route exact path="/" component={Home} />
+                <Route exact path="/home" component={Home} />
+                <Route exact path="/users" component={Users} />
+                <Route exact path="/chat_rooms" component={ChatRooms} />
+                <Route path="/chat_room/:id" component={ChatRoom} />
+                <Route component={NotFound} />
               </Switch>
             </Private>
           </Switch>
