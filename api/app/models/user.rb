@@ -18,5 +18,8 @@ class User < ActiveRecord::Base
 
   has_many :messages
 
-  has_many :outputs
+  has_many :posts
+
+  # dependent: :destroy 
+  #ユーザーが退会するにあたってその関係するもの全てを削除する
 end
