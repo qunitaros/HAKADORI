@@ -17,15 +17,16 @@ import { AuthContext } from "../../App";
 
 const useStyles = makeStyles((theme: Theme) => ({
   avatar: {
-    width: theme.spacing(10),
-    height: theme.spacing(10),
+    width: theme.spacing(15),
+    height: theme.spacing(15),
     mergin: "0 auto",
   },
   formWrapper: {
+    marginTop: "50px",
     padding: "2px 4px",
     display: "flex",
     alignItems: "center",
-    width: 340,
+    maxWidth: "380px",
   },
   textInputWrapper: {
     width: "100%",
@@ -111,7 +112,7 @@ const ChatRoom: React.FC<ChatRoomProps> = (props) => {
   return (
     <>
       {!loading ? (
-        <div style={{ maxWidth: 360 }}>
+        <div style={{ maxWidth: "720px" }}>
           <Grid
             container
             justifyContent="center"
