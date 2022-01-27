@@ -154,14 +154,14 @@ const ChatRoom: React.FC<ChatRoomProps> = (props) => {
                         : "30px 30px 0px 30px"
                     }
                     bgcolor={
-                      message.userId === otherUser?.id ? "#d3d3d3" : "ffb6c1"
+                      message.userId === otherUser?.id ? "#000000" : "#ffb6c1"
                     }
                     color={
                       message.userId === otherUser?.id ? "#000000" : "#ffffff"
                     }
                     m={1}
-                    border={0}
-                    style={{ padding: "1rem" }}
+                    border={10}
+                    style={{ padding: "1rem 0.5rem 1rem 1rem" }}
                   >
                     <Typography variant="body1" component="p">
                       {message.content}

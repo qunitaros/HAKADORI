@@ -1,5 +1,5 @@
 class Api::V1::ChatRoomsController < ApplicationController
-  before_action :set_chat_room only %i[show]
+  before_action :set_chat_room, only: %i[show]
 
   def index 
     chat_rooms = []

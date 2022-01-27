@@ -10,13 +10,13 @@ class Api::V1::LikesController < ApplicationController
   def create
     is_matched = false #マッチングが成立したかどうかのフラグ
 
-    active_likes = Like.find_or_initialize_by(like_params)
-    passive_likes = Like.find_by(
+    active_like = Like.find_or_initialize_by(like_params)
+    passive_like = Like.find_by(
       from_user_id: active_like.to_user_id,
       to_user_id: active_like.from_user_id
     )
 
-    if passive_likes # いいねを押した際、相手からのいいねが既に存在する場合はマッチング成立
+    if passive_like # いいねを押した際、相手からのいいねが既に存在する場合はマッチング成立
       chat_room = ChatRoom.create #メッセージ交換用の部屋を作成
 
       #自分
@@ -28,7 +28,7 @@ class Api::V1::LikesController < ApplicationController
       #相手
       ChatRoomUser.find_or_create_by(
         chat_room_id: chat_room.id,
-        user_id: passive_likes.from_user_id
+        user_id: passive_like.from_user_id
       )
 
       is_matched = true
