@@ -62,7 +62,7 @@ const Users: React.FC = () => {
     const today =
       date.getFullYear() +
       ("0" + (date.getMonth() + 1)).slice(-2) +
-      ("0" + (date.getDate() + 1)).slice(-2);
+      ("0" + date.getDate()).slice(-2);
 
     return Math.floor((parseInt(today) - parseInt(birthday)) / 10000);
   };
@@ -221,11 +221,11 @@ const Users: React.FC = () => {
           </Grid>
           <Grid container justifyContent="center">
             <Button
-              variant="outlined"
+              variant={isLikedUser(user.id) ? "outlined" : "contained"}
               onClick={() =>
                 isLikedUser(user.id) ? void 0 : handleCreateLike(user)
               }
-              color="primary"
+              color="secondary"
               startIcon={isLikedUser(user.id) ? true : false}
               style={{ marginTop: "1rem", marginBottom: "1rem" }}
             >

@@ -111,12 +111,12 @@ const Home: React.FC = () => {
 
   // 勉強分野
   const currentUserField = (): string => {
-    return fields[currentUser?.field];
+    return fields[currentUser?.field || 0];
   };
 
   // 休日
   const currentUserDayOff = (): string => {
-    return dayOffs[currentUser?.dayOff];
+    return dayOffs[currentUser?.dayOff || 0];
   };
 
   const createFormData = (): UpdateUserFormData => {
@@ -202,9 +202,9 @@ const Home: React.FC = () => {
               <Grid container justifyContent="center">
                 <Grid item style={{ marginTop: "1.5rem" }}>
                   <Typography variant="body1" component="p" gutterBottom>
-                    {currentUser?.name} {currentUserAge()}歳 (
-                    {currentUserPrefecture()}) 勉強している分野:
-                    {currentUserField}
+                    {currentUser?.name} <br />
+                    {currentUserAge()}歳（{currentUserPrefecture()}) <br />
+                    勉強中:{currentUserField} <br />
                     休日:{currentUserDayOff}
                   </Typography>
                   <Divider style={{ marginTop: "0.5rem" }} />
@@ -376,11 +376,7 @@ const Home: React.FC = () => {
                 ) : null}
               </DialogContent>
               <DialogActions>
-                <Button
-                  onClick={handleSubmit}
-                  color="secondary"
-                  disabled={!name || !profile ? true : false}
-                >
+                <Button onClick={handleSubmit} color="secondary">
                   変更する
                 </Button>
               </DialogActions>

@@ -62,10 +62,10 @@ const ChatRooms: React.FC = () => {
                 <List>
                   {/* 個別のチャットルームに飛ばす */}
                   <Link
-                    to={`/chatroom/${chatRoom.chatRoom.id}`}
+                    to={`/chat_room/${chatRoom.chatRoom.id}`}
                     className={classes.link}
                   >
-                    <div className={classes.root}>
+                    <span className={classes.root}>
                       <ListItem alignItems="flex-start" style={{ padding: 0 }}>
                         <ListItemAvatar>
                           <Avatar
@@ -76,7 +76,7 @@ const ChatRooms: React.FC = () => {
                         <ListItemText
                           primary={chatRoom.otherUser.name}
                           secondary={
-                            <div style={{ marginTop: "0.5rem" }}>
+                            <span style={{ marginTop: "0.5rem" }}>
                               <Typography
                                 component="span"
                                 variant="body2"
@@ -91,11 +91,11 @@ const ChatRooms: React.FC = () => {
                                     ) + "..."
                                   : chatRoom.lastMessage.content}
                               </Typography>
-                            </div>
+                            </span>
                           }
                         />
                       </ListItem>
-                    </div>
+                    </span>
                   </Link>
                   <Divider component="li" />
                 </List>

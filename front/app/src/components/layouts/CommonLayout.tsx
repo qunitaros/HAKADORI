@@ -12,7 +12,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 interface CommonLayoutProps {
-  children: React.ReactElement;
+  children: React.ReactNode;
 }
 
 // 全てのページで共通となるレイアウト
