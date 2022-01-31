@@ -12,6 +12,7 @@ import PersonIcon from "@material-ui/icons/Person";
 import SearchIcon from "@material-ui/icons/Search";
 import ChatBubbleIcon from "@material-ui/icons/ChatBubble";
 import SchoolIcon from "@material-ui/icons/School";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 
 import { AuthContext } from "../../App";
 
@@ -49,6 +50,15 @@ const Header: React.FC = () => {
             </IconButton>
             <IconButton
               component={Link}
+              to="/likes"
+              edge="start"
+              className={classes.linkBtn}
+              color="inherit"
+            >
+              <FavoriteIcon />
+            </IconButton>
+            <IconButton
+              component={Link}
               to="/chat_rooms"
               edge="start"
               className={classes.linkBtn}
@@ -58,7 +68,7 @@ const Header: React.FC = () => {
             </IconButton>
             <IconButton
               component={Link}
-              to="/output"
+              to="/posts"
               edge="start"
               className={classes.linkBtn}
               color="inherit"
@@ -98,7 +108,10 @@ const Header: React.FC = () => {
 
   return (
     <>
-      <AppBar position="static" color="secondary">
+      <AppBar
+        position="static"
+        style={{ color: "#000456", backgroundColor: "wheat" }}
+      >
         <Toolbar>
           <Typography
             component={Link}

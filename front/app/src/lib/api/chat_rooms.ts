@@ -1,6 +1,7 @@
+import client from "../../lib/api/client";
 import Cookies from "js-cookie";
-import client from "./client";
 
+// マッチングしたユーザーとの全てのチャットルーム情報を取得
 export const getChatRooms = () => {
   return client.get("chat_rooms", {
     headers: {
@@ -11,6 +12,7 @@ export const getChatRooms = () => {
   });
 };
 
+// id指定でチャットルーム情報を個別に取得
 export const getChatRoom = (id: number) => {
   return client.get(`chat_rooms/${id}`, {
     headers: {
