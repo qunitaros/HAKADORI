@@ -204,8 +204,8 @@ const Home: React.FC = () => {
                   <Typography variant="body1" component="p" gutterBottom>
                     {currentUser?.name} <br />
                     {currentUserAge()}歳（{currentUserPrefecture()}) <br />
-                    勉強中:{currentUserField} <br />
-                    休日:{currentUserDayOff}
+                    勉強中:{currentUserField()} <br />
+                    休日:{currentUserDayOff()}
                   </Typography>
                   <Divider style={{ marginTop: "0.5rem" }} />
                   <Typography

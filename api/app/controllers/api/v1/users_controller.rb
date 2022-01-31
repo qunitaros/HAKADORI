@@ -7,7 +7,8 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show 
-    render json: { status: 200, user: @user }
+    posts = @user.posts.all
+    render json: { status: 200, user: @user, posts: posts }
   end
 
   def update

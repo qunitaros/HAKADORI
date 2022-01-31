@@ -41,6 +41,14 @@ export interface User {
   updatedAt?: Date;
 }
 
+export interface UserPost {
+  id: number;
+  postField: number;
+  content: string;
+  userId: number;
+  createdAt?: Date;
+}
+
 export interface UpdateUserData {
   id: number | undefined | null;
   name?: string;
@@ -83,9 +91,19 @@ export interface Message {
   createdAt?: Date;
 }
 
-// アウトプット
-export interface OutPut {
-  title: string;
-  field: number;
+// ポスト
+export interface Post {
+  id: number;
+  postField: number;
+  content: string;
+  userId: number;
+  createdAt?: Date;
+  userName: string;
+  image: {
+    url: string;
+  };
+}
+
+export interface CreatePost {
   content: string;
 }

@@ -12,11 +12,15 @@ import SignUp from "./components/pages/SignUp";
 import SignIn from "./components/pages/SignIn";
 
 import { getCurrentUser } from "./lib/api/auth";
-import { User } from "./interfaces/index";
+import { User as UserData } from "./interfaces/index";
 import NotFound from "./components/pages/NotFound";
 import ChatRoom from "./components/pages/ChatRoom";
 import ChatRooms from "./components/pages/ChatRooms";
 import Users from "./components/pages/Users";
+import Posts from "./components/pages/Posts";
+import Root from "./components/pages/Root";
+import User from "./components/pages/User";
+import Likes from "./components/pages/Likes";
 
 // グローバルで扱う変数・関数
 export const AuthContext = createContext(
@@ -25,15 +29,15 @@ export const AuthContext = createContext(
     setLoading: React.Dispatch<React.SetStateAction<boolean>>;
     isSignedIn: boolean;
     setIsSignedIn: React.Dispatch<React.SetStateAction<boolean>>;
-    currentUser: User | undefined;
-    setCurrentUser: React.Dispatch<React.SetStateAction<User | undefined>>;
+    currentUser: UserData | undefined;
+    setCurrentUser: React.Dispatch<React.SetStateAction<UserData | undefined>>;
   }
 );
 
 const App: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
-  const [currentUser, setCurrentUser] = useState<User | undefined>();
+  const [currentUser, setCurrentUser] = useState<UserData | undefined>();
 
   // 認証済みのユーザーがいるかどうかチェック
   // 確認できた場合はそのユーザーの情報を取得
@@ -87,14 +91,18 @@ const App: React.FC = () => {
       >
         <CommonLayout>
           <Switch>
+            <Route exact path="/" component={Root} />
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/signin" component={SignIn} />
             <Private>
               <Switch>
                 <Route exact path="/home" component={Home} />
                 <Route exact path="/users" component={Users} />
+                <Route exact path="/user/:id" component={User} />
+                <Route exact path="/likes" component={Likes} />
                 <Route exact path="/chat_rooms" component={ChatRooms} />
                 <Route path="/chat_room/:id" component={ChatRoom} />
+                <Route exact path="/posts" component={Posts} />
                 <Route component={NotFound} />
               </Switch>
             </Private>

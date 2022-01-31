@@ -7,6 +7,8 @@ import DialogContent from "@material-ui/core/DialogContent";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
 
 import { AuthContext } from "../../App";
 import { User, Like } from "../../interfaces";
@@ -14,11 +16,20 @@ import { getUsers } from "../../lib/api/users";
 import { prefectures } from "../../data/prefectures";
 import { createLike, getLikes } from "../../lib/api/likes";
 import AlertMessage from "../utils/AlertMessage";
+import { fields } from "../../data/fields";
+import { dayOffs } from "../../data/dayOffs";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) => ({
   avatar: {
     width: theme.spacing(10),
     height: theme.spacing(10),
+  },
+  card: {
+    height: theme.spacing(30),
+    width: theme.spacing(25),
+    maxWidth: "300px",
+    minWidth: "100px",
   },
 }));
 
@@ -50,7 +61,7 @@ const Users: React.FC = () => {
   const [user, setUser] = useState<User>(initialUserState);
   const [userDetailOpen, setUserDetailOpen] = useState<boolean>(false);
   const [likedUsers, setLikedUsers] = useState<User[]>([]);
-  const [likes, setLikens] = useState<Like[]>([]);
+  const [likes, setLikes] = useState<Like[]>([]);
   const [alertMessageOpen, setAlertMessageOpen] = useState<boolean>(false);
 
   // 生年月日から年齢を計算する
@@ -72,6 +83,16 @@ const Users: React.FC = () => {
     return prefectures[user.prefecture - 1];
   };
 
+  // 学習分野
+  const userField = (): string => {
+    return fields[user.field];
+  };
+
+  // 休日
+  const userDayOff = (): string => {
+    return dayOffs[user.dayOff];
+  };
+
   const handleCreateLike = async (user: User) => {
     const data: Like = {
       fromUserId: currentUser?.id,
@@ -80,10 +101,9 @@ const Users: React.FC = () => {
 
     try {
       const res = await createLike(data);
-      console.log(res);
 
       if (res?.status === 200) {
-        setLikens([res.data.like, ...likes]);
+        setLikes([res.data.like, ...likes]);
         setLikedUsers([user, ...likedUsers]);
 
         console.log(res?.data.like);
@@ -104,7 +124,6 @@ const Users: React.FC = () => {
   const handleGetUsers = async () => {
     try {
       const res = await getUsers();
-      console.log(res);
 
       if (res?.status === 200) {
         setUsers(res?.data.users);
@@ -121,7 +140,6 @@ const Users: React.FC = () => {
   const handleGetLikes = async () => {
     try {
       const res = await getLikes();
-      console.log(res);
 
       if (res?.status === 200) {
         setLikedUsers(res?.data.activeLikes);
@@ -157,19 +175,38 @@ const Users: React.FC = () => {
                   }}
                 >
                   <Grid item style={{ margin: "0.5rem", cursor: "pointer" }}>
-                    <Avatar
-                      alt="avatar"
-                      src={user?.image.url}
-                      className={classes.avatar}
-                    />
-                    <Typography
-                      variant="body2"
-                      component="p"
-                      gutterBottom
-                      style={{ marginTop: "0.5rem", textAlign: "center" }}
-                    >
-                      {user.name}
-                    </Typography>
+                    <Card className={classes.card}>
+                      <CardContent>
+                        <Grid container justifyContent="center">
+                          <Grid item>
+                            <Link to={`user/${user.id}`}>
+                              <Avatar
+                                alt="avatar"
+                                src={user?.image.url}
+                                className={classes.avatar}
+                              />
+                            </Link>
+                          </Grid>
+                        </Grid>
+                        <Divider style={{ marginTop: "0.8rem" }} />
+                        <Grid container justifyContent="center">
+                          <Typography
+                            variant="body2"
+                            component="p"
+                            gutterBottom
+                            style={{ marginTop: "0.5rem", textAlign: "center" }}
+                          >
+                            {user.name}さん <br />
+                            {userAge()}歳 ({userPrefecture()})
+                          </Typography>
+                        </Grid>
+                        <Grid container justifyContent="center">
+                          <Link to={`user/${user.id}`}>
+                            <Button size="small">プロフィールを見る</Button>
+                          </Link>
+                        </Grid>
+                      </CardContent>
+                    </Card>
                   </Grid>
                 </div>
               );
@@ -183,7 +220,7 @@ const Users: React.FC = () => {
       ) : (
         <></>
       )}
-      <Dialog
+      {/* <Dialog
         open={userDetailOpen}
         keepMounted
         onClose={() => setUserDetailOpen(false)}
@@ -206,7 +243,9 @@ const Users: React.FC = () => {
                 gutterBottom
                 style={{ textAlign: "center" }}
               >
-                {user.name} {userAge()}歳 ({userPrefecture()})
+                {user.name} {userAge()}歳 ({userPrefecture()}) <br />
+                学習分野:{userField()} <br />
+                休日: {userDayOff()}
               </Typography>
               <Divider />
               <Typography
@@ -239,7 +278,7 @@ const Users: React.FC = () => {
         setOpen={setAlertMessageOpen}
         severity="success"
         message="マッチングが成立しました!"
-      />
+      /> */}
     </>
   );
 };
