@@ -7,7 +7,7 @@ class Api::V1::PostsController < ApplicationController
   end
 
   def create
-    post = Post.new(params)
+    post = Post.new(post_params)
     if post.save
       render json: { status: 200, post: post }
     else
@@ -30,6 +30,6 @@ class Api::V1::PostsController < ApplicationController
     end
 
     def post_params
-      params.require(:post).permit(:content, :post_field, :user_id)
+      params.permit(:content, :post_field, :user_id)
     end
 end

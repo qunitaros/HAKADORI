@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 // サインアップ用ページ
 const SignUp: React.FC = () => {
   const classes = useStyles();
-  const histroy = useHistory();
+  const history = useHistory();
 
   const { setIsSignedIn, setCurrentUser } = useContext(AuthContext);
 
@@ -136,7 +136,7 @@ const SignUp: React.FC = () => {
         setIsSignedIn(true);
         setCurrentUser(res.data.data);
 
-        histroy.push("/home");
+        history.push("/home");
 
         setName("");
         setEmail("");

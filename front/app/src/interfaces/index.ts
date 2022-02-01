@@ -41,14 +41,6 @@ export interface User {
   updatedAt?: Date;
 }
 
-export interface UserPost {
-  id: number;
-  postField: number;
-  content: string;
-  userId: number;
-  createdAt?: Date;
-}
-
 export interface UpdateUserData {
   id: number | undefined | null;
   name?: string;
@@ -104,6 +96,14 @@ export interface Post {
   };
 }
 
-export interface CreatePost {
+export interface UserPost {
+  id: number;
+  postField: number;
   content: string;
+  userId: number;
+  createdAt?: Date;
+}
+
+export interface CreatePostFormData extends FormData {
+  append(name: keyof UserPost, value: String | Blob, fileName?: string): any;
 }

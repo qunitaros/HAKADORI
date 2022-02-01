@@ -1,11 +1,11 @@
 import client from "./client";
-import { Post } from "../../interfaces";
+import { CreatePostFormData } from "../../interfaces";
 
 export const getPosts = () => {
   return client.get(`posts`);
 };
 
-export const createPost = (data: Post) => {
+export const createPost = (data: CreatePostFormData) => {
   return client.post("posts", data);
 };
 
