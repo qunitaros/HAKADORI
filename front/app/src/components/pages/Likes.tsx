@@ -1,7 +1,5 @@
 import { useEffect } from "react";
-import { useState } from "react";
 import { User } from "../../interfaces";
-import { getLikes } from "../../lib/api/likes";
 
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -12,47 +10,19 @@ import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
-// import { makeStyles, Theme } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
-
-// const useStyles = makeStyles((theme: Theme) => ({
-//   root: {
-//     flexGrow: 1,
-//     minWidth: 340,
-//     maxWidth: "100%",
-//   },
-//   link: {
-//     textDecoration: "none",
-//     color: "inherit",
-//   },
-// }));
+import useLikes from "../../lib/hooks/useLikes";
+import useMatching from "../../lib/hooks/useMatching";
 
 const Likes: React.FC = () => {
   // const classes = useStyles();
 
-  const [loading, setLoading] = useState<boolean>(true);
-  const [passiveLikeUsers, setPassiveLikeUsers] = useState<User[]>([]);
-  //const [activeLikeUsers, setActiveLikeUsers] = useState<User[]>([]);
-
-  // passiveLikeを取得
-  const handleGetLikeUsers = async () => {
-    try {
-      const res = await getLikes();
-      if (res?.status === 200) {
-        //setActiveLikeUsers(res?.data.activeLikes);
-        setPassiveLikeUsers(res?.data.passiveLikes);
-        console.log(res?.data.passiveLikes);
-      } else {
-        console.log(res?.data);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-    setLoading(false);
-  };
+  const { loading, passiveLikeUsers, handleGetLikeUsers } = useLikes();
+  const { isMatched } = useMatching();
 
   useEffect(() => {
     handleGetLikeUsers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -78,10 +48,20 @@ const Likes: React.FC = () => {
                     </Link>
                     <Divider />
                     <CardContent>
-                      <Typography variant="body2" component="p">
-                        {passiveLikeUser.name}さんからいいねがありした! <br />
-                        プロフィールを確認してみましょう!
-                      </Typography>
+                      {isMatched ? (
+                        <Typography
+                          variant="body2"
+                          component="p"
+                          color="secondary"
+                        >
+                          {passiveLikeUser.name}さんとマッチング中!!
+                        </Typography>
+                      ) : (
+                        <Typography variant="body2" component="p">
+                          {passiveLikeUser.name}さんからいいねがありした! <br />
+                          プロフィールを確認してみましょう!
+                        </Typography>
+                      )}
                     </CardContent>
                     <CardActions>
                       <Link to={`user/${passiveLikeUser.id}`}>

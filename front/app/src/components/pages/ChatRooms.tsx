@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import { makeStyles, Theme } from "@material-ui/core/styles";
@@ -11,8 +11,8 @@ import Divider from "@material-ui/core/Divider";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 
-import { getChatRooms } from "../../lib/api/chat_rooms";
 import { ChatRoom } from "../../interfaces/index";
+import useChatRooms from "../../lib/hooks/useChatRooms";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -24,32 +24,20 @@ const useStyles = makeStyles((theme: Theme) => ({
     textDecoration: "none",
     color: "inherit",
   },
+  chatRoom: {
+    padding: theme.spacing(1),
+  },
 }));
 
 //チャットルーム一覧ページ
 const ChatRooms: React.FC = () => {
   const classes = useStyles();
 
-  const [loading, setLoading] = useState<boolean>(true);
-  const [chatRooms, setChatRooms] = useState<ChatRoom[]>([]);
-
-  const handleGetChatRooms = async () => {
-    try {
-      const res = await getChatRooms();
-
-      if (res.status === 200) {
-        setChatRooms(res.data.chatRooms);
-      } else {
-        console.log("No chat rooms");
-      }
-    } catch (err) {
-      console.log(err);
-    }
-    setLoading(false);
-  };
+  const { loading, chatRooms, handleGetChatRooms } = useChatRooms();
 
   useEffect(() => {
     handleGetChatRooms();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -59,14 +47,17 @@ const ChatRooms: React.FC = () => {
           chatRooms.map((chatRoom: ChatRoom, index: number) => {
             return (
               <Grid container key={index} justifyContent="center">
-                <List>
+                <List style={{ width: "300px" }}>
                   {/* 個別のチャットルームに飛ばす */}
                   <Link
                     to={`/chat_room/${chatRoom.chatRoom.id}`}
                     className={classes.link}
                   >
                     <span className={classes.root}>
-                      <ListItem alignItems="flex-start" style={{ padding: 0 }}>
+                      <ListItem
+                        alignItems="flex-start"
+                        className={classes.chatRoom}
+                      >
                         <ListItemAvatar>
                           <Avatar
                             alt="avatar"

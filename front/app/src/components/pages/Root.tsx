@@ -1,5 +1,5 @@
 import Image from "../image/studyMain.jpeg";
-import { makeStyles, Theme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyle = makeStyles({
   image: {

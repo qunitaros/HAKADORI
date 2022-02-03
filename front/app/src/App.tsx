@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext } from "react";
+import React, { useEffect, createContext } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -10,17 +10,17 @@ import CommonLayout from "./components/layouts/CommonLayout";
 import Home from "./components/pages/Home";
 import SignUp from "./components/pages/SignUp";
 import SignIn from "./components/pages/SignIn";
+import useCurrentUser from "./lib/hooks/useCurrentUser";
 
-import { getCurrentUser } from "./lib/api/auth";
 import { User as UserData } from "./interfaces/index";
 import NotFound from "./components/pages/NotFound";
 import ChatRoom from "./components/pages/ChatRoom";
 import ChatRooms from "./components/pages/ChatRooms";
 import Users from "./components/pages/Users";
-import Posts from "./components/pages/Posts";
 import Root from "./components/pages/Root";
 import User from "./components/pages/User";
 import Likes from "./components/pages/Likes";
+import Posts from "./components/pages/Posts";
 
 // グローバルで扱う変数・関数
 export const AuthContext = createContext(
@@ -35,33 +35,20 @@ export const AuthContext = createContext(
 );
 
 const App: React.FC = () => {
-  const [loading, setLoading] = useState<boolean>(true);
-  const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
-  const [currentUser, setCurrentUser] = useState<UserData | undefined>();
-
-  // 認証済みのユーザーがいるかどうかチェック
-  // 確認できた場合はそのユーザーの情報を取得
-  const handleGetCurrentUser = async () => {
-    try {
-      const res = await getCurrentUser();
-      console.log(res);
-
-      if (res?.status === 200) {
-        setIsSignedIn(true);
-        setCurrentUser(res?.data.currentUser);
-      } else {
-        console.log("No current user");
-      }
-    } catch (err) {
-      console.log(err);
-    }
-
-    setLoading(false);
-  };
+  const {
+    loading,
+    setLoading,
+    isSignedIn,
+    setIsSignedIn,
+    currentUser,
+    setCurrentUser,
+    handleGetCurrentUser,
+  } = useCurrentUser();
 
   useEffect(() => {
     handleGetCurrentUser();
-  }, [setCurrentUser]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // ユーザーが認証済みかどうかでルーティングを決定
   // 未認証だった場合は「/signin」ページに促す
@@ -108,6 +95,7 @@ const App: React.FC = () => {
             </Private>
           </Switch>
         </CommonLayout>
+        {/* </PostContext.Provider> */}
       </AuthContext.Provider>
     </Router>
   );
