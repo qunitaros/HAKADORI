@@ -6,7 +6,7 @@ interface UsersNameProps {
 }
 const UsersName = ({ children }: UsersNameProps) => {
   return (
-    <Typography variant="h6" gutterBottom>
+    <Typography component="h6" variant="h6" gutterBottom>
       {children}
     </Typography>
   );

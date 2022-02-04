@@ -2,8 +2,12 @@ class Api::V1::PostsController < ApplicationController
   before_action :set_post, only: [:update, :destroy]
 
   def index
-    posts = User.joins(:posts).select('posts.id, post_field, content, user_id, posts.created_at, name AS user_name, image ')
-    render json: { status: 200, posts: posts }
+    posts = Post.all
+    hash = []
+    posts.each{|post|
+      hash.push({post: post, user: post.user})
+    }
+    render json: { status: 200, posts: hash }
   end
 
   def create

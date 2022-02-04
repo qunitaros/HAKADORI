@@ -49,7 +49,7 @@ const CurrentUserProps = () => {
           dayOff={currentUserDayOff()}
           profile={currentUser?.profile}
         />
-        <SignOutButton onClick={() => handleSignOut} />
+        <SignOutButton onClick={handleSignOut} />
       </CardContent>
     </Card>
   );

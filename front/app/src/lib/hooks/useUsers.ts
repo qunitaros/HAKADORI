@@ -33,6 +33,7 @@ const useUsers = () => {
 
       if (res?.status === 200) {
         setUsers(res?.data.users);
+        console.log(res.data.users);
       } else {
         console.log("No users");
       }

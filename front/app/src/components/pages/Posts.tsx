@@ -83,11 +83,11 @@ const Posts: React.FC = () => {
                 return (
                   <Grid key={index} item xs={4}>
                     <PostsCard
-                      id={post.userId}
-                      imageUrl={post.image.url}
-                      userName={post.userName}
-                      postContent={post.content}
-                      postField={CreatePostField(post)}
+                      id={post.post.userId}
+                      imageUrl={post.user.image.url}
+                      userName={post.user.name}
+                      postContent={post.post.content}
+                      postField={CreatePostField(post.post)}
                       onClick={() => {
                         setPost(post);
                         setPostDetailOpen(true);
@@ -106,7 +106,7 @@ const Posts: React.FC = () => {
       ) : (
         <></>
       )}
-      <PostContentDialog>{post.content}</PostContentDialog>
+      <PostContentDialog>{post.post.content}</PostContentDialog>
       <PostCreateDialog />
       <AlertMessage // エラーが発生した場合はアラートを表示
         open={alertMessageOpen}

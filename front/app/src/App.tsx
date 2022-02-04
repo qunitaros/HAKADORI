@@ -76,9 +76,9 @@ const App: React.FC = () => {
           setCurrentUser,
         }}
       >
-        <CommonLayout>
-          <Switch>
-            <Route exact path="/" component={Root} />
+        <Switch>
+          <Route exact path="/" component={Root} />
+          <CommonLayout>
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/signin" component={SignIn} />
             <Private>
@@ -93,8 +93,9 @@ const App: React.FC = () => {
                 <Route component={NotFound} />
               </Switch>
             </Private>
-          </Switch>
-        </CommonLayout>
+          </CommonLayout>
+        </Switch>
+
         {/* </PostContext.Provider> */}
       </AuthContext.Provider>
     </Router>
