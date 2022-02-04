@@ -18,7 +18,12 @@ interface HeaderTitleProps {
 const Headerttl = ({ children }: HeaderTitleProps) => {
   const classes = useStyles();
   return (
-    <Typography component={Link} to="/" variant="h6" className={classes.title}>
+    <Typography
+      component={Link}
+      to="/users"
+      variant="h6"
+      className={classes.title}
+    >
       {children}
     </Typography>
   );

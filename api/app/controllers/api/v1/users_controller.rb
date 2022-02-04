@@ -37,3 +37,4 @@ class Api::V1::UsersController < ApplicationController
       params.permit(:name, :prefecture, :profile, :image, :field, :day_off)
     end
 end
+

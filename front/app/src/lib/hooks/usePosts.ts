@@ -2,17 +2,32 @@ import { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { AuthContext } from "../../App";
 import { fields } from "../../data/fields";
-import { CreatePostFormData, Post } from "../../interfaces";
+import { CreatePostFormData, Post, UserPost } from "../../interfaces";
 import { createPost, getPosts } from "../api/post";
 
 const inisialState: Post = {
-  id: 0,
-  postField: 0,
-  content: "",
-  userId: 0,
-  userName: "",
-  image: {
-    url: "",
+  post: {
+    id: 0,
+    postField: 0,
+    content: "",
+    userId: 0,
+  },
+  user: {
+    id: 0,
+    uid: "",
+    provider: "",
+    email: "",
+    name: "",
+    image: {
+      url: "",
+    },
+    gender: 0,
+    birthday: "",
+    profile: "",
+    prefecture: 1,
+    field: 0,
+    dayOff: 0,
+    allowPasswordChange: true,
   },
 };
 
@@ -32,7 +47,7 @@ const usePost = () => {
   const createFormData = (): CreatePostFormData => {
     const formData = new FormData();
 
-    formData.append("userId", String(currentUser.id));
+    formData.append("userId", String(currentUser?.id));
     formData.append("content", content);
     formData.append("postField", String(postField));
 
@@ -46,7 +61,6 @@ const usePost = () => {
 
       if (res?.status === 200) {
         setPosts(res?.data.posts);
-        console.log(res.data.posts);
       } else {
         console.log(res);
       }
@@ -82,7 +96,7 @@ const usePost = () => {
   };
 
   // 分野
-  const CreatePostField = (post: Post): string => {
+  const CreatePostField = (post: UserPost): string => {
     return fields[post.postField || 0];
   };
 

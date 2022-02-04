@@ -15,7 +15,7 @@ interface CommonLayoutProps {
   children: React.ReactNode;
 }
 
-// 全てのページで共通となるレイアウト
+// サインイン中共通のレイアウト
 const CommonLayout = ({ children }: CommonLayoutProps) => {
   const classes = useStyles();
 

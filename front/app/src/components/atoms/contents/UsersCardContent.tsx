@@ -1,5 +1,5 @@
 import React from "react";
-import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
 import { Theme, makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -15,16 +15,7 @@ interface UserCardContent {
 const UsersCardContent = ({ children }: UserCardContent) => {
   const classes = useStyles();
 
-  return (
-    <Typography
-      variant="body2"
-      component="p"
-      gutterBottom
-      className={classes.content}
-    >
-      {children}
-    </Typography>
-  );
+  return <Grid className={classes.content}>{children}</Grid>;
 };
 
 export default UsersCardContent;

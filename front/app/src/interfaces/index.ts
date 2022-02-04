@@ -83,19 +83,7 @@ export interface Message {
   createdAt?: Date;
 }
 
-// ポスト
-export interface Post {
-  id: number;
-  postField: number;
-  content: string;
-  userId: number;
-  createdAt?: Date;
-  userName: string;
-  image: {
-    url: string;
-  };
-}
-
+// 投稿、Userページ用ポスト
 export interface UserPost {
   id: number;
   postField: number;
@@ -104,6 +92,12 @@ export interface UserPost {
   createdAt?: Date;
 }
 
+// ポスト一覧用のポスト
+export interface Post {
+  post: UserPost;
+  user: User;
+}
+
 export interface CreatePostFormData extends FormData {
-  append(name: keyof UserPost, value: String | Blob, fileName?: string): any;
+  append(name: keyof UserPost, value: String | Blob): any;
 }

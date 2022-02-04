@@ -6,6 +6,7 @@ import { User } from "../../interfaces";
 import useUsers from "../../lib/hooks/useUsers";
 import UsersCard from "../organisms/cards/UsersCard";
 import UsersName from "../atoms/titles/UsersName";
+import UsersInfo from "../atoms/contents/UsersInfo";
 
 // ユーザー一覧ページ
 const Users: React.FC = () => {
@@ -28,7 +29,9 @@ const Users: React.FC = () => {
                   <Grid item style={{ margin: "0.5rem", cursor: "pointer" }}>
                     <UsersCard id={user.id} imageUrl={user.image.url}>
                       <UsersName>{user.name}さん</UsersName>
-                      {userAge(user)}歳 ({userPrefecture(user)})
+                      <UsersInfo>
+                        {userAge(user)}歳 ({userPrefecture(user)})
+                      </UsersInfo>
                     </UsersCard>
                   </Grid>
                 </Grid>
