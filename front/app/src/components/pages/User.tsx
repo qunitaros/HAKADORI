@@ -1,15 +1,20 @@
-import React, { useEffect, createContext } from "react";
+import React, { useEffect, createContext, useContext } from "react";
 
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 
 import { User as UserData, UserPost } from "../../interfaces";
 import { RouteComponentProps } from "react-router-dom";
 import useUser from "../../lib/hooks/useUser";
 import UserCard from "../organisms/cards/UserCard";
-import UserPostsCard from "../organisms/dialogs/UserPostsCard";
+import UserPostsCard from "../organisms/cards/UserPostsCard";
 import UserPostDialog from "../organisms/dialogs/UserPostDialog";
+import { AuthContext } from "../../App";
+import LikeButton from "../atoms/buttons/LikeButton";
+import useMatching from "../../lib/hooks/useMatching";
 
 export const UserContext = createContext(
   {} as {
@@ -19,11 +24,14 @@ export const UserContext = createContext(
     setUserPost: React.Dispatch<React.SetStateAction<UserPost>>;
     postDetailOpen: boolean;
     setPostDetailOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    postDeleteConfirm: boolean;
+    setPostDeleteConfirm: React.Dispatch<React.SetStateAction<boolean>>;
     handleGetUser: any;
     userAge: any;
     userDayOff: any;
     userField: any;
     userPrefecture: any;
+    handleDeletePost: any;
   }
 );
 
@@ -37,6 +45,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 type UserProps = RouteComponentProps<{ id: string }>;
 
 const User: React.FC<UserProps> = (props) => {
+  const { currentUser } = useContext(AuthContext);
   const classes = useStyles();
   const {
     loading,
@@ -52,10 +61,16 @@ const User: React.FC<UserProps> = (props) => {
     userField,
     userPrefecture,
     CreatePostField,
+    handleDeletePost,
+    postDeleteConfirm,
+    setPostDeleteConfirm,
   } = useUser(props);
+
+  const { isLikedUser, handleCreateLike, handleGetLikes } = useMatching();
 
   useEffect(() => {
     handleGetUser();
+    handleGetLikes();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -68,6 +83,9 @@ const User: React.FC<UserProps> = (props) => {
         setUserPost,
         postDetailOpen,
         setPostDetailOpen,
+        postDeleteConfirm,
+        setPostDeleteConfirm,
+        handleDeletePost,
         handleGetUser,
         userAge,
         userDayOff,
@@ -78,6 +96,23 @@ const User: React.FC<UserProps> = (props) => {
       {!loading ? (
         <Grid container justifyContent="center">
           <UserCard />
+          {currentUser.id !== user.id ? (
+            <LikeButton
+              variant="outlined"
+              onClick={() =>
+                isLikedUser(user.id) ? void 0 : handleCreateLike(user)
+              }
+              startIcon={
+                isLikedUser(user.id) ? <FavoriteIcon /> : <FavoriteBorderIcon />
+              }
+              disabled={isLikedUser(user.id) ? true : false}
+            >
+              {isLikedUser(user.id) ? "いいね済み" : "いいね"}
+            </LikeButton>
+          ) : (
+            <></>
+          )}
+
           {userPosts?.length > 0 ? (
             <Grid
               container
@@ -91,10 +126,14 @@ const User: React.FC<UserProps> = (props) => {
                     <UserPostsCard
                       postContent={userPost.content}
                       postField={CreatePostField(userPost)}
-                      onClick={() => {
+                      id={userPost.id}
+                      onClickOpen={() => {
                         setUserPost(userPost);
                         setPostDetailOpen(true);
                       }}
+                      useable={
+                        currentUser.id !== userPost.userId ? true : false
+                      }
                     />
                     <Grid
                       container

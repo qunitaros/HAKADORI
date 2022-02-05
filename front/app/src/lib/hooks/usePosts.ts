@@ -1,5 +1,4 @@
 import { useContext, useState } from "react";
-import { useHistory } from "react-router-dom";
 import { AuthContext } from "../../App";
 import { fields } from "../../data/fields";
 import { CreatePostFormData, Post, UserPost } from "../../interfaces";
@@ -33,7 +32,6 @@ const inisialState: Post = {
 
 const usePost = () => {
   const { currentUser } = useContext(AuthContext);
-  const history = useHistory();
 
   const [post, setPost] = useState<Post>(inisialState);
   const [posts, setPosts] = useState<Post[]>([]);
@@ -80,7 +78,6 @@ const usePost = () => {
 
       if (res?.status === 200) {
         setCreatePostFormOpen(false);
-        history.push("/posts");
 
         setContent("");
         setPostField(0);

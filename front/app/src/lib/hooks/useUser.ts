@@ -3,6 +3,7 @@ import { dayOffs } from "../../data/dayOffs";
 import { fields } from "../../data/fields";
 import { prefectures } from "../../data/prefectures";
 import { User as UserData, UserPost } from "../../interfaces/index";
+import { deletePost } from "../api/post";
 import { getUser } from "../api/users";
 
 const useUser = (props) => {
@@ -36,6 +37,7 @@ const useUser = (props) => {
   const [userPosts, setUserPosts] = useState<UserPost[] | undefined>([]);
   const [userPost, setUserPost] = useState<UserPost>(initialUserPostState);
   const [postDetailOpen, setPostDetailOpen] = useState<boolean>(false);
+  const [postDeleteConfirm, setPostDeleteConfirm] = useState<boolean>(false);
 
   const id = parseInt(props.match.params.id);
 
@@ -47,12 +49,25 @@ const useUser = (props) => {
         setUserPosts(res?.data.posts);
         console.log(res.data.posts);
       } else {
-        console.log(res.data);
+        console.log(res?.data);
       }
     } catch (err) {
       console.log(err);
     }
     setLoading(false);
+  };
+
+  const handleDeletePost = async (id: number) => {
+    try {
+      const res = await deletePost(id);
+      setPostDeleteConfirm(false);
+      if (res?.status === 200) {
+      } else {
+        console.log(res?.data);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   //生年月日から年齢を計算する (年齢 = floor(今日-誕生日)/ 10000)
@@ -103,6 +118,9 @@ const useUser = (props) => {
     userField,
     userPrefecture,
     CreatePostField,
+    handleDeletePost,
+    postDeleteConfirm,
+    setPostDeleteConfirm,
   };
 };
 

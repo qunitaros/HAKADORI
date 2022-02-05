@@ -59,6 +59,7 @@ const useMatching = () => {
 
   return {
     alertMessageOpen,
+    setAlertMessageOpen,
     handleGetLikes,
     handleCreateLike,
     isLikedUser,
