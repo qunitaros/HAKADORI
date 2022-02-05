@@ -4,14 +4,16 @@ import Button from "@material-ui/core/Button";
 interface LikeButtonProps {
   variant: "text" | "outlined" | "contained";
   onClick: () => void;
-  startIcon: boolean;
+  startIcon: any;
   children: React.ReactNode;
+  disabled: boolean;
 }
 
 const LikeButton = ({
   variant,
   onClick,
   startIcon,
+  disabled,
   children,
 }: LikeButtonProps) => {
   return (
@@ -20,6 +22,7 @@ const LikeButton = ({
         variant={variant}
         onClick={onClick}
         color="secondary"
+        disabled={disabled}
         startIcon={startIcon}
         style={{ marginTop: "1rem", marginBottom: "1rem" }}
       >

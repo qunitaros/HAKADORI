@@ -3,11 +3,11 @@ class Api::V1::PostsController < ApplicationController
 
   def index
     posts = Post.all
-    hash = []
+    array = []
     posts.each{|post|
-      hash.push({post: post, user: post.user})
+      array.push({post: post, user: post.user})
     }
-    render json: { status: 200, posts: hash }
+    render json: { status: 200, posts: array }
   end
 
   def create

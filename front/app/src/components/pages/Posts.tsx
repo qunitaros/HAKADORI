@@ -77,7 +77,6 @@ const Posts: React.FC = () => {
       {!loading ? (
         posts?.length > 0 ? (
           <>
-            <PostButton onClick={() => setCreatePostFormOpen(true)} />
             <Grid container justifyContent="center" spacing={2}>
               {posts?.map((post: Post, index: number) => {
                 return (
@@ -99,13 +98,26 @@ const Posts: React.FC = () => {
             </Grid>
           </>
         ) : (
-          <Typography component="p" variant="body2" color="textSecondary">
-            投稿されていません。
-          </Typography>
+          <Grid
+            container
+            style={{ flexFlow: "column", alignItems: "center" }}
+            justifyContent="center"
+          >
+            <Typography
+              component="h6"
+              variant="body1"
+              color="textSecondary"
+              style={{ marginBottom: "30px" }}
+            >
+              投稿されていません。
+            </Typography>
+            <PostButton onClick={() => setCreatePostFormOpen(true)} />
+          </Grid>
         )
       ) : (
         <></>
       )}
+
       <PostContentDialog>{post.post.content}</PostContentDialog>
       <PostCreateDialog />
       <AlertMessage // エラーが発生した場合はアラートを表示

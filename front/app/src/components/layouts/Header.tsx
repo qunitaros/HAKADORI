@@ -8,13 +8,13 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import PersonIcon from "@material-ui/icons/Person";
 import SearchIcon from "@material-ui/icons/Search";
 import ChatBubbleIcon from "@material-ui/icons/ChatBubble";
 import SchoolIcon from "@material-ui/icons/School";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 
 import { AuthContext } from "../../App";
+import PersonNav from "../atoms/navs/PersonNav";
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
@@ -75,15 +75,7 @@ const Header: React.FC = () => {
             >
               <SchoolIcon />
             </IconButton>
-            <IconButton
-              component={Link}
-              to="/home"
-              edge="start"
-              className={classes.linkBtn}
-              color="inherit"
-            >
-              <PersonIcon />
-            </IconButton>
+            <PersonNav />
           </>
         );
       } else {

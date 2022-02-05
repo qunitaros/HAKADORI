@@ -1,5 +1,5 @@
 class Api::V1::LikesController < ApplicationController
-  def index 
+  def index
     render json: {
       status: 200,
       active_likes: current_api_v1_user.active_likes,
@@ -49,3 +49,7 @@ class Api::V1::LikesController < ApplicationController
       params.permit(:from_user_id, :to_user_id)
     end
 end
+
+
+#マッチングのフラグについて考える
+#今日でテスト以外全部終わらせる

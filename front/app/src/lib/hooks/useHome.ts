@@ -104,7 +104,7 @@ const useHome = () => {
     }
   };
 
-  const handleSignOut = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSignOut = async () => {
     try {
       const res = await signOut();
 
@@ -125,6 +125,7 @@ const useHome = () => {
       console.log(err);
     }
   };
+
   return {
     isSignedIn,
     editFormOpen,
