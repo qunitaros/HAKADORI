@@ -1,5 +1,5 @@
 class Api::V1::LikesController < ApplicationController
-  def index 
+  def index
     render json: {
       status: 200,
       active_likes: current_api_v1_user.active_likes,
