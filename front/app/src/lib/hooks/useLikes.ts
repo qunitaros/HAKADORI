@@ -1,18 +1,29 @@
-import { useState } from "react";
-import { User } from "../../interfaces";
-import { getLikes } from "../api/likes";
+import { useState, useContext } from "react";
+import { AuthContext } from "../../App";
+import { Like, PassiveLikeUser, User } from "../../interfaces";
+import { createLike, getLikes } from "../api/likes";
 
 const useLikes = () => {
-  const [loading, setLoading] = useState<boolean>(true);
-  const [passiveLikeUsers, setPassiveLikeUsers] = useState<User[]>([]);
+  const { currentUser } = useContext(AuthContext);
 
-  // passiveLikeを取得
+  const [loading, setLoading] = useState<boolean>(true);
+  const [passiveLikeUsers, setPassiveLikeUsers] = useState<PassiveLikeUser[]>(
+    []
+  );
+  const [likedUsers, setLikedUsers] = useState<User[]>([]);
+  const [likes, setLikes] = useState<Like[]>([]);
+  const [matchingMessageOpen, setMatchingMessageOpen] =
+    useState<boolean>(false);
+  const [isMatched, setIsMatched] = useState<boolean>(false);
+
+  // passiveLike,activeLikeを取得
   const handleGetLikeUsers = async () => {
     try {
       const res = await getLikes();
       if (res?.status === 200) {
-        //setActiveLikeUsers(res?.data.activeLikes);
         setPassiveLikeUsers(res?.data.passiveLikes);
+        setLikedUsers(res?.data.activeLikes);
+
         console.log(res?.data.passiveLikes);
       } else {
         console.log(res?.data);
@@ -22,7 +33,52 @@ const useLikes = () => {
     }
     setLoading(false);
   };
-  return { loading, passiveLikeUsers, handleGetLikeUsers };
+
+  //いいねの生成
+  const handleCreateLike = async (user: User) => {
+    const data: Like = {
+      fromUserId: currentUser?.id,
+      toUserId: user.id,
+    };
+
+    try {
+      const res = await createLike(data);
+
+      if (res?.status === 200) {
+        setLikes([res.data.like, ...likes]);
+        setLikedUsers([user, ...likedUsers]);
+
+        console.log(res?.data.like);
+      } else {
+        console.log("Failed");
+      }
+
+      if (res?.data.isMatched === true) {
+        setMatchingMessageOpen(true);
+        setIsMatched(true);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // 既にいいねされているユーザーかどうかの判定
+  const isLikedUser = (userId: number | undefined): boolean => {
+    return likedUsers?.some((likedUser: User) => likedUser.id === userId);
+  };
+
+  return {
+    loading,
+    likes,
+    matchingMessageOpen,
+    setMatchingMessageOpen,
+    isMatched,
+    setIsMatched,
+    passiveLikeUsers,
+    handleGetLikeUsers,
+    handleCreateLike,
+    isLikedUser,
+  };
 };
 
 export default useLikes;

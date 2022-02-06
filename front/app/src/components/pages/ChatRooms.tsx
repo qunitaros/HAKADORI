@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import { Grid, Typography } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -99,7 +100,7 @@ const ChatRooms: React.FC = () => {
           </Typography>
         )
       ) : (
-        <></>
+        <CircularProgress color="inherit" />
       )}
     </>
   );

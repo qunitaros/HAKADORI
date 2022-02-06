@@ -2,15 +2,17 @@ import React, { useEffect } from "react";
 import { RouteComponentProps } from "react-router-dom";
 
 import { makeStyles, Theme } from "@material-ui/core/styles";
-import { Grid, Typography } from "@material-ui/core";
-import Avatar from "@material-ui/core/Avatar";
-import TextField from "@material-ui/core/TextField";
-import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
-import SendIcon from "@material-ui/icons/Send";
+import { Grid } from "@material-ui/core";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 import { Message } from "../../interfaces/index";
 import useChatRoom from "../../lib/hooks/useChatRoom";
+import MessageContent from "../atoms/contents/MessageContent";
+import MessageTime from "../atoms/contents/MessageTime";
+import MessageForm from "../atoms/forms/MessageForm";
+import MessageButton from "../atoms/buttons/MessageButton";
+import ChatRoomUserName from "../atoms/titles/ChatRoomUserName";
+import LargeAvatar from "../atoms/avatars/LargeAvatar";
 
 const useStyles = makeStyles((theme: Theme) => ({
   avatar: {
@@ -64,23 +66,9 @@ const ChatRoom: React.FC<ChatRoomProps> = (props) => {
             style={{ marginBottom: "1rem" }}
           >
             <Grid item>
-              <Avatar
-                alt="avatar"
-                src={otherUser?.image.url || ""}
-                className={classes.avatar}
-              />
-              <Typography
-                variant="body2"
-                component="p"
-                gutterBottom
-                style={{
-                  marginTop: "0.5rem",
-                  marginBottom: "1rem",
-                  textAlign: "center",
-                }}
-              >
-                {otherUser?.name}
-              </Typography>
+              <LargeAvatar imageUrl={otherUser?.image.url || ""} />
+
+              <ChatRoomUserName>{otherUser?.name}</ChatRoomUserName>
             </Grid>
           </Grid>
           {messages.map((message: Message, index: number) => {
@@ -93,68 +81,41 @@ const ChatRoom: React.FC<ChatRoomProps> = (props) => {
                 }
               >
                 <Grid item>
-                  <Box
-                    borderRadius={
-                      message.userId === otherUser?.id
-                        ? "30px 30px 30px 0px"
-                        : "30px 30px 0px 30px"
-                    }
-                    bgcolor={
-                      message.userId === otherUser?.id ? "#000000" : "#ffb6c1"
-                    }
-                    color={
-                      message.userId === otherUser?.id ? "#000000" : "#ffffff"
-                    }
-                    m={1}
-                    border={10}
-                    style={{ padding: "1rem 0.5rem 1rem 1rem" }}
+                  <MessageContent
+                    messageUserId={message.userId}
+                    otherUserId={otherUser?.id}
                   >
-                    <Typography variant="body1" component="p">
-                      {message.content}
-                    </Typography>
-                  </Box>
-                  <Typography
-                    variant="body2"
-                    component="p"
-                    color="textSecondary"
-                    style={{
-                      textAlign:
-                        message.userId === otherUser?.id ? "left" : "right",
-                    }}
+                    {message.content}
+                  </MessageContent>
+                  <MessageTime
+                    messageUserId={message.userId}
+                    otherUserId={otherUser?.id}
                   >
                     {iso8601ToDateTime(
                       message.createdAt?.toString() || "100000000"
                     )}
-                  </Typography>
+                  </MessageTime>
                 </Grid>
               </Grid>
             );
           })}
           <Grid container justifyContent="center" style={{ marginTop: "2rem" }}>
             <form className={classes.formWrapper} noValidate autoComplete="off">
-              <TextField
-                required
-                multiline
+              <MessageForm
                 value={content}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setContent(e.target.value)
                 }
-                className={classes.textInputWrapper}
               />
-              <Button
-                variant="contained"
-                color="primary"
+              <MessageButton
                 disabled={!content ? true : false}
                 onClick={handleSubmit}
-                className={classes.button}
-              >
-                <SendIcon />
-              </Button>
+              />
             </form>
           </Grid>
         </div>
       ) : (
-        <></>
+        <CircularProgress color="inherit" />
       )}
     </>
   );

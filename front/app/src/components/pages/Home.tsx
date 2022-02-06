@@ -1,4 +1,5 @@
 import React, { createContext } from "react";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 import useHome from "../../lib/hooks/useHome";
 import { User } from "../../interfaces";
@@ -95,7 +96,7 @@ const Home: React.FC = () => {
           <UserEditDialog />
         </>
       ) : (
-        <></>
+        <CircularProgress color="inherit" />
       )}
     </HomeContext.Provider>
   );

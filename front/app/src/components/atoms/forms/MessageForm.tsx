@@ -10,11 +10,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface MessageFormProps {
   value: string;
-  onChange: () => void;
-  className: string;
+  onChange: any;
 }
 
-const MessageForm = ({ value, onChange, className }: MessageFormProps) => {
+const MessageForm = ({ value, onChange }: MessageFormProps) => {
   const classes = useStyles();
 
   return (
