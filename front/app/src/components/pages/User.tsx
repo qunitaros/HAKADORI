@@ -5,6 +5,8 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import Typography from "@material-ui/core/Typography";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 import { User as UserData, UserPost } from "../../interfaces";
 import { RouteComponentProps } from "react-router-dom";
@@ -14,7 +16,7 @@ import UserPostsCard from "../organisms/cards/UserPostsCard";
 import UserPostDialog from "../organisms/dialogs/UserPostDialog";
 import { AuthContext } from "../../App";
 import LikeButton from "../atoms/buttons/LikeButton";
-import useMatching from "../../lib/hooks/useMatching";
+import useLikes from "../../lib/hooks/useLikes";
 
 export const UserContext = createContext(
   {} as {
@@ -66,11 +68,11 @@ const User: React.FC<UserProps> = (props) => {
     setPostDeleteConfirm,
   } = useUser(props);
 
-  const { isLikedUser, handleCreateLike, handleGetLikes } = useMatching();
+  const { isLikedUser, handleCreateLike, handleGetLikeUsers } = useLikes();
 
   useEffect(() => {
     handleGetUser();
-    handleGetLikes();
+    handleGetLikeUsers();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -155,11 +157,21 @@ const User: React.FC<UserProps> = (props) => {
               })}
             </Grid>
           ) : (
-            <></>
+            <>
+              <br />
+              <Grid
+                container
+                justifyContent="center"
+                spacing={3}
+                className={classes.container}
+              >
+                <Typography component="h6">まだ投稿がありません。</Typography>
+              </Grid>
+            </>
           )}
         </Grid>
       ) : (
-        <></>
+        <CircularProgress color="inherit" />
       )}
       <UserPostDialog
         postField={CreatePostField(userPost)}

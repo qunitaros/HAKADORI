@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
+import SendIcon from "@material-ui/icons/Send";
 import { Theme, makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -10,7 +11,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface MessageButtonProps {
   disabled: boolean;
-  onClick: () => void;
+  onClick: any;
 }
 
 const MessageButton = ({ disabled, onClick }: MessageButtonProps) => {
@@ -22,7 +23,9 @@ const MessageButton = ({ disabled, onClick }: MessageButtonProps) => {
       disabled={disabled}
       onClick={onClick}
       className={classes.button}
-    ></Button>
+    >
+      <SendIcon />
+    </Button>
   );
 };
 

@@ -5,7 +5,7 @@ class Api::V1::ChatRoomsController < ApplicationController
     chat_rooms = []
 
     current_api_v1_user.chat_rooms.order("created_at DESC").each do |chat_room|
-      # 部屋の情報(相手のユーザーは誰か、妻女に送信されたメッセージはどれか)をJSON形式で作成
+      # 部屋の情報(相手のユーザーは誰か、相手に送信されたメッセージはどれか)をJSON形式で作成
       chat_rooms << {
         chat_room: chat_room,
         other_user: chat_room.users.where.not(id: current_api_v1_user.id)[0],

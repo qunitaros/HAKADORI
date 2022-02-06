@@ -66,6 +66,11 @@ export interface Like {
   toUserId: number | undefined | null;
 }
 
+export interface PassiveLikeUser {
+  passiveLike: User;
+  isMatched: boolean;
+}
+
 // チャットルーム
 export interface ChatRoom {
   chatRoom: {
@@ -92,7 +97,7 @@ export interface UserPost {
   createdAt?: Date;
 }
 
-// ポスト一覧用のポスト
+// 一覧表示用のポスト
 export interface Post {
   post: UserPost;
   user: User;

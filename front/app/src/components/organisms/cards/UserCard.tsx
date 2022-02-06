@@ -8,6 +8,8 @@ import LargeAvatar from "../../atoms/avatars/LargeAvatar";
 import UserProfileContent from "../../atoms/contents/UserProfileContent";
 
 import { UserContext } from "../../pages/User";
+import UserProfileName from "../../atoms/titles/UserProfileName";
+import { AuthContext } from "../../../App";
 
 const useStyles = makeStyles((theme: Theme) => ({
   userCard: {
@@ -21,6 +23,7 @@ const UserCard = () => {
   const classes = useStyles();
   const { user, userAge, userDayOff, userField, userPrefecture } =
     useContext(UserContext);
+  const { currentUser } = useContext(AuthContext);
 
   return (
     <Card className={classes.userCard}>
@@ -28,14 +31,18 @@ const UserCard = () => {
         <Grid container justifyContent="center">
           <LargeAvatar imageUrl={user?.image.url} />
         </Grid>
-        <UserProfileContent
-          name={user?.name}
-          age={userAge()}
-          prefecture={userPrefecture()}
-          field={userField()}
-          dayOff={userDayOff()}
-          profile={user?.profile}
-        />
+        <UserProfileName>{user?.name}</UserProfileName>
+        {user.id !== currentUser.id ? (
+          <UserProfileContent
+            age={userAge()}
+            prefecture={userPrefecture()}
+            field={userField()}
+            dayOff={userDayOff()}
+            profile={user?.profile}
+          />
+        ) : (
+          <></>
+        )}
       </CardContent>
     </Card>
   );

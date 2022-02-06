@@ -93,8 +93,6 @@ const useHome = () => {
       if (res.status === 200) {
         setEditFormOpen(false);
         setCurrentUser(res.data.user);
-
-        console.log("Updata user successfuliy!");
       } else {
         console.log(res.data.message);
       }

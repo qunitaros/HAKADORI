@@ -2,6 +2,7 @@ import React, { useEffect, createContext } from "react";
 
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 import { Post } from "../../interfaces";
 
@@ -115,7 +116,7 @@ const Posts: React.FC = () => {
           </Grid>
         )
       ) : (
-        <></>
+        <CircularProgress color="inherit" />
       )}
 
       <PostContentDialog>{post.post.content}</PostContentDialog>

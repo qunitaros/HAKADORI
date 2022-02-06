@@ -1,8 +1,8 @@
+import React from "react";
 import { Theme, makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
-import UserProfileName from "../titles/UserProfileName";
 
 const useStyles = makeStyles((theme: Theme) => ({
   grid: {
@@ -11,7 +11,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface UserProfileContentProps {
-  name: string;
   age: string;
   prefecture: string;
   field: string;
@@ -20,7 +19,6 @@ interface UserProfileContentProps {
 }
 
 const UserProfileContent = ({
-  name,
   age,
   prefecture,
   field,
@@ -31,8 +29,7 @@ const UserProfileContent = ({
 
   return (
     <Grid container justifyContent="center" className={classes.grid}>
-      <Grid item style={{ marginTop: "1.5rem" }}>
-        <UserProfileName>{name}</UserProfileName>
+      <Grid item>
         <Typography variant="body1" component="p" gutterBottom>
           {age}歳（{prefecture}) <br />
           勉強中:{field} <br />

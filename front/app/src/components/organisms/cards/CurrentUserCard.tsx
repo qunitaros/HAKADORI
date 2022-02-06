@@ -9,6 +9,7 @@ import SettingIcon from "../../atoms/icons/SettingIcon";
 import SignOutButton from "../../atoms/buttons/SignOutButton";
 import { HomeContext } from "../../pages/Home";
 import UserProfileContent from "../../atoms/contents/UserProfileContent";
+import UserProfileName from "../../atoms/titles/UserProfileName";
 
 const useStyles = makeStyles((theme: Theme) => ({
   userCard: {
@@ -41,8 +42,8 @@ const CurrentUserProps = () => {
         <Grid container justifyContent="center">
           <LargeAvatar imageUrl={currentUser?.image.url} />
         </Grid>
+        <UserProfileName>{currentUser?.name}</UserProfileName>
         <UserProfileContent
-          name={currentUser?.name}
           age={currentUserAge()}
           prefecture={currentUserPrefecture()}
           field={currentUserField()}

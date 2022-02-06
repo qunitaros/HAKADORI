@@ -2,12 +2,10 @@ class Api::V1::PostsController < ApplicationController
   before_action :set_post, only: [:update, :destroy]
 
   def index
-    posts = Post.all
-    array = []
-    posts.each{|post|
-      array.push({post: post, user: post.user})
-    }
-    render json: { status: 200, posts: array }
+    posts = []
+    #PostにUserModelを付与
+    Post.all.each{|post| posts <<{ post: post, user: post.user }}
+    render json: { status: 200, posts: posts }
   end
 
   def create

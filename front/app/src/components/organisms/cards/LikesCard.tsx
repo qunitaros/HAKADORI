@@ -3,35 +3,34 @@ import Card from "@material-ui/core/Card";
 import Divider from "@material-ui/core/Divider";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
-import Typography from "@material-ui/core/Typography";
+import { Theme, makeStyles } from "@material-ui/core/styles";
 
 import OpenUserButton from "../../atoms/buttons/OpenUserButton";
 import SmallAvatar from "../../atoms/avatars/SmallAvatar";
 
+const useStyles = makeStyles((theme: Theme) => ({
+  card: {
+    backgroundColor: "#e6e6e6",
+    color: "inhedit",
+    opacity: "0.8",
+    height: "220px",
+  },
+}));
+
 interface LikesCardProps {
   id: number;
   imageUrl: string;
-  userName: string;
+  children: React.ReactNode;
 }
 
-const LikesCard = ({ id, imageUrl, userName }: LikesCardProps) => {
+const LikesCard = ({ id, imageUrl, children }: LikesCardProps) => {
+  const classes = useStyles();
+
   return (
-    <Card
-      variant="outlined"
-      style={{
-        backgroundColor: "#e6e6e6",
-        color: "inhedit",
-        opacity: "0.8",
-      }}
-    >
+    <Card variant="outlined" className={classes.card}>
       <SmallAvatar id={id} imageUrl={imageUrl} />
       <Divider />
-      <CardContent>
-        <Typography variant="body2" component="p">
-          {userName}さんからいいねがありした! <br />
-          プロフィールを確認してみましょう!
-        </Typography>
-      </CardContent>
+      <CardContent>{children}</CardContent>
       <CardActions>
         <OpenUserButton id={id} />
       </CardActions>

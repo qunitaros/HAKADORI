@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
-import { Grid, Typography } from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 import { User } from "../../interfaces";
 
@@ -45,7 +47,7 @@ const Users: React.FC = () => {
           </Typography>
         )
       ) : (
-        <></>
+        <CircularProgress color="inherit" />
       )}
     </>
   );
