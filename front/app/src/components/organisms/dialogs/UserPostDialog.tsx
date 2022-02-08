@@ -42,6 +42,3 @@ const UserPostDialog = ({ postField, postContent }: UserPostDialogProps) => {
 };
 
 export default UserPostDialog;
-
-//サインアップ時、サインイン時またはユーザー情報を更新したときにimage情報をsetImageに格納、
-//投稿時にsetImageからavatarを作成

@@ -3,8 +3,20 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+
+  validates :name, presence: true, length: { maximum: 30 }
+  validates :email, presence: true, uniqueness: true
+  validates :password, presence: true, length: { minimum: 6 }
+  validates :field, presence: true
+  validates :day_off, presence: true
+  validates :birthday, presence: true
+  validates :gender, presence: true
+  validates :profile, length: { maximum: 160 }
+
+
+
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable
   include DeviseTokenAuth::Concerns::User
   mount_uploader :image, ImageUploader
 

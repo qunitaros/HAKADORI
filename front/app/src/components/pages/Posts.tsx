@@ -79,6 +79,7 @@ const Posts: React.FC = () => {
         posts?.length > 0 ? (
           <>
             <Grid container justifyContent="center" spacing={2}>
+              <PostButton onClick={() => setCreatePostFormOpen(true)} />
               {posts?.map((post: Post, index: number) => {
                 return (
                   <Grid key={index} item xs={4}>

@@ -8,10 +8,10 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import SearchIcon from "@material-ui/icons/Search";
 import ChatBubbleIcon from "@material-ui/icons/ChatBubble";
 import SchoolIcon from "@material-ui/icons/School";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import GroupIcon from "@material-ui/icons/Group";
 
 import { AuthContext } from "../../App";
 import PersonNav from "../atoms/navs/PersonNav";
@@ -46,7 +46,7 @@ const Header: React.FC = () => {
               className={classes.linkBtn}
               color="inherit"
             >
-              <SearchIcon />
+              <GroupIcon />
             </IconButton>
             <IconButton
               component={Link}
