@@ -4,14 +4,13 @@ import { RouteComponentProps } from "react-router-dom";
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 import CircularProgress from "@material-ui/core/CircularProgress";
-
+import ChatRoomUserName from "../atoms/titles/ChatRoomUserName";
 import { Message } from "../../interfaces/index";
 import useChatRoom from "../../lib/hooks/useChatRoom";
 import MessageContent from "../atoms/contents/MessageContent";
 import MessageTime from "../atoms/contents/MessageTime";
 import MessageForm from "../atoms/forms/MessageForm";
 import MessageButton from "../atoms/buttons/MessageButton";
-import ChatRoomUserName from "../atoms/titles/ChatRoomUserName";
 import LargeAvatar from "../atoms/avatars/LargeAvatar";
 
 const useStyles = makeStyles((theme: Theme) => ({
