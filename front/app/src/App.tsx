@@ -6,6 +6,8 @@ import {
   Redirect,
 } from "react-router-dom";
 
+import CircularProgress from "@material-ui/core/CircularProgress";
+
 import CommonLayout from "./components/layouts/CommonLayout";
 import Home from "./components/pages/Home";
 import SignUp from "./components/pages/SignUp";
@@ -31,6 +33,7 @@ export const AuthContext = createContext(
     setIsSignedIn: React.Dispatch<React.SetStateAction<boolean>>;
     currentUser: UserData | undefined;
     setCurrentUser: React.Dispatch<React.SetStateAction<UserData | undefined>>;
+    handleGetCurrentUser: any;
   }
 );
 
@@ -45,10 +48,19 @@ const App: React.FC = () => {
     handleGetCurrentUser,
   } = useCurrentUser();
 
-  useEffect(() => {
-    handleGetCurrentUser();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // 認証済みのユーザーが再認証できないようにする
+  // signoutしていない状態であれば「/home」ページに促す
+  const Public = ({ children }: { children: React.ReactElement }) => {
+    if (!loading) {
+      if (isSignedIn === false) {
+        return children;
+      } else {
+        return <Redirect to="/home" />;
+      }
+    } else {
+      return <></>;
+    }
+  };
 
   // ユーザーが認証済みかどうかでルーティングを決定
   // 未認証だった場合は「/signin」ページに促す
@@ -60,9 +72,14 @@ const App: React.FC = () => {
         return <Redirect to="/signin" />;
       }
     } else {
-      return <></>;
+      return <CircularProgress color="inherit" />;
     }
   };
+
+  useEffect(() => {
+    handleGetCurrentUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Router>
@@ -74,13 +91,17 @@ const App: React.FC = () => {
           setIsSignedIn,
           currentUser,
           setCurrentUser,
+          handleGetCurrentUser,
         }}
       >
         <Switch>
           <Route exact path="/" component={Root} />
           <CommonLayout>
-            <Route exact path="/signup" component={SignUp} />
-            <Route exact path="/signin" component={SignIn} />
+            <Switch>
+              <Route exact path="/signup" component={SignUp} />
+              <Route exact path="/signin" component={SignIn} />
+            </Switch>
+
             <Private>
               <Switch>
                 <Route exact path="/home" component={Home} />

@@ -6,25 +6,22 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import ChatBubbleIcon from "@material-ui/icons/ChatBubble";
 import SchoolIcon from "@material-ui/icons/School";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import GroupIcon from "@material-ui/icons/Group";
+import LinearProgress from "@material-ui/core/LinearProgress";
 
 import { AuthContext } from "../../App";
 import PersonNav from "../atoms/navs/PersonNav";
+import HeaderIconButton from "../atoms/icons/HeaderIcons";
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
     flexGrow: 1,
     textDecoration: "none",
     color: "inherit",
-  },
-  linkBtn: {
-    textTransform: "none",
-    marginLeft: theme.spacing(1),
   },
 }));
 
@@ -39,62 +36,33 @@ const Header: React.FC = () => {
       if (isSignedIn) {
         return (
           <>
-            <IconButton
-              component={Link}
-              to="/users"
-              edge="start"
-              className={classes.linkBtn}
-              color="inherit"
-            >
+            <HeaderIconButton link="/users">
               <GroupIcon />
-            </IconButton>
-            <IconButton
-              component={Link}
-              to="/likes"
-              edge="start"
-              className={classes.linkBtn}
-              color="inherit"
-            >
+            </HeaderIconButton>
+            <HeaderIconButton link="/likes">
               <FavoriteIcon />
-            </IconButton>
-            <IconButton
-              component={Link}
-              to="/chat_rooms"
-              edge="start"
-              className={classes.linkBtn}
-              color="inherit"
-            >
+            </HeaderIconButton>
+            <HeaderIconButton link="/chat_rooms">
               <ChatBubbleIcon />
-            </IconButton>
-            <IconButton
-              component={Link}
-              to="/posts"
-              edge="start"
-              className={classes.linkBtn}
-              color="inherit"
-            >
+            </HeaderIconButton>
+            <HeaderIconButton link="/posts">
               <SchoolIcon />
-            </IconButton>
+            </HeaderIconButton>
+
             <PersonNav />
           </>
         );
       } else {
         return (
           <>
-            <IconButton
-              component={Link}
-              to="/signin"
-              edge="start"
-              className={classes.linkBtn}
-              color="inherit"
-            >
+            <HeaderIconButton link="/signin">
               <ExitToAppIcon />
-            </IconButton>
+            </HeaderIconButton>
           </>
         );
       }
     } else {
-      return <></>;
+      return <LinearProgress />;
     }
   };
 

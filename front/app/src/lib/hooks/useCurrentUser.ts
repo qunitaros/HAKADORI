@@ -15,12 +15,17 @@ const useCurrentUser = () => {
       console.log(res);
 
       if (res?.status === 200) {
-        setIsSignedIn(true);
-        setCurrentUser(res?.data.currentUser);
+        if (res?.data.status === 200) {
+          setIsSignedIn(true);
+          setCurrentUser(res?.data.currentUser);
+        } else {
+          console.log(res?.data.status);
+        }
       } else {
         console.log("No current user");
       }
     } catch (err) {
+      setIsSignedIn(false);
       console.log(err);
     }
 

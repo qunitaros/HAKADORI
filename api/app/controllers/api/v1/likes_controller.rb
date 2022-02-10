@@ -1,4 +1,6 @@
 class Api::V1::LikesController < ApplicationController
+  before_action :authenticate_api_v1_user!
+
   def index
     passive_likes = []
     current_api_v1_user.passive_likes.each do |passive_like| 

@@ -197,16 +197,16 @@ const SignUpCard = () => {
           <div style={{ textAlign: "right" }}>
             <SubmitButton
               disabled={
-                !name ||
-                !email ||
-                !password ||
-                !passwordConfirmation ||
-                !gender ||
-                !prefecture ||
-                !field ||
-                !dayOff ||
-                !birthday
-                  ? true
+                !name
+                  ? // !email ||
+                    // !password ||
+                    // !passwordConfirmation ||
+                    // !gender ||
+                    // !prefecture ||
+                    // !field ||
+                    // !dayOff ||
+                    // !birthday
+                    true
                   : false
               }
               onClick={handleSubmit}

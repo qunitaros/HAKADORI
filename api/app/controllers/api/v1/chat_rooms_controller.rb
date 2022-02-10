@@ -1,4 +1,5 @@
 class Api::V1::ChatRoomsController < ApplicationController
+  before_action :authenticate_api_v1_user!
   before_action :set_chat_room, only: %i[show]
 
   def index 
