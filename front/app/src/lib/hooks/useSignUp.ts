@@ -63,31 +63,33 @@ const useSignUp = () => {
       const res = await signUp(data);
       console.log(res);
 
-      if (res.status === 200) {
-        // アカウント作成と同時にサインインさせてしまう
-        Cookies.set("_access_token", res.headers["access-token"]);
-        Cookies.set("_client", res.headers["client"]);
-        Cookies.set("_uid", res.headers["uid"]);
+      if (password === passwordConfirmation) {
+        if (res.status === 200) {
+          // アカウント作成と同時にサインインさせてしまう
+          Cookies.set("_access_token", res.headers["access-token"]);
+          Cookies.set("_client", res.headers["client"]);
+          Cookies.set("_uid", res.headers["uid"]);
 
-        setIsSignedIn(true);
-        setCurrentUser(res.data.data);
+          setIsSignedIn(true);
+          setCurrentUser(res.data.data);
 
-        history.push("/home");
+          history.push("/home");
 
-        setName("");
-        setEmail("");
-        setPassword("");
-        setPasswordConfirmation("");
-        setGender(undefined);
-        setPrefecture(undefined);
-        setBirthday(null);
-        setField(undefined);
-        setDayOff(undefined);
+          setName("");
+          setEmail("");
+          setPassword("");
+          setPasswordConfirmation("");
+          setGender(undefined);
+          setPrefecture(undefined);
+          setBirthday(null);
+          setField(undefined);
+          setDayOff(undefined);
 
-        console.log("Signed in successfully!");
-      } else {
-        setAlertMessageOpen(true);
-      }
+          console.log("Signed in successfully!");
+        } else {
+          setAlertMessageOpen(true);
+        }
+      } else setAlertMessageOpen(true);
     } catch (err) {
       console.log(err);
       setAlertMessageOpen(true);

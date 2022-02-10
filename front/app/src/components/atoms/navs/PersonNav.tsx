@@ -10,10 +10,15 @@ import { AuthContext } from "../../../App";
 
 const PersonNav = () => {
   const { currentUser } = useContext(AuthContext);
+
+  const [currentUserId, setCurrentUserId] = useState<number | undefined>(
+    undefined
+  );
   const [anchorEl, setAnchorEl] = useState<
     Element | ((element: Element) => Element)
   >(null);
   const handleOpenNav = (e) => {
+    setCurrentUserId(currentUser.id);
     setAnchorEl(e.currentTarget);
   };
 
@@ -46,7 +51,7 @@ const PersonNav = () => {
         <MenuItem
           onClick={handleCloseNav}
           component={Link}
-          to={`user/${currentUser.id}`}
+          to={`user/${currentUserId}`}
         >
           <Typography>My投稿</Typography>
         </MenuItem>

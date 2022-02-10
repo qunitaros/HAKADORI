@@ -97,7 +97,7 @@ const SignUp: React.FC = () => {
         open={alertMessageOpen}
         setOpen={setAlertMessageOpen}
         severity="error"
-        message="メールアドレスかパスワードが間違っています"
+        message="アカウントの作成に失敗しました。確認用パスワードが合っているか、空欄がないか確認してください。"
       />
     </SignUpContext.Provider>
   );

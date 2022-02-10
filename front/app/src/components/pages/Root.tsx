@@ -12,8 +12,10 @@ const useStyle = makeStyles({
   },
   footer: {},
 });
+
 const Root: React.FC = () => {
   const classes = useStyle();
+
   return (
     <>
       <div>

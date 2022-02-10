@@ -1,5 +1,5 @@
 class Api::V1::PostsController < ApplicationController
-  before_action :set_post, only: [:update, :destroy]
+  before_action :set_post, only: [:destroy]
 
   def index
     posts = []
@@ -22,9 +22,7 @@ class Api::V1::PostsController < ApplicationController
     render json: { status: 200, post: @post }
   end
 
-  def update
-  end
-
+ 
   private
     
     def set_post

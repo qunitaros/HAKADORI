@@ -9,6 +9,7 @@
   if user.new_record?
     user.name = name
     user.password = "password"
+    user.password_confirmation = "password"
     user.prefecture = n + 1
     user.gender = 1
     user.field = n

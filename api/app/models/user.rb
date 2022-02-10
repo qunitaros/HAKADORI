@@ -6,7 +6,8 @@ class User < ActiveRecord::Base
 
   validates :name, presence: true, length: { maximum: 30 }
   validates :email, presence: true, uniqueness: true
-  validates :password, presence: true, length: { minimum: 6 }
+  # VALID_PASSWORD_REGEX = /\A[a-z0-9]+\z/i
+  # validates :password, format: { with: VALID_PASSWORD_REGEX } #ログアウトエラーの原因,ログインエラーの原因
   validates :field, presence: true
   validates :day_off, presence: true
   validates :birthday, presence: true
@@ -16,7 +17,7 @@ class User < ActiveRecord::Base
 
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable
+         :recoverable, :rememberable, :validatable
   include DeviseTokenAuth::Concerns::User
   mount_uploader :image, ImageUploader
 

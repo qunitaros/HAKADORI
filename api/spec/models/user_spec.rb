@@ -6,7 +6,7 @@ RSpec.describe User, type: :model do
   describe "正常値と異常値の確認について" do
 
     context "バリデーションについて" do
-      it "name,email,password,gender,prefecture,birthday,day_off,fieldがあれば有効であること" do
+      it "name,email,password,password_confirmation,gender,prefecture,birthday,day_off,fieldがあれば有効であること" do
         expect(user).to be_valid
         expect(user.errors).to be_empty
       end
@@ -36,16 +36,16 @@ RSpec.describe User, type: :model do
         expect(user.errors[:email]).to include("has already been taken")
       end
     
-      it "passwordがなければ無効であること" do
-        user.password = ""
-        user.valid?
-        expect(user.errors[:password]).to include("can't be blank")
-      end
-    
       it "passwordが6文字より少ないときは無効であること" do
         user.password = "test"
         user.valid?
         expect(user.errors[:password]).to include("is too short (minimum is 6 characters)")
+      end
+
+      it "passwordとpassword_confirmationが一致しなければ無効であること" do
+        user.password_confirmation = "docker-compose"
+        user.valid?
+        expect(user.errors[:password_confirmation]).to include("doesn't match Password")
       end
 
       it "genderがなければ無効であること" do
