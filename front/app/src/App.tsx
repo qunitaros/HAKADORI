@@ -48,22 +48,6 @@ const App: React.FC = () => {
     handleGetCurrentUser,
   } = useCurrentUser();
 
-  // 認証済みのユーザーが再認証できないようにする
-  // signoutしていない状態であれば「/home」ページに促す
-  const Public = ({ children }: { children: React.ReactElement }) => {
-    if (!loading) {
-      if (isSignedIn === false) {
-        return children;
-      } else {
-        return <Redirect to="/home" />;
-      }
-    } else {
-      return <></>;
-    }
-  };
-
-  // ユーザーが認証済みかどうかでルーティングを決定
-  // 未認証だった場合は「/signin」ページに促す
   const Private = ({ children }: { children: React.ReactElement }) => {
     if (!loading) {
       if (isSignedIn) {
@@ -97,10 +81,14 @@ const App: React.FC = () => {
         <Switch>
           <Route exact path="/" component={Root} />
           <CommonLayout>
-            <Switch>
-              <Route exact path="/signup" component={SignUp} />
-              <Route exact path="/signin" component={SignIn} />
-            </Switch>
+            {!isSignedIn ? (
+              <Switch>
+                <Route exact path="/signup" component={SignUp} />
+                <Route exact path="/signin" component={SignIn} />
+              </Switch>
+            ) : (
+              <></>
+            )}
 
             <Private>
               <Switch>
@@ -116,8 +104,6 @@ const App: React.FC = () => {
             </Private>
           </CommonLayout>
         </Switch>
-
-        {/* </PostContext.Provider> */}
       </AuthContext.Provider>
     </Router>
   );

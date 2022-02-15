@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../../App";
-import { Like, PassiveLikeUser, User } from "../../interfaces";
+import { ActiveLikeUser, Like, PassiveLikeUser, User } from "../../interfaces";
 import { createLike, getLikes } from "../api/likes";
 
 const useLikes = () => {
@@ -10,10 +10,14 @@ const useLikes = () => {
   const [passiveLikeUsers, setPassiveLikeUsers] = useState<PassiveLikeUser[]>(
     []
   );
+  const [activeLikeUsers, setActiveLikeUsers] = useState<ActiveLikeUser[]>([]);
   const [likedUsers, setLikedUsers] = useState<User[]>([]);
   const [likes, setLikes] = useState<Like[]>([]);
   const [matchingMessageOpen, setMatchingMessageOpen] =
     useState<boolean>(false);
+  const [matchingDialogOpen, setMatchingDialogOpen] = useState<boolean>(false);
+
+  const [matchingCount, setMatchingCount] = useState<number>(0);
   const [isMatched, setIsMatched] = useState<boolean>(false);
 
   // passiveLike,activeLikeを取得
@@ -22,9 +26,12 @@ const useLikes = () => {
       const res = await getLikes();
       if (res?.status === 200) {
         setPassiveLikeUsers(res?.data.passiveLikes);
-        setLikedUsers(res?.data.activeLikes);
+        setActiveLikeUsers(res?.data.activeLikes);
 
-        console.log(res?.data.passiveLikes);
+        if (res?.data.matchingCount > 0) {
+          setMatchingCount(res?.data.matchingCount);
+          setMatchingDialogOpen(true);
+        }
       } else {
         console.log(res?.data);
       }
@@ -55,7 +62,6 @@ const useLikes = () => {
 
       if (res?.data.isMatched === true) {
         setMatchingMessageOpen(true);
-        setIsMatched(true);
       }
     } catch (err) {
       console.log(err);
@@ -74,10 +80,17 @@ const useLikes = () => {
     setMatchingMessageOpen,
     isMatched,
     setIsMatched,
+    matchingDialogOpen,
+    setMatchingDialogOpen,
+    matchingCount,
     passiveLikeUsers,
     handleGetLikeUsers,
     handleCreateLike,
     isLikedUser,
+    likedUsers,
+    setLikedUsers,
+    activeLikeUsers,
+    setActiveLikeUsers,
   };
 };
 

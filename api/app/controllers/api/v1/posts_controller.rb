@@ -1,5 +1,4 @@
 class Api::V1::PostsController < ApplicationController
-  before_action :set_post, only: [:destroy]
 
   def index
     posts = []
