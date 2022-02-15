@@ -71,6 +71,11 @@ export interface PassiveLikeUser {
   isMatched: boolean;
 }
 
+export interface ActiveLikeUser {
+  activeLike: User;
+  isMatched: boolean;
+}
+
 // チャットルーム
 export interface ChatRoom {
   chatRoom: {

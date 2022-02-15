@@ -1,7 +1,6 @@
 class Api::V1::LikesController < ApplicationController
-  before_action :authenticate_api_v1_user!
-
   def index
+    matching_count = 0 #マッチングしている人数を測定
     passive_likes = []
     current_api_v1_user.passive_likes.each do |passive_like| 
 
@@ -13,15 +12,33 @@ class Api::V1::LikesController < ApplicationController
       )
       if active_like
         is_matched = true
+        matching_count += 1
       end
 
       passive_likes <<{ passive_like: passive_like, is_matched: is_matched }
     end
 
+    active_likes = []
+    current_api_v1_user.active_likes.each do |active_like|
+      is_matched = false
+
+      passive_like = Like.find_by(
+        from_user_id: active_like.id,
+        to_user_id: current_api_v1_user.id
+      )
+
+      if passive_like
+        is_matched = true
+      end
+
+      active_likes <<{active_like: active_like, is_matched: is_matched}
+    end
+
     render json: {
       status: 200,
-      active_likes: current_api_v1_user.active_likes,
-      passive_likes: passive_likes
+      active_likes: active_likes,
+      passive_likes: passive_likes,
+      matching_count: matching_count
     }
   end
 
