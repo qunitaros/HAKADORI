@@ -1,15 +1,10 @@
 import React, { useContext } from "react";
 
 import "date-fns";
-import DateFnsUtils from "@date-io/date-fns";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import MenuItem from "@material-ui/core/MenuItem";
-import Grid from "@material-ui/core/Grid";
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker,
-} from "@material-ui/pickers";
+
 import { Theme, makeStyles } from "@material-ui/core/styles";
 import SubmitButton from "../../atoms/buttons/SubmitButton";
 import { SignUpContext } from "../../pages/SignUp";
@@ -22,6 +17,7 @@ import { prefectures } from "../../../data/prefectures";
 import { dayOffs } from "../../../data/dayOffs";
 import { fields } from "../../../data/fields";
 import { genders } from "../../../data/genders";
+import BirthdayForm from "../../atoms/forms/BirthdayForm";
 
 const useStyles = makeStyles((theme: Theme) => ({
   header: {
@@ -62,8 +58,6 @@ const SignUpCard = () => {
     setPasswordConfirmation,
     prefecture,
     setPrefecture,
-    birthday,
-    setBirthday,
     gender,
     setGender,
     field,
@@ -167,21 +161,7 @@ const SignUpCard = () => {
               </MenuItem>
             ))}
           </UserFormControl>
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <Grid container justifyContent="space-around">
-              <KeyboardDatePicker
-                fullWidth
-                inputVariant="outlined"
-                margin="dense"
-                id="date-picker-dialog"
-                label="誕生日"
-                format="MM/dd/yyyy"
-                value={birthday}
-                onChange={(date: Date | null) => setBirthday(date)}
-                KeyboardButtonProps={{ "aria-label": "change date" }}
-              />
-            </Grid>
-          </MuiPickersUtilsProvider>
+          <BirthdayForm />
           <PhotoCameraIcon
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               uploadImage(e);

@@ -6,6 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import { PostsContext } from "../../pages/Posts";
+import DialogHeader from "../../layouts/DialogHeader";
 
 const useStyles = makeStyles((theme: Theme) => ({
   grid: {
@@ -30,6 +31,10 @@ const PostContentDialog = ({ children }: PostContentDialogProps) => {
       keepMounted
       onClose={() => setPostDetailOpen(false)}
     >
+      <DialogHeader
+        title="投稿の詳細"
+        onClose={() => setPostDetailOpen(false)}
+      />
       <DialogContent>
         <Grid container justifyContent="center">
           <Grid item className={classes.grid}>

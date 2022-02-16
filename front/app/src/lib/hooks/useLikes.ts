@@ -16,6 +16,8 @@ const useLikes = () => {
   const [matchingMessageOpen, setMatchingMessageOpen] =
     useState<boolean>(false);
   const [matchingDialogOpen, setMatchingDialogOpen] = useState<boolean>(false);
+  const [activeLikeUserDialogOpen, setActiveLikeUserDialogOpen] =
+    useState<boolean>(false);
 
   const [matchingCount, setMatchingCount] = useState<number>(0);
   const [isMatched, setIsMatched] = useState<boolean>(false);
@@ -91,6 +93,8 @@ const useLikes = () => {
     setLikedUsers,
     activeLikeUsers,
     setActiveLikeUsers,
+    activeLikeUserDialogOpen,
+    setActiveLikeUserDialogOpen,
   };
 };
 
