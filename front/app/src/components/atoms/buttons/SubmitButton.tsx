@@ -1,13 +1,11 @@
 import React from "react";
-import { makeStyles, Theme } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
+import { styled } from "@mui/material/styles";
+import Button from "@mui/material/Button";
 
-const useStyles = makeStyles((theme: Theme) => ({
-  submitBtn: {
-    marginTop: theme.spacing(1),
-    flexGrow: 1,
-    textTransform: "none",
-  },
+const StyledButton = styled(Button)(({ theme }) => ({
+  marginTop: theme.spacing(1),
+  flexGrow: 1,
+  textTransform: "none",
 }));
 
 interface SubmitButtonProps {
@@ -16,21 +14,20 @@ interface SubmitButtonProps {
   onClick: () => void;
 }
 
-const SubmitButton = ({ children, disabled, onClick }: SubmitButtonProps) => {
-  const classes = useStyles();
-
-  return (
-    <Button
-      type="submit"
-      variant="outlined"
-      color="secondary"
-      className={classes.submitBtn}
-      disabled={disabled}
-      onClick={onClick}
-    >
-      {children}
-    </Button>
-  );
-};
+const SubmitButton = React.memo(
+  ({ children, disabled, onClick }: SubmitButtonProps) => {
+    return (
+      <StyledButton
+        type="submit"
+        variant="outlined"
+        color="secondary"
+        disabled={disabled}
+        onClick={onClick}
+      >
+        {children}
+      </StyledButton>
+    );
+  }
+);
 
 export default SubmitButton;

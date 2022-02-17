@@ -1,6 +1,6 @@
 import React from "react";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert, { AlertProps } from "@mui/lab/Alert";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,
@@ -17,35 +17,32 @@ interface AlertMessageProps {
 }
 
 // アラートメッセージ（何かアクションを行なった際の案内用に使い回す）
-const AlertMessage = ({
-  open,
-  setOpen,
-  severity,
-  message,
-}: AlertMessageProps) => {
-  const handleCloseAlertMessage = (
-    e?: React.SyntheticEvent,
-    reason?: string
-  ) => {
-    if (reason === "clickaway") return;
+const AlertMessage = React.memo(
+  ({ open, setOpen, severity, message }: AlertMessageProps) => {
+    const handleCloseAlertMessage = (
+      e?: React.SyntheticEvent,
+      reason?: string
+    ) => {
+      if (reason === "clickaway") return;
 
-    setOpen(false);
-  };
+      setOpen(false);
+    };
 
-  return (
-    <>
-      <Snackbar
-        open={open}
-        autoHideDuration={6000}
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
-        onClose={handleCloseAlertMessage}
-      >
-        <Alert onClose={handleCloseAlertMessage} severity={severity}>
-          {message}
-        </Alert>
-      </Snackbar>
-    </>
-  );
-};
+    return (
+      <>
+        <Snackbar
+          open={open}
+          autoHideDuration={6000}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          onClose={handleCloseAlertMessage}
+        >
+          <Alert onClose={handleCloseAlertMessage} severity={severity}>
+            {message}
+          </Alert>
+        </Snackbar>
+      </>
+    );
+  }
+);
 
 export default AlertMessage;

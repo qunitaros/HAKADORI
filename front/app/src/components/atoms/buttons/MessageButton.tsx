@@ -1,12 +1,10 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
-import SendIcon from "@material-ui/icons/Send";
-import { Theme, makeStyles } from "@material-ui/core/styles";
+import Button from "@mui/material/Button";
+import SendIcon from "@mui/icons-material/Send";
+import { styled } from "@mui/material/styles";
 
-const useStyles = makeStyles((theme: Theme) => ({
-  button: {
-    marginLeft: theme.spacing(3),
-  },
+const StyledButton = styled(Button)(({ theme }) => ({
+  marginLeft: theme.spacing(3),
 }));
 
 interface MessageButtonProps {
@@ -14,19 +12,19 @@ interface MessageButtonProps {
   onClick: any;
 }
 
-const MessageButton = ({ disabled, onClick }: MessageButtonProps) => {
-  const classes = useStyles();
-  return (
-    <Button
-      variant="contained"
-      color="primary"
-      disabled={disabled}
-      onClick={onClick}
-      className={classes.button}
-    >
-      <SendIcon />
-    </Button>
-  );
-};
+const MessageButton = React.memo(
+  ({ disabled, onClick }: MessageButtonProps) => {
+    return (
+      <StyledButton
+        variant="contained"
+        color="primary"
+        disabled={disabled}
+        onClick={onClick}
+      >
+        <SendIcon />
+      </StyledButton>
+    );
+  }
+);
 
 export default MessageButton;

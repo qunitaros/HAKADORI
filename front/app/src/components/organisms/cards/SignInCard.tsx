@@ -1,41 +1,41 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
-import { Theme, makeStyles } from "@material-ui/core/styles";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+import { styled } from "@mui/material/styles";
 
 import { SignInContext } from "../../pages/SignIn";
 import SubmitButton from "../../atoms/buttons/SubmitButton";
 import UserTextField from "../../atoms/forms/UserTextfield";
 
-const useStyles = makeStyles((theme: Theme) => ({
-  header: {
-    textAlign: "center",
-  },
-  card: {
-    padding: theme.spacing(2),
-    maxWidth: 340,
-  },
-  box: {
-    paddingTop: "2rem",
-    textAlign: "center",
-  },
-  link: {
-    color: "secondary",
-  },
+const StyledHeader = styled(CardHeader)(() => ({
+  textAlign: "center",
 }));
 
-const SignInCard = () => {
-  const classes = useStyles();
+const StyledCard = styled(Card)(({ theme }) => ({
+  padding: theme.spacing(2),
+  maxWidth: 340,
+}));
+
+const StyledBox = styled("div")(() => ({
+  paddingTop: "2rem",
+  textAlign: "center",
+}));
+
+const StyledLink = styled(Link)(() => ({
+  color: "secondary",
+}));
+
+const SignInCard = React.memo(() => {
   const { email, setEmail, password, setPassword, handleSubmit } =
     useContext(SignInContext);
 
   return (
-    <Card className={classes.card}>
-      <CardHeader className={classes.header} title="サインイン" />
+    <StyledCard>
+      <StyledHeader title="サインイン" />
       <CardContent>
         <UserTextField
           label="メールアドレス"
@@ -62,18 +62,16 @@ const SignInCard = () => {
             ログイン
           </SubmitButton>
         </div>
-        <div className={classes.box}>
+        <StyledBox>
           <Typography variant="body2">
             まだアカウントをお持ちでない方は
-            <Link to="/signup" className={classes.link}>
-              こちら
-            </Link>
+            <StyledLink to="/signup">こちら</StyledLink>
             から作成してください。
           </Typography>
-        </div>
+        </StyledBox>
       </CardContent>
-    </Card>
+    </StyledCard>
   );
-};
+});
 
 export default SignInCard;

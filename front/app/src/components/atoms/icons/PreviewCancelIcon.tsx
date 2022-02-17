@@ -1,16 +1,15 @@
 import React from "react";
-import Box from "@material-ui/core/Box";
-import IconButton from "@material-ui/core/IconButton";
-import CancelIcon from "@material-ui/icons/Cancel";
-import { Theme, makeStyles } from "@material-ui/core/styles";
+import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import CancelIcon from "@mui/icons-material/Cancel";
+import { styled } from "@mui/material/styles";
 
-const useStyles = makeStyles((theme: Theme) => ({
-  box: {
-    marginBottom: "1.5rem",
-  },
-  preview: {
-    width: "100%",
-  },
+const StyledBox = styled(Box)(() => ({
+  marginBottom: "1.5rem",
+}));
+
+const StyledPreview = styled("img")(() => ({
+  width: "100%",
 }));
 
 interface CancelIconProps {
@@ -18,17 +17,17 @@ interface CancelIconProps {
   onClick: any;
 }
 
-const PreviewCancelIcon = ({ imageUrl, onClick }: CancelIconProps) => {
-  const classes = useStyles();
-
-  return (
-    <Box className={classes.box}>
-      <IconButton color="inherit" onClick={onClick}>
-        <CancelIcon />
-      </IconButton>
-      <img src={imageUrl} alt="preview img" className={classes.preview} />
-    </Box>
-  );
-};
+const PreviewCancelIcon = React.memo(
+  ({ imageUrl, onClick }: CancelIconProps) => {
+    return (
+      <StyledBox>
+        <IconButton color="inherit" onClick={onClick}>
+          <CancelIcon />
+        </IconButton>
+        <StyledPreview src={imageUrl} alt="preview img" />
+      </StyledBox>
+    );
+  }
+);
 
 export default PreviewCancelIcon;

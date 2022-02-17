@@ -61,6 +61,7 @@ const useSignUp = () => {
 
     try {
       const res = await signUp(data);
+
       console.log(res);
 
       if (password === passwordConfirmation) {
@@ -92,6 +93,7 @@ const useSignUp = () => {
       } else setAlertMessageOpen(true);
     } catch (err) {
       console.log(err);
+      console.log(birthday);
       setAlertMessageOpen(true);
     }
   };

@@ -1,20 +1,18 @@
 import React from "react";
-import Card from "@material-ui/core/Card";
-import Divider from "@material-ui/core/Divider";
-import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-import { Theme, makeStyles } from "@material-ui/core/styles";
+import Card from "@mui/material/Card";
+import Divider from "@mui/material/Divider";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import { styled } from "@mui/material/styles";
 
 import OpenUserButton from "../../atoms/buttons/OpenUserButton";
 import SmallAvatar from "../../atoms/avatars/SmallAvatar";
 
-const useStyles = makeStyles((theme: Theme) => ({
-  card: {
-    backgroundColor: "#e6e6e6",
-    color: "inhedit",
-    opacity: "0.8",
-    height: "220px",
-  },
+const StyledCard = styled(Card)(() => ({
+  backgroundColor: "#e6e6e6",
+  color: "inhedit",
+  opacity: "0.8",
+  height: "220px",
 }));
 
 interface LikesCardProps {
@@ -23,19 +21,17 @@ interface LikesCardProps {
   children: React.ReactNode;
 }
 
-const LikesCard = ({ id, imageUrl, children }: LikesCardProps) => {
-  const classes = useStyles();
-
+const LikesCard = React.memo(({ id, imageUrl, children }: LikesCardProps) => {
   return (
-    <Card variant="outlined" className={classes.card}>
+    <StyledCard variant="outlined">
       <SmallAvatar id={id} imageUrl={imageUrl} />
       <Divider />
       <CardContent>{children}</CardContent>
       <CardActions>
         <OpenUserButton id={id} />
       </CardActions>
-    </Card>
+    </StyledCard>
   );
-};
+});
 
 export default LikesCard;

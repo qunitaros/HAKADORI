@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import CardHeader from "@material-ui/core/CardHeader";
-import Avatar from "@material-ui/core/Avatar";
+import CardHeader from "@mui/material/CardHeader";
+import Avatar from "@mui/material/Avatar";
 import { AuthContext } from "../../../App";
 
 interface SmallAvatarProps {
@@ -9,12 +9,12 @@ interface SmallAvatarProps {
   imageUrl: string;
 }
 
-const SmallAvatar = ({ id, imageUrl }: SmallAvatarProps) => {
+const SmallAvatar = React.memo(({ id, imageUrl }: SmallAvatarProps) => {
   const { currentUser } = useContext(AuthContext);
   return (
     <Link to={id === currentUser.id ? "home" : `user/${id}`}>
       <CardHeader avatar={<Avatar src={imageUrl} />} />
     </Link>
   );
-};
+});
 export default SmallAvatar;

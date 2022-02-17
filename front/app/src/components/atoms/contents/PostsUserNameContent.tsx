@@ -1,26 +1,25 @@
 import React from "react";
-import Typography from "@material-ui/core/Typography";
-import { Theme, makeStyles } from "@material-ui/core/styles";
+import Typography from "@mui/material/Typography";
+import { styled } from "@mui/material/styles";
 
-const useStyles = makeStyles((theme: Theme) => ({
-  title: {
-    fontSize: 14,
-  },
+const StyledTitle = styled(Typography)(() => ({
+  fontSize: 14,
 }));
 
 interface PostsUserNameContentProps {
   children: React.ReactNode;
 }
 
-const PostsUserNameContent = ({ children }: PostsUserNameContentProps) => {
-  const classes = useStyles();
-  return (
-    <>
-      <Typography className={classes.title} color="textSecondary" gutterBottom>
-        {children}
-      </Typography>
-    </>
-  );
-};
+const PostsUserNameContent = React.memo(
+  ({ children }: PostsUserNameContentProps) => {
+    return (
+      <>
+        <StyledTitle color="textSecondary" gutterBottom>
+          {children}
+        </StyledTitle>
+      </>
+    );
+  }
+);
 
 export default PostsUserNameContent;

@@ -1,29 +1,25 @@
+import React from "react";
 import Image from "../image/studyMain.jpeg";
-import { makeStyles } from "@material-ui/core/styles";
+import { styled } from "@mui/material/styles";
 
-const useStyle = makeStyles({
-  image: {
-    height: "auto",
-    maxHeight: "500px",
-    overflow: "hidden",
-    width: "100%",
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-  },
-  footer: {},
-});
+const StyledImage = styled("img")(() => ({
+  height: "auto",
+  maxHeight: "500px",
+  overflow: "hidden",
+  width: "100%",
+  backgroundSize: "cover",
+  backgroundRepeat: "no-repeat",
+}));
 
-const Root: React.FC = () => {
-  const classes = useStyle();
-
+const Root: React.FC = React.memo(() => {
   return (
     <>
       <div>
-        <img src={Image} className={classes.image} alt="backgroundImage" />
+        <StyledImage src={Image} alt="backgroundImage" />
       </div>
       <footer></footer>
     </>
   );
-};
+});
 
 export default Root;

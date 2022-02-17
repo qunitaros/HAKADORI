@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import Dialog from "@material-ui/core/Dialog";
-import DialogContent from "@material-ui/core/DialogContent";
-import MenuItem from "@material-ui/core/MenuItem";
-import DialogActions from "@material-ui/core/DialogActions";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import MenuItem from "@mui/material/MenuItem";
+import DialogActions from "@mui/material/DialogActions";
 
 import Dialogttl from "../../atoms/titles/Dialogttl";
 import UserTextField from "../../atoms/forms/UserTextfield";
@@ -15,7 +15,7 @@ import PhotoCameraIcon from "../../atoms/icons/PhotoCameraIcon";
 import PreviewCancelIcon from "../../atoms/icons/PreviewCancelIcon";
 import SubmitButton from "../../atoms/buttons/SubmitButton";
 
-const UserEditDialog = () => {
+const UserEditDialog = React.memo(() => {
   const {
     name,
     setName,
@@ -54,7 +54,7 @@ const UserEditDialog = () => {
           />
 
           <UserFormControl
-            value={prefecture}
+            value={`${prefecture}`}
             onChange={(e: React.ChangeEvent<{ value: unknown }>) =>
               setPrefecture(e.target.value as number)
             }
@@ -67,7 +67,7 @@ const UserEditDialog = () => {
             ))}
           </UserFormControl>
           <UserFormControl
-            value={field}
+            value={`${field}`}
             onChange={(e: React.ChangeEvent<{ value: unknown }>) =>
               setField(e.target.value as number)
             }
@@ -81,7 +81,7 @@ const UserEditDialog = () => {
           </UserFormControl>
 
           <UserFormControl
-            value={dayOff}
+            value={`${dayOff}`}
             onChange={(e: React.ChangeEvent<{ value: unknown }>) =>
               setDayOff(e.target.value as number)
             }
@@ -130,6 +130,6 @@ const UserEditDialog = () => {
       </Dialog>
     </form>
   );
-};
+});
 
 export default UserEditDialog;

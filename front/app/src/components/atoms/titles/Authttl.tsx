@@ -1,20 +1,16 @@
 import React from "react";
-import CardHeader from "@material-ui/core/CardHeader";
-import { Theme, makeStyles } from "@material-ui/core/styles";
+import CardHeader from "@mui/material/CardHeader";
+import { styled } from "@mui/material/styles";
 
-const useStyles = makeStyles((theme: Theme) => ({
-  header: {
-    textAlign: "center",
-  },
+const StyledHeader = styled(CardHeader)(() => ({
+  textAlign: "center",
 }));
 
 interface AuthttleProps {
   title: string;
 }
 
-const Authttl = ({ title }: AuthttleProps) => {
-  const classes = useStyles();
-
-  return <CardHeader className={classes.header} title={title} />;
-};
+const Authttl = React.memo(({ title }: AuthttleProps) => {
+  return <StyledHeader title={title} />;
+});
 export default Authttl;

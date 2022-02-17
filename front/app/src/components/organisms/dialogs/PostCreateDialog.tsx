@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import Dialog from "@material-ui/core/Dialog";
-import DialogContent from "@material-ui/core/DialogContent";
-import MenuItem from "@material-ui/core/MenuItem";
-import DialogActions from "@material-ui/core/DialogActions";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import MenuItem from "@mui/material/MenuItem";
+import DialogActions from "@mui/material/DialogActions";
 
 import { PostsContext } from "../../pages/Posts";
 import Dialogttl from "../../atoms/titles/Dialogttl";
@@ -11,7 +11,7 @@ import { fields } from "../../../data/fields";
 import PostTextField from "../../atoms/forms/PostTextField";
 import SubmitButton from "../../atoms/buttons/SubmitButton";
 
-const PostContentDialog = () => {
+const PostContentDialog = React.memo(() => {
   const {
     createPostFormOpen,
     setCreatePostFormOpen,
@@ -32,7 +32,7 @@ const PostContentDialog = () => {
         <Dialogttl>新しい投稿</Dialogttl>
         <DialogContent>
           <PostFormControl
-            value={postField}
+            value={`${postField}`}
             onChange={(e: React.ChangeEvent<{ value: unknown }>) =>
               setPostField(e.target.value as number)
             }
@@ -65,6 +65,6 @@ const PostContentDialog = () => {
       </Dialog>
     </form>
   );
-};
+});
 
 export default PostContentDialog;

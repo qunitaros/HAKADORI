@@ -1,14 +1,12 @@
 import React from "react";
 
-import { Container, Grid } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Container, Grid } from "@mui/material";
+import { styled } from "@mui/material/styles";
 
 import Header from "./Header";
 
-const useStyles = makeStyles(() => ({
-  container: {
-    paddingTop: "3rem",
-  },
+const StyledContainer = styled(Container)(() => ({
+  paddingTop: "3rem",
 }));
 
 interface CommonLayoutProps {
@@ -16,23 +14,21 @@ interface CommonLayoutProps {
 }
 
 // サインイン中共通のレイアウト
-const CommonLayout = ({ children }: CommonLayoutProps) => {
-  const classes = useStyles();
-
+const CommonLayout = React.memo(({ children }: CommonLayoutProps) => {
   return (
     <>
       <header>
         <Header />
       </header>
       <main>
-        <Container maxWidth="lg" className={classes.container}>
+        <StyledContainer maxWidth="lg">
           <Grid container justifyContent="center">
             {children}
           </Grid>
-        </Container>
+        </StyledContainer>
       </main>
     </>
   );
-};
+});
 
 export default CommonLayout;

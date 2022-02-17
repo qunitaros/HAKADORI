@@ -1,27 +1,24 @@
 import React from "react";
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
-import { Theme, makeStyles } from "@material-ui/core/styles";
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
+import { styled } from "@mui/material/styles";
 
-const useStyles = makeStyles((theme: Theme) => ({
-  title: {
-    marginTop: theme.spacing(2),
-  },
+const StyledTitle = styled(Grid)(({ theme }) => ({
+  marginTop: theme.spacing(2),
 }));
 
 interface UserProfileNameProps {
   children: React.ReactNode;
 }
 
-const UserProfileName = ({ children }: UserProfileNameProps) => {
-  const classes = useStyles();
+const UserProfileName = React.memo(({ children }: UserProfileNameProps) => {
   return (
-    <Grid container justifyContent="center" className={classes.title}>
+    <StyledTitle container justifyContent="center">
       <Typography variant="h4" gutterBottom>
         {children}
       </Typography>
-    </Grid>
+    </StyledTitle>
   );
-};
+});
 
 export default UserProfileName;

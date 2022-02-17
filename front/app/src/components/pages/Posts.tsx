@@ -1,8 +1,8 @@
 import React, { useEffect, createContext } from "react";
 
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import { Post } from "../../interfaces";
 
@@ -31,7 +31,7 @@ export const PostsContext = createContext(
   }
 );
 
-const Posts: React.FC = () => {
+const Posts: React.FC = React.memo(() => {
   const {
     post,
     setPost,
@@ -130,6 +130,6 @@ const Posts: React.FC = () => {
       />
     </PostsContext.Provider>
   );
-};
+});
 
 export default Posts;

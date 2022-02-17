@@ -1,14 +1,14 @@
 import React, { useState, useContext } from "react";
-import IconButton from "@material-ui/core/IconButton";
-import PersonIcon from "@material-ui/icons/Person";
-import Menu from "@material-ui/core/Menu";
-import Box from "@material-ui/core/Box";
-import MenuItem from "@material-ui/core/MenuItem";
-import Typography from "@material-ui/core/Typography";
+import IconButton from "@mui/material/IconButton";
+import PersonIcon from "@mui/icons-material/Person";
+import Menu from "@mui/material/Menu";
+import Box from "@mui/material/Box";
+import MenuItem from "@mui/material/MenuItem";
+import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../App";
 
-const PersonNav = () => {
+const PersonNav = React.memo(() => {
   const { currentUser } = useContext(AuthContext);
 
   const [currentUserId, setCurrentUserId] = useState<number | undefined>(
@@ -58,6 +58,6 @@ const PersonNav = () => {
       </Menu>
     </Box>
   );
-};
+});
 
 export default PersonNav;

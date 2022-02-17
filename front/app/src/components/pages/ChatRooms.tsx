@@ -1,39 +1,37 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import { makeStyles, Theme } from "@material-ui/core/styles";
-import { Grid, Typography } from "@material-ui/core";
-import Avatar from "@material-ui/core/Avatar";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import { styled } from "@mui/material/styles";
+import { Grid, Typography } from "@mui/material";
+import Avatar from "@mui/material/Avatar";
+import CircularProgress from "@mui/material/CircularProgress";
 
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import Divider from "@material-ui/core/Divider";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import Divider from "@mui/material/Divider";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
 
 import { ChatRoom } from "../../interfaces/index";
 import useChatRooms from "../../lib/hooks/useChatRooms";
 
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    flexGrow: 1,
-    minWidth: 340,
-    maxWidth: "100%",
-  },
-  link: {
-    textDecoration: "none",
-    color: "inherit",
-  },
-  chatRoom: {
-    padding: theme.spacing(1),
-  },
+const StyledRoot = styled("span")(() => ({
+  flexGrow: 1,
+  minWidth: 340,
+  maxWidth: "100%",
+}));
+
+const StyledLink = styled(Link)(() => ({
+  textDecoration: "none",
+  color: "inherit",
+}));
+
+const StyledChatRoom = styled(ListItem)(({ theme }) => ({
+  padding: theme.spacing(1),
 }));
 
 //チャットルーム一覧ページ
-const ChatRooms: React.FC = () => {
-  const classes = useStyles();
-
+const ChatRooms: React.FC = React.memo(() => {
   const { loading, chatRooms, handleGetChatRooms } = useChatRooms();
 
   useEffect(() => {
@@ -50,15 +48,9 @@ const ChatRooms: React.FC = () => {
               <Grid container key={index} justifyContent="center">
                 <List style={{ width: "300px" }}>
                   {/* 個別のチャットルームに飛ばす */}
-                  <Link
-                    to={`/chat_room/${chatRoom.chatRoom.id}`}
-                    className={classes.link}
-                  >
-                    <span className={classes.root}>
-                      <ListItem
-                        alignItems="flex-start"
-                        className={classes.chatRoom}
-                      >
+                  <StyledLink to={`/chat_room/${chatRoom.chatRoom.id}`}>
+                    <StyledRoot>
+                      <StyledChatRoom alignItems="flex-start">
                         <ListItemAvatar>
                           <Avatar
                             alt="avatar"
@@ -86,9 +78,9 @@ const ChatRooms: React.FC = () => {
                             </span>
                           }
                         />
-                      </ListItem>
-                    </span>
-                  </Link>
+                      </StyledChatRoom>
+                    </StyledRoot>
+                  </StyledLink>
                   <Divider component="li" />
                 </List>
               </Grid>
@@ -104,6 +96,6 @@ const ChatRooms: React.FC = () => {
       )}
     </>
   );
-};
+});
 
 export default ChatRooms;

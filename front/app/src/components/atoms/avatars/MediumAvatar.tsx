@@ -1,15 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import Avatar from "@material-ui/core/Avatar";
-import { Theme, makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
+import Avatar from "@mui/material/Avatar";
+import { styled } from "@mui/material/styles";
+import Grid from "@mui/material/Grid";
 
-const useStyles = makeStyles((theme: Theme) => ({
-  avatar: {
-    width: theme.spacing(10),
-    height: theme.spacing(10),
-  },
+const StyledAvatar = styled(Avatar)(({ theme }) => ({
+  width: theme.spacing(10),
+  height: theme.spacing(10),
 }));
 
 interface MediumAvatarProps {
@@ -18,12 +16,11 @@ interface MediumAvatarProps {
 }
 
 const MediumAvatar = ({ id, imageUrl }: MediumAvatarProps) => {
-  const classes = useStyles();
   return (
     <Grid container justifyContent="center">
       <Grid item>
         <Link to={`user/${id}`}>
-          <Avatar alt="avatar" src={imageUrl} className={classes.avatar} />
+          <StyledAvatar alt="avatar" src={imageUrl} />
         </Link>
       </Grid>
     </Grid>

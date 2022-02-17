@@ -1,14 +1,6 @@
 import React from "react";
-import IconButton from "@material-ui/core/IconButton";
-import { Theme, makeStyles } from "@material-ui/core/styles";
+import IconButton from "@mui/material/IconButton";
 import { Link } from "react-router-dom";
-
-const useStyles = makeStyles((theme: Theme) => ({
-  linkBtn: {
-    textTransform: "none",
-    marginLeft: theme.spacing(1),
-  },
-}));
 
 interface HeaderIconButtonProps {
   children: React.ReactNode;
@@ -16,15 +8,13 @@ interface HeaderIconButtonProps {
 }
 
 const HeaderIconButton = ({ children, link }: HeaderIconButtonProps) => {
-  const classes = useStyles();
-
   return (
     <IconButton
       component={Link}
       to={link}
       edge="start"
-      className={classes.linkBtn}
       color="inherit"
+      style={{ textTransform: "none", marginLeft: 3 }}
     >
       {children}
     </IconButton>

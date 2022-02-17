@@ -15,7 +15,7 @@ export const SignInContext = createContext(
 );
 
 // サインイン用ページ
-const SignIn: React.FC = () => {
+const SignIn: React.FC = React.memo(() => {
   const {
     email,
     setEmail,
@@ -43,6 +43,6 @@ const SignIn: React.FC = () => {
       />
     </>
   );
-};
+});
 
 export default SignIn;

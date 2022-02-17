@@ -6,7 +6,7 @@ import {
   Redirect,
 } from "react-router-dom";
 
-import CircularProgress from "@material-ui/core/CircularProgress";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import CommonLayout from "./components/layouts/CommonLayout";
 import Home from "./components/pages/Home";

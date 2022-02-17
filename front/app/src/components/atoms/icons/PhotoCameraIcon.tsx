@@ -1,14 +1,13 @@
-import IconButton from "@material-ui/core/IconButton";
-import PhotoCamera from "@material-ui/icons/PhotoCamera";
-import { Theme, makeStyles } from "@material-ui/core/styles";
+import IconButton from "@mui/material/IconButton";
+import PhotoCamera from "@mui/icons-material/PhotoCamera";
+import { styled } from "@mui/material/styles";
 
-const useStyles = makeStyles((theme: Theme) => ({
-  imageUploadBtn: {
-    textAlign: "right",
-  },
-  input: {
-    display: "none",
-  },
+const StyledButton = styled("div")(() => ({
+  textAlign: "right",
+}));
+
+const StyledInput = styled("input")(() => ({
+  display: "none",
 }));
 
 interface PhotoCameraIconProps {
@@ -16,12 +15,10 @@ interface PhotoCameraIconProps {
 }
 
 const PhotoCameraIcon = ({ onChange }: PhotoCameraIconProps) => {
-  const classes = useStyles();
   return (
-    <div className={classes.imageUploadBtn}>
-      <input
+    <StyledButton>
+      <StyledInput
         accept="image/*"
-        className={classes.input}
         id="icon-button-file"
         type="file"
         onChange={onChange}
@@ -35,7 +32,7 @@ const PhotoCameraIcon = ({ onChange }: PhotoCameraIconProps) => {
           <PhotoCamera />
         </IconButton>
       </label>
-    </div>
+    </StyledButton>
   );
 };
 
