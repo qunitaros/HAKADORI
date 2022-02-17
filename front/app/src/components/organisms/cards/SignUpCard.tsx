@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 
 import "date-fns";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import MenuItem from "@material-ui/core/MenuItem";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import MenuItem from "@mui/material/MenuItem";
 
-import { Theme, makeStyles } from "@material-ui/core/styles";
+import { styled } from "@mui/material/styles";
 import SubmitButton from "../../atoms/buttons/SubmitButton";
 import { SignUpContext } from "../../pages/SignUp";
 import PreviewCancelIcon from "../../atoms/icons/PreviewCancelIcon";
@@ -19,34 +19,12 @@ import { fields } from "../../../data/fields";
 import { genders } from "../../../data/genders";
 import BirthdayForm from "../../atoms/forms/BirthdayForm";
 
-const useStyles = makeStyles((theme: Theme) => ({
-  header: {
-    textAlign: "center",
-  },
-  card: {
-    padding: theme.spacing(2),
-    maxWidth: 340,
-  },
-  inputFileButton: {
-    textTransform: "none",
-    color: theme.palette.secondary.main,
-  },
-  imageUploadBtn: {
-    textAlign: "right",
-  },
-  input: {
-    display: "none",
-  },
-  box: {
-    marginBottom: "1.5rem",
-  },
-  preview: {
-    width: "100%",
-  },
+const StyledCard = styled(Card)(({ theme }) => ({
+  padding: theme.spacing(2),
+  maxWidth: 340,
 }));
 
-const SignUpCard = () => {
-  const classes = useStyles();
+const SignUpCard = React.memo(() => {
   const {
     name,
     setName,
@@ -73,7 +51,7 @@ const SignUpCard = () => {
 
   return (
     <form noValidate autoComplete="off">
-      <Card className={classes.card}>
+      <StyledCard>
         <Authttl title="アカウント作成" />
         <CardContent>
           <UserTextField
@@ -109,7 +87,7 @@ const SignUpCard = () => {
             }
           />
           <UserFormControl
-            value={gender}
+            value={`${gender}`}
             onChange={(e: React.ChangeEvent<{ value: unknown }>) =>
               setGender(e.target.value as number)
             }
@@ -122,7 +100,7 @@ const SignUpCard = () => {
             ))}
           </UserFormControl>
           <UserFormControl
-            value={prefecture}
+            value={`${prefecture}`}
             onChange={(e: React.ChangeEvent<{ value: unknown }>) =>
               setPrefecture(e.target.value as number)
             }
@@ -135,7 +113,7 @@ const SignUpCard = () => {
             ))}
           </UserFormControl>
           <UserFormControl
-            value={field}
+            value={`${field}`}
             onChange={(e: React.ChangeEvent<{ value: unknown }>) =>
               setField(e.target.value as number)
             }
@@ -149,7 +127,7 @@ const SignUpCard = () => {
           </UserFormControl>
 
           <UserFormControl
-            value={dayOff}
+            value={`${dayOff}`}
             onChange={(e: React.ChangeEvent<{ value: unknown }>) =>
               setDayOff(e.target.value as number)
             }
@@ -195,9 +173,9 @@ const SignUpCard = () => {
             </SubmitButton>
           </div>
         </CardContent>
-      </Card>
+      </StyledCard>
     </form>
   );
-};
+});
 
 export default SignUpCard;

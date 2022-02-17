@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 
-import { Theme, makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Grid from "@material-ui/core/Grid";
+import { styled } from "@mui/material/styles";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Grid from "@mui/material/Grid";
 import LargeAvatar from "../../atoms/avatars/LargeAvatar";
 import SettingIcon from "../../atoms/icons/SettingIcon";
 import SignOutButton from "../../atoms/buttons/SignOutButton";
@@ -11,16 +11,13 @@ import { HomeContext } from "../../pages/Home";
 import UserProfileContent from "../../atoms/contents/UserProfileContent";
 import UserProfileName from "../../atoms/titles/UserProfileName";
 
-const useStyles = makeStyles((theme: Theme) => ({
-  userCard: {
-    width: "50%",
-    maxWidth: "460px",
-    minWidth: "200px",
-  },
+const StyledCard = styled(Card)(() => ({
+  width: "50%",
+  maxWidth: "460px",
+  minWidth: "200px",
 }));
 
-const CurrentUserProps = () => {
-  const classes = useStyles();
+const CurrentUserProps = React.memo(() => {
   const {
     setEditFormOpen,
     currentUserAge,
@@ -32,7 +29,7 @@ const CurrentUserProps = () => {
   } = useContext(HomeContext);
 
   return (
-    <Card className={classes.userCard}>
+    <StyledCard>
       <CardContent>
         <Grid container justifyContent="flex-end">
           <Grid item>
@@ -52,8 +49,8 @@ const CurrentUserProps = () => {
         />
         <SignOutButton onClick={handleSignOut} />
       </CardContent>
-    </Card>
+    </StyledCard>
   );
-};
+});
 
 export default CurrentUserProps;

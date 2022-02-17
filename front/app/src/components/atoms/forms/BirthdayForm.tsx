@@ -6,7 +6,7 @@ import DatePicker from "@mui/lab/DatePicker";
 import { SignUpContext } from "../../pages/SignUp";
 import jaLocale from "date-fns/locale/ja";
 
-export default function ResponsiveDatePickers() {
+const BirthdayForm = React.memo(() => {
   const { birthday, setBirthday } = useContext(SignUpContext);
 
   return (
@@ -24,4 +24,6 @@ export default function ResponsiveDatePickers() {
       />
     </LocalizationProvider>
   );
-}
+});
+
+export default BirthdayForm;

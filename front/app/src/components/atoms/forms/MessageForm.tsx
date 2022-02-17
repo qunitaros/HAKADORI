@@ -1,11 +1,9 @@
 import React from "react";
-import TextField from "@material-ui/core/TextField";
-import { Theme, makeStyles } from "@material-ui/core/styles";
+import TextField from "@mui/material/TextField";
+import { styled } from "@mui/material/styles";
 
-const useStyles = makeStyles((theme: Theme) => ({
-  textInputWrapper: {
-    width: "100%",
-  },
+const StyledTextField = styled(TextField)(() => ({
+  width: "100%",
 }));
 
 interface MessageFormProps {
@@ -13,18 +11,10 @@ interface MessageFormProps {
   onChange: any;
 }
 
-const MessageForm = ({ value, onChange }: MessageFormProps) => {
-  const classes = useStyles();
-
+const MessageForm = React.memo(({ value, onChange }: MessageFormProps) => {
   return (
-    <TextField
-      required
-      multiline
-      value={value}
-      onChange={onChange}
-      className={classes.textInputWrapper}
-    />
+    <StyledTextField required multiline value={value} onChange={onChange} />
   );
-};
+});
 
 export default MessageForm;

@@ -1,9 +1,10 @@
+import React from "react";
 import { useEffect } from "react";
 import { ActiveLikeUser, PassiveLikeUser } from "../../interfaces";
 
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import useLikes from "../../lib/hooks/useLikes";
 import LikesCard from "../organisms/cards/LikesCard";
@@ -11,7 +12,7 @@ import ActiveLikeUsersDialog from "../organisms/dialogs/ActiveLikeUsersDialog";
 import ActiveLikeUsersList from "../organisms/lists/ActiveLikeUsersList";
 import ActiveLikeUserOpenButton from "../atoms/buttons/ActiveLikeUserOpenButton";
 
-const Likes: React.FC = () => {
+const Likes: React.FC = React.memo(() => {
   const {
     loading,
     passiveLikeUsers,
@@ -112,6 +113,6 @@ const Likes: React.FC = () => {
       </ActiveLikeUsersDialog>
     </>
   );
-};
+});
 
 export default Likes;

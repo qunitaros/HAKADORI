@@ -1,14 +1,12 @@
 import React from "react";
 
-import Avatar from "@material-ui/core/Avatar";
-import { Theme, makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
+import Avatar from "@mui/material/Avatar";
+import { styled } from "@mui/material/styles";
+import Grid from "@mui/material/Grid";
 
-const useStyles = makeStyles((theme: Theme) => ({
-  avatar: {
-    width: theme.spacing(16),
-    height: theme.spacing(16),
-  },
+const StyledAvatar = styled(Avatar)(({ theme }) => ({
+  width: theme.spacing(16),
+  height: theme.spacing(16),
 }));
 
 interface LargeAvatarProps {
@@ -16,11 +14,10 @@ interface LargeAvatarProps {
 }
 
 const LargeAvatar = ({ imageUrl }: LargeAvatarProps) => {
-  const classes = useStyles();
   return (
     <Grid container justifyContent="center">
       <Grid item>
-        <Avatar alt="avatar" src={imageUrl} className={classes.avatar} />
+        <StyledAvatar alt="avatar" src={imageUrl} />
       </Grid>
     </Grid>
   );

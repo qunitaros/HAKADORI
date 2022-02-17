@@ -1,32 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { makeStyles, Theme } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-
-const useStyles = makeStyles((theme: Theme) => ({
-  title: {
-    flexGrow: 1,
-    textDecoration: "none",
-    color: "inherit",
-  },
-}));
+import Typography from "@mui/material/Typography";
 
 interface HeaderTitleProps {
   children: React.ReactNode;
 }
 
-const Headerttl = ({ children }: HeaderTitleProps) => {
-  const classes = useStyles();
+const Headerttl = React.memo(({ children }: HeaderTitleProps) => {
   return (
     <Typography
       component={Link}
       to="/users"
       variant="h6"
-      className={classes.title}
+      style={{ marginTop: "0.5rem", marginBottom: "1rem", textAlign: "center" }}
     >
       {children}
     </Typography>
   );
-};
+});
 
 export default Headerttl;

@@ -35,7 +35,8 @@ export const SignUpContext = createContext(
 );
 
 // サインアップ用ページ
-const SignUp: React.FC = () => {
+const SignUp: React.FC = React.memo(() => {
+  console.log("render");
   const {
     name,
     setName,
@@ -101,6 +102,6 @@ const SignUp: React.FC = () => {
       />
     </SignUpContext.Provider>
   );
-};
+});
 
 export default SignUp;

@@ -1,17 +1,17 @@
 import React from "react";
-import IconButton from "@material-ui/core/IconButton";
-import SettingsIcon from "@material-ui/icons/Settings";
+import IconButton from "@mui/material/IconButton";
+import SettingsIcon from "@mui/icons-material/Settings";
 
 interface SettingIconProps {
   onClick: () => void;
 }
 
-const SettingIcon = ({ onClick }: SettingIconProps) => {
+const SettingIcon = React.memo(({ onClick }: SettingIconProps) => {
   return (
     <IconButton onClick={onClick}>
       <SettingsIcon color="action" fontSize="small" />
     </IconButton>
   );
-};
+});
 
 export default SettingIcon;

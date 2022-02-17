@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
+import Button from "@mui/material/Button";
 
 import { Link } from "react-router-dom";
 
@@ -7,12 +7,12 @@ interface OpenUserButtonProps {
   id: number;
 }
 
-const OpenUserButton = ({ id }: OpenUserButtonProps) => {
+const OpenUserButton = React.memo(({ id }: OpenUserButtonProps) => {
   return (
     <Link to={`/user/${id}`}>
       <Button>プロフィールを見る</Button>
     </Link>
   );
-};
+});
 
 export default OpenUserButton;

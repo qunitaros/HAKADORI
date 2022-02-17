@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 
-import { Theme, makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Grid from "@material-ui/core/Grid";
+import { styled } from "@mui/material/styles";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Grid from "@mui/material/Grid";
 import LargeAvatar from "../../atoms/avatars/LargeAvatar";
 import UserProfileContent from "../../atoms/contents/UserProfileContent";
 
@@ -11,22 +11,19 @@ import { UserContext } from "../../pages/User";
 import UserProfileName from "../../atoms/titles/UserProfileName";
 import { AuthContext } from "../../../App";
 
-const useStyles = makeStyles((theme: Theme) => ({
-  userCard: {
-    width: "50%",
-    maxWidth: "460px",
-    minWidth: "200px",
-  },
+const StyledCard = styled(Card)(() => ({
+  width: "50%",
+  maxWidth: "460px",
+  minWidth: "200px",
 }));
 
-const UserCard = () => {
-  const classes = useStyles();
+const UserCard = React.memo(() => {
   const { user, userAge, userDayOff, userField, userPrefecture } =
     useContext(UserContext);
   const { currentUser } = useContext(AuthContext);
 
   return (
-    <Card className={classes.userCard}>
+    <StyledCard>
       <CardContent>
         <Grid container justifyContent="center">
           <LargeAvatar imageUrl={user?.image.url} />
@@ -44,8 +41,8 @@ const UserCard = () => {
           <></>
         )}
       </CardContent>
-    </Card>
+    </StyledCard>
   );
-};
+});
 
 export default UserCard;

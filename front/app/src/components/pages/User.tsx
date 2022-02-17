@@ -1,12 +1,12 @@
 import React, { useEffect, createContext, useContext } from "react";
 
-import { makeStyles, Theme } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import Typography from "@material-ui/core/Typography";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import { styled } from "@mui/material/styles";
+import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import Typography from "@mui/material/Typography";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import { User as UserData, UserPost } from "../../interfaces";
 import { RouteComponentProps } from "react-router-dom";
@@ -37,18 +37,15 @@ export const UserContext = createContext(
   }
 );
 
-const useStyles = makeStyles((theme: Theme) => ({
-  container: {
-    marginTop: theme.spacing(4),
-    width: "100%",
-  },
+const StyledContainer = styled(Grid)(({ theme }) => ({
+  marginTop: theme.spacing(4),
+  width: "100%",
 }));
 
 type UserProps = RouteComponentProps<{ id: string }>;
 
-const User: React.FC<UserProps> = (props) => {
+const User: React.FC<UserProps> = React.memo((props) => {
   const { currentUser } = useContext(AuthContext);
-  const classes = useStyles();
   const {
     loading,
     user,
@@ -116,12 +113,7 @@ const User: React.FC<UserProps> = (props) => {
           )}
 
           {userPosts?.length > 0 ? (
-            <Grid
-              container
-              justifyContent="center"
-              spacing={3}
-              className={classes.container}
-            >
+            <StyledContainer container justifyContent="center" spacing={3}>
               {userPosts?.map((userPost: UserPost, index: number) => {
                 return (
                   <Grid key={index} item xs={4}>
@@ -155,18 +147,13 @@ const User: React.FC<UserProps> = (props) => {
                   </Grid>
                 );
               })}
-            </Grid>
+            </StyledContainer>
           ) : (
             <>
               <br />
-              <Grid
-                container
-                justifyContent="center"
-                spacing={3}
-                className={classes.container}
-              >
+              <StyledContainer container justifyContent="center" spacing={3}>
                 <Typography component="h6">まだ投稿がありません。</Typography>
-              </Grid>
+              </StyledContainer>
             </>
           )}
         </Grid>
@@ -179,6 +166,6 @@ const User: React.FC<UserProps> = (props) => {
       />
     </UserContext.Provider>
   );
-};
+});
 
 export default User;

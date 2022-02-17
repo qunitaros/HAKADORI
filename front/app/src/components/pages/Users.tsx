@@ -1,7 +1,7 @@
 import React, { useEffect, createContext } from "react";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import { User } from "../../interfaces";
 
@@ -18,7 +18,7 @@ export const UsersContext = createContext(
 );
 
 // ユーザー一覧ページ
-const Users: React.FC = () => {
+const Users: React.FC = React.memo(() => {
   const {
     loading,
     users,
@@ -66,6 +66,6 @@ const Users: React.FC = () => {
       </Grid>
     </UsersContext.Provider>
   );
-};
+});
 
 export default Users;

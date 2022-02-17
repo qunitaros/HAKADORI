@@ -1,5 +1,5 @@
 import React, { createContext } from "react";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import useHome from "../../lib/hooks/useHome";
 import { User } from "../../interfaces";

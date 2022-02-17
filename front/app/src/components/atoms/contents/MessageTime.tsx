@@ -1,5 +1,5 @@
 import React from "react";
-import Typography from "@material-ui/core/Typography";
+import Typography from "@mui/material/Typography";
 
 interface MessageTimeProps {
   messageUserId: number;
@@ -7,23 +7,21 @@ interface MessageTimeProps {
   children: React.ReactNode;
 }
 
-const MessageTime = ({
-  messageUserId,
-  otherUserId,
-  children,
-}: MessageTimeProps) => {
-  return (
-    <Typography
-      variant="body2"
-      component="p"
-      color="textSecondary"
-      style={{
-        textAlign: messageUserId === otherUserId ? "left" : "right",
-      }}
-    >
-      {children}
-    </Typography>
-  );
-};
+const MessageTime = React.memo(
+  ({ messageUserId, otherUserId, children }: MessageTimeProps) => {
+    return (
+      <Typography
+        variant="body2"
+        component="p"
+        color="textSecondary"
+        style={{
+          textAlign: messageUserId === otherUserId ? "left" : "right",
+        }}
+      >
+        {children}
+      </Typography>
+    );
+  }
+);
 
 export default MessageTime;

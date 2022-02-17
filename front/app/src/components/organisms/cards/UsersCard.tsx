@@ -1,26 +1,20 @@
 import React from "react";
 
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Grid from "@material-ui/core/Grid";
-import Divider from "@material-ui/core/Divider";
-import { Theme, makeStyles } from "@material-ui/core/styles";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Grid from "@mui/material/Grid";
+import Divider from "@mui/material/Divider";
+import { styled } from "@mui/material/styles";
 
 import MediumAvatar from "../../atoms/avatars/MediumAvatar";
 import OpenUserButton from "../../atoms/buttons/OpenUserButton";
 import UsersCardContent from "../../atoms/contents/UsersCardContent";
 
-const useStyles = makeStyles((theme: Theme) => ({
-  avatar: {
-    width: theme.spacing(10),
-    height: theme.spacing(10),
-  },
-  card: {
-    height: theme.spacing(30),
-    width: theme.spacing(25),
-    maxWidth: "300px",
-    minWidth: "100px",
-  },
+const StyledCard = styled(Card)(({ theme }) => ({
+  height: theme.spacing(30),
+  width: theme.spacing(25),
+  maxWidth: "300px",
+  minWidth: "100px",
 }));
 
 interface UsersCardProps {
@@ -29,11 +23,9 @@ interface UsersCardProps {
   children: React.ReactNode;
 }
 
-const UsersCard = ({ id, imageUrl, children }: UsersCardProps) => {
-  const classes = useStyles();
-
+const UsersCard = React.memo(({ id, imageUrl, children }: UsersCardProps) => {
   return (
-    <Card className={classes.card}>
+    <StyledCard>
       <CardContent>
         <MediumAvatar id={id} imageUrl={imageUrl} />
         <Divider style={{ marginTop: "0.8rem" }} />
@@ -44,8 +36,8 @@ const UsersCard = ({ id, imageUrl, children }: UsersCardProps) => {
           <OpenUserButton id={id} />
         </Grid>
       </CardContent>
-    </Card>
+    </StyledCard>
   );
-};
+});
 
 export default UsersCard;

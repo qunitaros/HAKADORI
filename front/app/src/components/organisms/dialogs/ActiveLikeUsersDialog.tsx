@@ -1,8 +1,9 @@
 import React from "react";
 
-import Dialog from "@material-ui/core/Dialog";
-import List from "@material-ui/core/List";
-
+import Dialog from "@mui/material/Dialog";
+import List from "@mui/material/List";
+import { TransitionProps } from "@mui/material/transitions";
+import Slide from "@mui/material/Slide";
 import DialogHeader from "../../layouts/DialogHeader";
 
 interface ActiveLikeUsersDialogProps {
@@ -11,31 +12,29 @@ interface ActiveLikeUsersDialogProps {
   open: boolean;
 }
 
-const ActiveLikeUsersDialog = ({
-  children,
-  open,
-  onClose,
-}: ActiveLikeUsersDialogProps) => {
-  // const Transition = React.forwardRef(function Transition(
-  //   props: TransitionProps & {
-  //     children: React.ReactElement;
-  //   },
-  //   ref: React.Ref<unknown>
-  // ) {
-  //   return <Slide direction="up" ref={ref} {...props} />;
-  // });
+const Transition = React.forwardRef(function Transition(
+  props: TransitionProps & {
+    children: React.ReactElement;
+  },
+  ref: React.Ref<unknown>
+) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
-  return (
-    <Dialog
-      fullScreen
-      open={open}
-      onClose={onClose}
-      // TransitionComponent={Transition}
-    >
-      <DialogHeader onClose={onClose} title="自分からいいねしたユーザー" />
-      <List>{children}</List>
-    </Dialog>
-  );
-};
+const ActiveLikeUsersDialog = React.memo(
+  ({ children, open, onClose }: ActiveLikeUsersDialogProps) => {
+    return (
+      <Dialog
+        fullScreen
+        open={open}
+        onClose={onClose}
+        TransitionComponent={Transition}
+      >
+        <DialogHeader onClose={onClose} title="自分からいいねしたユーザー" />
+        <List>{children}</List>
+      </Dialog>
+    );
+  }
+);
 
 export default ActiveLikeUsersDialog;

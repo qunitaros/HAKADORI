@@ -1,25 +1,17 @@
 import React from "react";
-import { Theme, makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
+import { styled } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
 
-const useStyles = makeStyles((theme: Theme) => ({
-  postContent: {
-    marginBottom: 12,
-  },
+const StyledContent = styled(Typography)(() => ({
+  marginBottom: 12,
 }));
 
 interface PostsContentProps {
   children: React.ReactNode;
 }
 
-const PostsContent = ({ children }: PostsContentProps) => {
-  const classes = useStyles();
-
-  return (
-    <Typography variant="h5" component="h2" className={classes.postContent}>
-      {children}
-    </Typography>
-  );
-};
+const PostsContent = React.memo(({ children }: PostsContentProps) => {
+  return <StyledContent variant="h5">{children}</StyledContent>;
+});
 
 export default PostsContent;
