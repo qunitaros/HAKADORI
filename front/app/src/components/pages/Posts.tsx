@@ -11,7 +11,6 @@ import usePost from "../../lib/hooks/usePosts";
 import PostButton from "../atoms/buttons/PostButton";
 import PostsCard from "../organisms/cards/PostsCard";
 import PostContentDialog from "../organisms/dialogs/PostContentDialog";
-import PostCreateDialog from "../organisms/dialogs/PostCreateDialog";
 
 export const PostsContext = createContext(
   {} as {
@@ -50,6 +49,7 @@ const Posts: React.FC = React.memo(() => {
     handleGetPosts,
     handleSubmit,
     CreatePostField,
+    iso8601ToDateTime,
   } = usePost();
 
   useEffect(() => {
@@ -78,21 +78,19 @@ const Posts: React.FC = React.memo(() => {
       {!loading ? (
         posts?.length > 0 ? (
           <>
-            <Grid container justifyContent="center" spacing={2}>
-              <PostButton onClick={() => setCreatePostFormOpen(true)} />
+            <Grid container justifyContent="center">
               {posts?.map((post: Post, index: number) => {
                 return (
-                  <Grid key={index} item xs={4}>
+                  <Grid key={index} container justifyContent="center">
                     <PostsCard
                       id={post.post.userId}
                       imageUrl={post.user.image.url}
                       userName={post.user.name}
                       postContent={post.post.content}
                       postField={CreatePostField(post.post)}
-                      onClick={() => {
-                        setPost(post);
-                        setPostDetailOpen(true);
-                      }}
+                      postCreatedAt={iso8601ToDateTime(
+                        post.post.createdAt?.toString() || "100000000"
+                      )}
                     />
                   </Grid>
                 );
@@ -121,7 +119,6 @@ const Posts: React.FC = React.memo(() => {
       )}
 
       <PostContentDialog>{post.post.content}</PostContentDialog>
-      <PostCreateDialog />
       <AlertMessage // エラーが発生した場合はアラートを表示
         open={alertMessageOpen}
         setOpen={setAlertMessageOpen}

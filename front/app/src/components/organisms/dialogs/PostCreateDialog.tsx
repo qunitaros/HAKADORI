@@ -4,14 +4,14 @@ import DialogContent from "@mui/material/DialogContent";
 import MenuItem from "@mui/material/MenuItem";
 import DialogActions from "@mui/material/DialogActions";
 
-import { PostsContext } from "../../pages/Posts";
-import Dialogttl from "../../atoms/titles/Dialogttl";
 import PostFormControl from "../../atoms/forms/PostFormControl";
 import { fields } from "../../../data/fields";
 import PostTextField from "../../atoms/forms/PostTextField";
 import SubmitButton from "../../atoms/buttons/SubmitButton";
+import { PostCreateContext } from "../../layouts/BottomBar";
+import DialogHeader from "../../layouts/DialogHeader";
 
-const PostContentDialog = React.memo(() => {
+const PostCreateDialog = React.memo(() => {
   const {
     createPostFormOpen,
     setCreatePostFormOpen,
@@ -20,7 +20,7 @@ const PostContentDialog = React.memo(() => {
     content,
     setContent,
     handleSubmit,
-  } = useContext(PostsContext);
+  } = useContext(PostCreateContext);
 
   return (
     <form noValidate autoComplete="off">
@@ -28,8 +28,12 @@ const PostContentDialog = React.memo(() => {
         open={createPostFormOpen}
         keepMounted
         onClose={() => setCreatePostFormOpen(false)}
+        fullWidth
       >
-        <Dialogttl>新しい投稿</Dialogttl>
+        <DialogHeader
+          onClose={() => setCreatePostFormOpen(false)}
+          title="新しい投稿"
+        />
         <DialogContent>
           <PostFormControl
             value={`${postField}`}
@@ -48,7 +52,7 @@ const PostContentDialog = React.memo(() => {
             label="勉強したことや教わりたいこと"
             placeholder="140文字以内で書いてください"
             value={content}
-            rows={"4"}
+            rows={4}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setContent(e.target.value);
             }}
@@ -67,4 +71,4 @@ const PostContentDialog = React.memo(() => {
   );
 });
 
-export default PostContentDialog;
+export default PostCreateDialog;

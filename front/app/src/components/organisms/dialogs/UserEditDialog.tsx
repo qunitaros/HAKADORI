@@ -4,7 +4,6 @@ import DialogContent from "@mui/material/DialogContent";
 import MenuItem from "@mui/material/MenuItem";
 import DialogActions from "@mui/material/DialogActions";
 
-import Dialogttl from "../../atoms/titles/Dialogttl";
 import UserTextField from "../../atoms/forms/UserTextfield";
 import { HomeContext } from "../../pages/Home";
 import UserFormControl from "../../atoms/forms/UserFormControl";
@@ -14,6 +13,7 @@ import { dayOffs } from "../../../data/dayOffs";
 import PhotoCameraIcon from "../../atoms/icons/PhotoCameraIcon";
 import PreviewCancelIcon from "../../atoms/icons/PreviewCancelIcon";
 import SubmitButton from "../../atoms/buttons/SubmitButton";
+import DialogHeader from "../../layouts/DialogHeader";
 
 const UserEditDialog = React.memo(() => {
   const {
@@ -43,7 +43,10 @@ const UserEditDialog = React.memo(() => {
         keepMounted
         onClose={() => setEditFormOpen(false)}
       >
-        <Dialogttl>プロフィールの編集</Dialogttl>
+        <DialogHeader
+          onClose={() => setEditFormOpen(false)}
+          title="プロフィールの編集"
+        />
         <DialogContent>
           <UserTextField
             label="名前"

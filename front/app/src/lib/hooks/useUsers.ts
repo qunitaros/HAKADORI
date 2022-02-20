@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { fields } from "../../data/fields";
 import { prefectures } from "../../data/prefectures";
 import { User } from "../../interfaces";
 import { getUsers } from "../api/users";
@@ -27,6 +28,11 @@ const useUsers = () => {
     return prefectures[user.prefecture - 1];
   };
 
+  // 科目
+  const userField = (user: User): string => {
+    return fields[user.field];
+  };
+
   // ユーザー一覧を取得
   const handleGetUsers = async () => {
     try {
@@ -48,6 +54,7 @@ const useUsers = () => {
     users,
     userAge,
     userPrefecture,
+    userField,
     handleGetUsers,
     dialogOpen,
     setDialogOpen,

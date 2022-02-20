@@ -24,7 +24,6 @@ import User from "./components/pages/User";
 import Likes from "./components/pages/Likes";
 import Posts from "./components/pages/Posts";
 
-// グローバルで扱う変数・関数
 export const AuthContext = createContext(
   {} as {
     loading: boolean;

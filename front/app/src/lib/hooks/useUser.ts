@@ -62,6 +62,7 @@ const useUser = (props) => {
       const res = await deletePost(id);
       setPostDeleteConfirm(false);
       if (res?.status === 200) {
+        handleGetUser();
       } else {
         console.log(res?.data);
       }
@@ -104,6 +105,17 @@ const useUser = (props) => {
     return fields[post.postField || 0];
   };
 
+  const iso8601ToDateTime = (iso8601: string) => {
+    const date = new Date(Date.parse(iso8601));
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const hour = date.getHours();
+    const minute = date.getMinutes();
+
+    return year + " " + month + "/" + day + " " + hour + ":" + minute;
+  };
+
   return {
     loading,
     user,
@@ -121,6 +133,7 @@ const useUser = (props) => {
     handleDeletePost,
     postDeleteConfirm,
     setPostDeleteConfirm,
+    iso8601ToDateTime,
   };
 };
 

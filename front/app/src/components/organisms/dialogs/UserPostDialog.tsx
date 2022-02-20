@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import { UserContext } from "../../pages/User";
 import PostField from "../../atoms/contents/PostField";
+import DialogHeader from "../../layouts/DialogHeader";
 
 interface UserPostDialogProps {
   postField: string;
@@ -22,6 +23,7 @@ const UserPostDialog = React.memo(
         keepMounted
         onClose={() => setPostDetailOpen(false)}
       >
+        <DialogHeader onClose={() => setPostDetailOpen(false)} title="" />
         <DialogContent>
           <Grid container justifyContent="center">
             <Grid item style={{ marginTop: "1rem" }}>

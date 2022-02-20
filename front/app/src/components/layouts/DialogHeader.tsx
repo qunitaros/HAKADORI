@@ -18,17 +18,21 @@ const DialogHeader = React.memo(({ onClose, title }: DialogHeaderProps) => {
       style={{ color: "#000456", backgroundColor: "wheat" }}
     >
       <Toolbar>
+        <Typography
+          variant="h6"
+          component="div"
+          style={{ flexGrow: 1, textDecoration: "none", color: "inherit" }}
+        >
+          {title}
+        </Typography>
         <IconButton
-          edge="start"
+          edge="end"
           color="inherit"
           onClick={onClose}
           aria-label="close"
         >
           <CloseIcon />
         </IconButton>
-        <Typography variant="h6" component="div">
-          {title}
-        </Typography>
       </Toolbar>
     </AppBar>
   );

@@ -39,8 +39,9 @@ const usePost = () => {
   const [postDetailOpen, setPostDetailOpen] = useState<boolean>(false);
   const [postField, setPostField] = useState<number>();
   const [content, setContent] = useState<string>("");
-  const [alertMessageOpen, setAlertMessageOpen] = useState(false);
-  const [createPostFormOpen, setCreatePostFormOpen] = useState(false);
+  const [alertMessageOpen, setAlertMessageOpen] = useState<boolean>(false);
+  const [createPostFormOpen, setCreatePostFormOpen] = useState<boolean>(false);
+  const [createSuccessOpen, setCreateSuccessOpen] = useState<boolean>(false);
 
   const createFormData = (): CreatePostFormData => {
     const formData = new FormData();
@@ -77,6 +78,7 @@ const usePost = () => {
       const res = await createPost(data);
 
       if (res?.status === 200) {
+        setCreateSuccessOpen(true);
         setCreatePostFormOpen(false);
 
         setContent("");
@@ -90,6 +92,17 @@ const usePost = () => {
       console.log(err);
       setAlertMessageOpen(true);
     }
+  };
+
+  const iso8601ToDateTime = (iso8601: string) => {
+    const date = new Date(Date.parse(iso8601));
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const hour = date.getHours();
+    const minute = date.getMinutes();
+
+    return year + " " + month + "/" + day + " " + hour + ":" + minute;
   };
 
   // 分野
@@ -109,12 +122,15 @@ const usePost = () => {
     setContent,
     alertMessageOpen,
     setAlertMessageOpen,
+    createSuccessOpen,
+    setCreateSuccessOpen,
     setPostDetailOpen,
     createPostFormOpen,
     setCreatePostFormOpen,
     handleGetPosts,
     handleSubmit,
     CreatePostField,
+    iso8601ToDateTime,
   };
 };
 

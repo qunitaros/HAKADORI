@@ -12,9 +12,8 @@ import UserProfileName from "../../atoms/titles/UserProfileName";
 import { AuthContext } from "../../../App";
 
 const StyledCard = styled(Card)(() => ({
-  width: "50%",
-  maxWidth: "460px",
-  minWidth: "200px",
+  width: "84%",
+  padding: "1rem",
 }));
 
 const UserCard = React.memo(() => {

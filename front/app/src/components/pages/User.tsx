@@ -2,7 +2,6 @@ import React, { useEffect, createContext, useContext } from "react";
 
 import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import Typography from "@mui/material/Typography";
@@ -12,11 +11,12 @@ import { User as UserData, UserPost } from "../../interfaces";
 import { RouteComponentProps } from "react-router-dom";
 import useUser from "../../lib/hooks/useUser";
 import UserCard from "../organisms/cards/UserCard";
-import UserPostsCard from "../organisms/cards/UserPostsCard";
+import PostsCard from "../organisms/cards/PostsCard";
 import UserPostDialog from "../organisms/dialogs/UserPostDialog";
 import { AuthContext } from "../../App";
 import LikeButton from "../atoms/buttons/LikeButton";
 import useLikes from "../../lib/hooks/useLikes";
+import ConfirmDialog from "../organisms/dialogs/ConfirmDialog";
 
 export const UserContext = createContext(
   {} as {
@@ -34,6 +34,7 @@ export const UserContext = createContext(
     userField: any;
     userPrefecture: any;
     handleDeletePost: any;
+    handleGetLikeUsers: any;
   }
 );
 
@@ -63,13 +64,15 @@ const User: React.FC<UserProps> = React.memo((props) => {
     handleDeletePost,
     postDeleteConfirm,
     setPostDeleteConfirm,
+    iso8601ToDateTime,
   } = useUser(props);
 
-  const { isLikedUser, handleCreateLike, handleGetLikeUsers } = useLikes();
+  const { handleGetLikeUsers, isLikedUser, handleCreateLike } = useLikes();
 
   useEffect(() => {
     handleGetUser();
     handleGetLikeUsers();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -90,6 +93,7 @@ const User: React.FC<UserProps> = React.memo((props) => {
         userDayOff,
         userField,
         userPrefecture,
+        handleGetLikeUsers,
       }}
     >
       {!loading ? (
@@ -97,7 +101,7 @@ const User: React.FC<UserProps> = React.memo((props) => {
           <UserCard />
           {currentUser.id !== user.id ? (
             <LikeButton
-              variant="outlined"
+              variant="contained"
               onClick={() =>
                 isLikedUser(user.id) ? void 0 : handleCreateLike(user)
               }
@@ -113,37 +117,31 @@ const User: React.FC<UserProps> = React.memo((props) => {
           )}
 
           {userPosts?.length > 0 ? (
-            <StyledContainer container justifyContent="center" spacing={3}>
+            <StyledContainer container justifyContent="center">
               {userPosts?.map((userPost: UserPost, index: number) => {
                 return (
-                  <Grid key={index} item xs={4}>
-                    <UserPostsCard
+                  <Grid key={index} container justifyContent="center">
+                    <PostsCard
                       postContent={userPost.content}
                       postField={CreatePostField(userPost)}
-                      id={userPost.id}
-                      onClickOpen={() => {
-                        setUserPost(userPost);
-                        setPostDetailOpen(true);
-                      }}
                       useable={
-                        currentUser.id !== userPost.userId ? true : false
+                        currentUser.id === userPost.userId ? true : false
                       }
+                      deleteAction={() => setPostDeleteConfirm(true)}
+                      id={0}
+                      userName={user?.name}
+                      imageUrl={user.image.url}
+                      postCreatedAt={iso8601ToDateTime(
+                        userPost.createdAt?.toString() || "100000000"
+                      )}
                     />
-                    <Grid
-                      container
-                      justifyContent="center"
-                      style={{ marginTop: "0.2rem" }}
-                    >
-                      <Button
-                        size="small"
-                        onClick={() => {
-                          setUserPost(userPost);
-                          setPostDetailOpen(true);
-                        }}
-                      >
-                        詳しく見る
-                      </Button>
-                    </Grid>
+                    <ConfirmDialog
+                      open={postDeleteConfirm}
+                      onClose={() => setPostDeleteConfirm(false)}
+                      message="投稿を削除します。よろしいですか？"
+                      clickYes={() => handleDeletePost(userPost.id)}
+                      clickNo={() => setPostDeleteConfirm(false)}
+                    />
                   </Grid>
                 );
               })}

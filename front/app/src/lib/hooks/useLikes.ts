@@ -70,9 +70,14 @@ const useLikes = () => {
     }
   };
 
-  // 既にいいねされているユーザーかどうかの判定
+  //既にいいねされているユーザーかどうかの判定
   const isLikedUser = (userId: number | undefined): boolean => {
-    return likedUsers?.some((likedUser: User) => likedUser.id === userId);
+    return (
+      activeLikeUsers?.some(
+        (activeLikeUser: ActiveLikeUser) =>
+          activeLikeUser.activeLike.id === userId
+      ) || likedUsers?.some((likedUser: User) => likedUser.id === userId)
+    );
   };
 
   return {

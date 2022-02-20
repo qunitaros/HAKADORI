@@ -30,17 +30,30 @@ const Likes: React.FC = React.memo(() => {
   return (
     <>
       {!loading ? (
-        <>
+        <Grid container justifyContent="center">
+          {activeLikeUsers.length > 0 ? (
+            <ActiveLikeUserOpenButton
+              open={() => setActiveLikeUserDialogOpen(true)}
+            />
+          ) : (
+            <></>
+          )}
           {passiveLikeUsers.length > 0 ? (
             <>
-              <Grid container justifyContent="center" spacing={2}>
-                <ActiveLikeUserOpenButton
-                  open={() => setActiveLikeUserDialogOpen(true)}
-                />
+              <Grid
+                container
+                justifyContent="center"
+                style={{ marginTop: "2rem" }}
+              >
                 {passiveLikeUsers.map(
                   (passiveLikeUser: PassiveLikeUser, index: number) => {
                     return (
-                      <Grid key={index} item xs={4}>
+                      <Grid
+                        key={index}
+                        container
+                        justifyContent="center"
+                        style={{ marginTop: "1rem" }}
+                      >
                         <LikesCard
                           id={passiveLikeUser.passiveLike.id}
                           imageUrl={passiveLikeUser.passiveLike.image.url}
@@ -72,13 +85,19 @@ const Likes: React.FC = React.memo(() => {
               </Grid>
             </>
           ) : (
-            <Typography component="p" variant="body2" color="textSecondary">
-              現在いいねをしてくれた相手はいません。
-              <br />
-              いいと思った相手をこちらからいいねしてみましょう!
-            </Typography>
+            <Grid
+              justifyContent="center"
+              container
+              style={{ marginTop: "3rem" }}
+            >
+              <Typography component="p" variant="body2" color="textSecondary">
+                現在いいねをしてくれた相手はいません。
+                <br />
+                いいと思った相手をこちらからいいねしてみましょう!
+              </Typography>
+            </Grid>
           )}
-        </>
+        </Grid>
       ) : (
         <CircularProgress color="inherit" />
       )}

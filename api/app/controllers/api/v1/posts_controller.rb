@@ -17,16 +17,13 @@ class Api::V1::PostsController < ApplicationController
   end
 
   def destroy 
+    @post = Post.find(params[:id])
     @post.destroy
     render json: { status: 200, post: @post }
   end
 
  
   private
-    
-    def set_post
-      @post = Post.find(params[:id])
-    end
 
     def post_params
       params.permit(:content, :post_field, :user_id)
