@@ -6,12 +6,13 @@ const StyledButton = styled(Button)(({ theme }) => ({
   marginTop: theme.spacing(1),
   flexGrow: 1,
   textTransform: "none",
+  width: 200,
 }));
 
 interface SubmitButtonProps {
   children: React.ReactNode;
   disabled: boolean;
-  onClick: () => void;
+  onClick: any;
 }
 
 const SubmitButton = React.memo(

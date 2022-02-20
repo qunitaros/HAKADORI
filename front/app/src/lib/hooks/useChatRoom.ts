@@ -63,9 +63,7 @@ const useChatRoom = (props) => {
     const hour = date.getHours();
     const minute = date.getMinutes();
 
-    return (
-      year + "年" + month + "月" + day + "日" + hour + "時" + minute + "分"
-    );
+    return year + " " + month + "/" + day + " " + hour + ":" + minute;
   };
 
   return {

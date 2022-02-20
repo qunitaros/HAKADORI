@@ -6,7 +6,7 @@ interface PostTextFieldProps {
   type?: string;
   value: string;
   placeholder?: string;
-  rows?: string;
+  rows?: number;
   autoComplete?: string;
   onChange: any;
 }

@@ -16,7 +16,6 @@ interface AlertMessageProps {
   message: string;
 }
 
-// アラートメッセージ（何かアクションを行なった際の案内用に使い回す）
 const AlertMessage = React.memo(
   ({ open, setOpen, severity, message }: AlertMessageProps) => {
     const handleCloseAlertMessage = (

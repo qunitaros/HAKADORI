@@ -6,7 +6,12 @@ interface UsersNameProps {
 }
 const UsersName = React.memo(({ children }: UsersNameProps) => {
   return (
-    <Typography component="h6" variant="h6" gutterBottom>
+    <Typography
+      component="h5"
+      variant="h5"
+      gutterBottom
+      style={{ marginTop: "1rem" }}
+    >
       {children}
     </Typography>
   );

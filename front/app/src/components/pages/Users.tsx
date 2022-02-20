@@ -7,8 +7,6 @@ import { User } from "../../interfaces";
 
 import useUsers from "../../lib/hooks/useUsers";
 import UsersCard from "../organisms/cards/UsersCard";
-import UsersName from "../atoms/titles/UsersName";
-import UsersInfo from "../atoms/contents/UsersInfo";
 
 export const UsersContext = createContext(
   {} as {
@@ -24,6 +22,7 @@ const Users: React.FC = React.memo(() => {
     users,
     userAge,
     userPrefecture,
+    userField,
     handleGetUsers,
     dialogOpen,
     setDialogOpen,
@@ -39,22 +38,38 @@ const Users: React.FC = React.memo(() => {
       <Grid container justifyContent="center">
         {!loading ? (
           users?.length > 0 ? (
-            <Grid container justifyContent="center">
+            <>
               {users?.map((user: User, index: number) => {
                 return (
-                  <Grid key={index}>
-                    <Grid item style={{ margin: "0.5rem", cursor: "pointer" }}>
-                      <UsersCard id={user.id} imageUrl={user.image.url}>
-                        <UsersName>{user.name}さん</UsersName>
-                        <UsersInfo>
-                          {userAge(user)}歳 ({userPrefecture(user)})
-                        </UsersInfo>
-                      </UsersCard>
-                    </Grid>
+                  <Grid
+                    key={index}
+                    container
+                    justifyContent="center"
+                    style={{
+                      margin: "0.5rem",
+                      cursor: "pointer",
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                    }}
+                  >
+                    <UsersCard
+                      id={user.id}
+                      imageUrl={user.image.url}
+                      userName={user.name}
+                      userAge={userAge(user)}
+                      userPrefecture={userPrefecture(user)}
+                      userField={userField(user)}
+                      userProfile={
+                        user.profile.length > 50
+                          ? user.profile.substring(0, 50) + "..."
+                          : user.profile
+                      }
+                    />
                   </Grid>
                 );
               })}
-            </Grid>
+            </>
           ) : (
             <Typography component="p" variant="body2" color="textSecondary">
               まだ一人もユーザーがいません。

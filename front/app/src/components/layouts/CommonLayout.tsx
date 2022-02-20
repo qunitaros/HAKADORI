@@ -4,9 +4,12 @@ import { Container, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 import Header from "./Header";
+import BottomBar from "./BottomBar";
 
 const StyledContainer = styled(Container)(() => ({
   paddingTop: "3rem",
+  paddingBottom: "6rem",
+  backgroundColor: "#fffff9",
 }));
 
 interface CommonLayoutProps {
@@ -27,6 +30,9 @@ const CommonLayout = React.memo(({ children }: CommonLayoutProps) => {
           </Grid>
         </StyledContainer>
       </main>
+      <footer>
+        <BottomBar />
+      </footer>
     </>
   );
 });

@@ -1,51 +1,77 @@
 import React from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import { styled } from "@mui/material/styles";
+import Card from "@mui/material/Card";
+import Grid from "@mui/material/Grid";
+import CardHeader from "@mui/material/CardHeader";
 import Divider from "@mui/material/Divider";
 
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import Typography from "@mui/material/Typography";
 import SmallAvatar from "../../atoms/avatars/SmallAvatar";
-import OpenPostButton from "../../atoms/buttons/OpenPostButton";
-import PostField from "../../atoms/contents/PostField";
-import PostsContent from "../../atoms/contents/PostsContent";
-import PostsUserNameContent from "../../atoms/contents/PostsUserNameContent";
+import PostDeleteIcon from "../../atoms/icons/PostDeleteIcon";
 
-const StyledCard = styled(Card)(() => ({
-  height: "300px",
-  backgroundColor: "#cebc86",
-  color: "inhedit",
-  opacity: "0.5",
+const StyledCard = styled(Card)((theme) => ({
+  marginTop: "1rem",
+  width: "80%",
 }));
 
 interface PostsCardProps {
   id: number;
-  imageUrl: string;
   userName: string;
-  postContent: string;
-  onClick: () => void;
+  imageUrl: string;
   postField: string;
+  postContent: string;
+  postCreatedAt: Date | string | undefined;
+  useable?: boolean;
+  deleteAction?: any;
 }
 
 const PostsCard = React.memo(
   ({
     id,
-    imageUrl,
     userName,
-    postContent,
-    onClick,
+    imageUrl,
     postField,
+    postContent,
+    postCreatedAt,
+    useable,
+    deleteAction,
   }: PostsCardProps) => {
     return (
       <StyledCard variant="outlined">
-        <CardContent>
-          <SmallAvatar id={id} imageUrl={imageUrl} />
-          <PostsUserNameContent>{userName}</PostsUserNameContent>
-          <PostField postField={postField} />
-          <Divider />
-
-          <PostsContent>{postContent}</PostsContent>
-          <OpenPostButton onClick={onClick}>詳しく見る</OpenPostButton>
-        </CardContent>
+        <CardHeader
+          avatar={<SmallAvatar id={id} imageUrl={imageUrl} />}
+          title={postField}
+          subheader={userName}
+          action={
+            useable ? (
+              <CardActions>
+                <PostDeleteIcon onClick={deleteAction} />
+              </CardActions>
+            ) : (
+              <></>
+            )
+          }
+        />
+        <Divider />
+        <Grid
+          container
+          style={{ margin: "1rem auto auto 0.5rem", width: "92%" }}
+        >
+          <CardContent>
+            <Typography variant="body1" color="text.secondary">
+              {postContent}
+            </Typography>
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              style={{ marginTop: "1rem" }}
+            >
+              {postCreatedAt}
+            </Typography>
+          </CardContent>
+        </Grid>
       </StyledCard>
     );
   }

@@ -13,6 +13,7 @@ const StyledCard = styled(Card)(() => ({
   color: "inhedit",
   opacity: "0.8",
   height: "220px",
+  width: "80%",
 }));
 
 interface LikesCardProps {
