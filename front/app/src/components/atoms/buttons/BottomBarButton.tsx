@@ -11,6 +11,7 @@ const StyledFab = styled(Fab)(() => ({
   left: 0,
   right: 0,
   margin: "0 auto",
+  width: "100px",
 }));
 
 interface BottomBarButtonProps {
@@ -19,8 +20,14 @@ interface BottomBarButtonProps {
 
 const BottomBarButton = React.memo(({ onClick }: BottomBarButtonProps) => {
   return (
-    <StyledFab color="inherit" aria-label="add" onClick={onClick}>
+    <StyledFab
+      color="inherit"
+      aria-label="add"
+      variant="extended"
+      onClick={onClick}
+    >
       <AddIcon />
+      POST
     </StyledFab>
   );
 });

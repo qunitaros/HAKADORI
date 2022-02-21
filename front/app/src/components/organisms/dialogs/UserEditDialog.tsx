@@ -10,10 +10,11 @@ import UserFormControl from "../../atoms/forms/UserFormControl";
 import { prefectures } from "../../../data/prefectures";
 import { fields } from "../../../data/fields";
 import { dayOffs } from "../../../data/dayOffs";
-import PhotoCameraIcon from "../../atoms/icons/PhotoCameraIcon";
 import PreviewCancelIcon from "../../atoms/icons/PreviewCancelIcon";
 import SubmitButton from "../../atoms/buttons/SubmitButton";
 import DialogHeader from "../../layouts/DialogHeader";
+import ChangeAvatar from "../../atoms/avatars/ChangeAvatar";
+import { AuthContext } from "../../../App";
 
 const UserEditDialog = React.memo(() => {
   const {
@@ -36,18 +37,36 @@ const UserEditDialog = React.memo(() => {
     handleSubmit,
   } = useContext(HomeContext);
 
+  const { currentUser } = useContext(AuthContext);
+
   return (
     <form noValidate autoComplete="off">
       <Dialog
         open={editFormOpen}
         keepMounted
-        onClose={() => setEditFormOpen(false)}
+        onClose={() => {
+          setEditFormOpen(false);
+        }}
       >
         <DialogHeader
           onClose={() => setEditFormOpen(false)}
           title="プロフィールの編集"
         />
         <DialogContent>
+          <ChangeAvatar
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              uploadImage(e);
+              previewImage(e);
+            }}
+            imageUrl={currentUser.image.url}
+            text="プロフィール画像を変更"
+          />
+          {preview ? (
+            <PreviewCancelIcon
+              onClick={() => setPreview("")}
+              imageUrl={preview}
+            />
+          ) : null}
           <UserTextField
             label="名前"
             value={name}
@@ -105,18 +124,6 @@ const UserEditDialog = React.memo(() => {
               setProfile(e.target.value)
             }
           />
-          <PhotoCameraIcon
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              uploadImage(e);
-              previewImage(e);
-            }}
-          />
-          {preview ? (
-            <PreviewCancelIcon
-              onClick={() => setPreview("")}
-              imageUrl={preview}
-            />
-          ) : null}
           <DialogActions>
             <SubmitButton
               onClick={handleSubmit}

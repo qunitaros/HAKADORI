@@ -10,6 +10,8 @@ import PostTextField from "../../atoms/forms/PostTextField";
 import SubmitButton from "../../atoms/buttons/SubmitButton";
 import { PostCreateContext } from "../../layouts/BottomBar";
 import DialogHeader from "../../layouts/DialogHeader";
+import PhotoCameraIcon from "../../atoms/icons/PhotoCameraIcon";
+import PreviewCancelIcon from "../../atoms/icons/PreviewCancelIcon";
 
 const PostCreateDialog = React.memo(() => {
   const {
@@ -20,6 +22,11 @@ const PostCreateDialog = React.memo(() => {
     content,
     setContent,
     handleSubmit,
+    setPostPreview,
+    postPreview,
+    uploadPostImage,
+    previewPostImage,
+    setPostImage,
   } = useContext(PostCreateContext);
 
   return (
@@ -27,7 +34,11 @@ const PostCreateDialog = React.memo(() => {
       <Dialog
         open={createPostFormOpen}
         keepMounted
-        onClose={() => setCreatePostFormOpen(false)}
+        onClose={() => {
+          setCreatePostFormOpen(false);
+          setPostPreview("");
+          setPostImage("");
+        }}
         fullWidth
       >
         <DialogHeader
@@ -57,6 +68,22 @@ const PostCreateDialog = React.memo(() => {
               setContent(e.target.value);
             }}
           />
+          <PhotoCameraIcon
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              console.log(e.target.files);
+              uploadPostImage(e);
+              previewPostImage(e);
+            }}
+          />
+          {postPreview ? (
+            <PreviewCancelIcon
+              onClick={() => {
+                setPostPreview("");
+                setPostImage("");
+              }}
+              imageUrl={postPreview}
+            />
+          ) : null}
         </DialogContent>
         <DialogActions>
           <SubmitButton

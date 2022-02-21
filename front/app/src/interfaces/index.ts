@@ -98,6 +98,9 @@ export interface UserPost {
   id: number;
   postField: number;
   content: string;
+  postImage: {
+    url: string;
+  };
   userId: number;
   createdAt?: Date;
 }

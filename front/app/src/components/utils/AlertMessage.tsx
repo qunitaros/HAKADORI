@@ -1,12 +1,9 @@
 import React from "react";
-import Snackbar from "@mui/material/Snackbar";
-import MuiAlert, { AlertProps } from "@mui/lab/Alert";
+import Snack from "@mui/material/Snackbar";
+import Alert, { AlertProps } from "@mui/material/Alert";
 
-const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
-  props,
-  ref
-) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+const Alerts = React.forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
+  return <Alert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
 interface AlertMessageProps {
@@ -29,16 +26,16 @@ const AlertMessage = React.memo(
 
     return (
       <>
-        <Snackbar
+        <Snack
           open={open}
           autoHideDuration={6000}
           anchorOrigin={{ vertical: "top", horizontal: "center" }}
           onClose={handleCloseAlertMessage}
         >
-          <Alert onClose={handleCloseAlertMessage} severity={severity}>
+          <Alerts onClose={handleCloseAlertMessage} severity={severity}>
             {message}
-          </Alert>
-        </Snackbar>
+          </Alerts>
+        </Snack>
       </>
     );
   }

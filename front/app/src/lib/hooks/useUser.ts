@@ -30,6 +30,9 @@ const useUser = (props) => {
     postField: 0,
     content: "",
     userId: 0,
+    postImage: {
+      url: "",
+    },
   };
 
   const [loading, setLoading] = useState<boolean>(true);

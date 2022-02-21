@@ -131,6 +131,7 @@ const User: React.FC<UserProps> = React.memo((props) => {
                       id={0}
                       userName={user?.name}
                       imageUrl={user.image.url}
+                      postImage={userPost.postImage.url}
                       postCreatedAt={iso8601ToDateTime(
                         userPost.createdAt?.toString() || "100000000"
                       )}

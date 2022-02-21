@@ -12,9 +12,8 @@ import UserProfileContent from "../../atoms/contents/UserProfileContent";
 import UserProfileName from "../../atoms/titles/UserProfileName";
 
 const StyledCard = styled(Card)(() => ({
-  width: "50%",
-  maxWidth: "460px",
-  minWidth: "200px",
+  width: "80%",
+  marginBottom: "3rem",
 }));
 
 const CurrentUserProps = React.memo(() => {

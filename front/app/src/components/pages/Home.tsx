@@ -5,6 +5,7 @@ import useHome from "../../lib/hooks/useHome";
 import { User } from "../../interfaces";
 import CurrentUserCard from "../organisms/cards/CurrentUserCard";
 import UserEditDialog from "../organisms/dialogs/UserEditDialog";
+import AlertMessage from "../utils/AlertMessage";
 
 export const HomeContext = createContext(
   {} as {
@@ -22,6 +23,8 @@ export const HomeContext = createContext(
     setDayOff: React.Dispatch<React.SetStateAction<number>>;
     preview: string;
     setPreview: React.Dispatch<React.SetStateAction<string>>;
+    updateAlertMessageOpen: boolean;
+    setUpdateAlertMessageOpen: React.Dispatch<React.SetStateAction<boolean>>;
     uploadImage: any;
     previewImage: any;
     handleSignOut: any;
@@ -51,6 +54,8 @@ const Home: React.FC = () => {
     setDayOff,
     preview,
     setPreview,
+    updateAlertMessageOpen,
+    setUpdateAlertMessageOpen,
     uploadImage,
     previewImage,
     currentUserAge,
@@ -79,6 +84,8 @@ const Home: React.FC = () => {
         setDayOff,
         preview,
         setPreview,
+        updateAlertMessageOpen,
+        setUpdateAlertMessageOpen,
         uploadImage,
         previewImage,
         currentUserAge,
@@ -98,6 +105,12 @@ const Home: React.FC = () => {
       ) : (
         <CircularProgress color="inherit" />
       )}
+      <AlertMessage
+        open={updateAlertMessageOpen}
+        setOpen={setUpdateAlertMessageOpen}
+        severity="error"
+        message="プロフィールの更新に失敗しました。"
+      />
     </HomeContext.Provider>
   );
 };

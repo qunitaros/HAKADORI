@@ -6,7 +6,6 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 import { Post } from "../../interfaces";
 
-import AlertMessage from "../utils/AlertMessage";
 import usePost from "../../lib/hooks/usePosts";
 import PostButton from "../atoms/buttons/PostButton";
 import PostsCard from "../organisms/cards/PostsCard";
@@ -41,8 +40,6 @@ const Posts: React.FC = React.memo(() => {
     setPostField,
     content,
     setContent,
-    alertMessageOpen,
-    setAlertMessageOpen,
     setPostDetailOpen,
     createPostFormOpen,
     setCreatePostFormOpen,
@@ -88,6 +85,7 @@ const Posts: React.FC = React.memo(() => {
                       userName={post.user.name}
                       postContent={post.post.content}
                       postField={CreatePostField(post.post)}
+                      postImage={post.post.postImage.url}
                       postCreatedAt={iso8601ToDateTime(
                         post.post.createdAt?.toString() || "100000000"
                       )}
@@ -119,12 +117,6 @@ const Posts: React.FC = React.memo(() => {
       )}
 
       <PostContentDialog>{post.post.content}</PostContentDialog>
-      <AlertMessage // エラーが発生した場合はアラートを表示
-        open={alertMessageOpen}
-        setOpen={setAlertMessageOpen}
-        severity="error"
-        message="投稿に失敗しました。"
-      />
     </PostsContext.Provider>
   );
 });

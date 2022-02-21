@@ -33,6 +33,7 @@ const StyledIcon = styled(IconButton)(() => ({
     width: "1px",
     bgcolor: "divider",
   },
+  width: "100%",
 }));
 
 interface HeaderIconButtonProps {
@@ -44,7 +45,7 @@ interface HeaderIconButtonProps {
 const HeaderIcon = ({ children, link, text }: HeaderIconButtonProps) => {
   return (
     <>
-      <ListItem button>
+      <ListItem button sx={{ width: "100%" }}>
         <Link to={link} style={{ textDecoration: "none" }}>
           <Box style={{ display: "flex", alignItems: "center" }}>
             <ListItemIcon>
