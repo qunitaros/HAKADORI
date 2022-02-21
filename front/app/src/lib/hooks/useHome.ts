@@ -26,6 +26,8 @@ const useHome = () => {
   const [dayOff, setDayOff] = useState<number | undefined>(currentUser?.dayOff);
   const [image, setImage] = useState<string>("");
   const [preview, setPreview] = useState<string>("");
+  const [updateAlertMessageOpen, setUpdateAlertMessageOpen] =
+    useState<boolean>(false);
 
   // アップロードした画像の情報を取得
   const uploadImage = useCallback((e) => {
@@ -91,14 +93,16 @@ const useHome = () => {
       console.log(res);
 
       if (res.status === 200) {
-        setEditFormOpen(false);
+        setEditFormOpen(true);
         setCurrentUser(res.data.user);
       } else {
         console.log(res.data.message);
+        setUpdateAlertMessageOpen(true);
       }
     } catch (err) {
       console.log(err);
       console.log("Failed in updating user!");
+      setUpdateAlertMessageOpen(true);
     }
   };
 
@@ -142,6 +146,8 @@ const useHome = () => {
     setImage,
     preview,
     setPreview,
+    updateAlertMessageOpen,
+    setUpdateAlertMessageOpen,
     uploadImage,
     previewImage,
     currentUserAge,

@@ -4,7 +4,7 @@ import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 import CardHeader from "@mui/material/CardHeader";
 import Divider from "@mui/material/Divider";
-
+import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Typography from "@mui/material/Typography";
@@ -22,6 +22,7 @@ interface PostsCardProps {
   imageUrl: string;
   postField: string;
   postContent: string;
+  postImage: string;
   postCreatedAt: Date | string | undefined;
   useable?: boolean;
   deleteAction?: any;
@@ -34,6 +35,7 @@ const PostsCard = React.memo(
     imageUrl,
     postField,
     postContent,
+    postImage,
     postCreatedAt,
     useable,
     deleteAction,
@@ -54,6 +56,11 @@ const PostsCard = React.memo(
             )
           }
         />
+        {postImage ? (
+          <CardMedia component="img" image={postImage} alt={postImage} />
+        ) : (
+          <></>
+        )}
         <Divider />
         <Grid
           container

@@ -9,7 +9,6 @@ import { styled } from "@mui/material/styles";
 import SubmitButton from "../../atoms/buttons/SubmitButton";
 import { SignUpContext } from "../../pages/SignUp";
 import PreviewCancelIcon from "../../atoms/icons/PreviewCancelIcon";
-import PhotoCameraIcon from "../../atoms/icons/PhotoCameraIcon";
 import UserFormControl from "../../atoms/forms/UserFormControl";
 import UserTextField from "../../atoms/forms/UserTextfield";
 import Authttl from "../../atoms/titles/Authttl";
@@ -18,10 +17,12 @@ import { dayOffs } from "../../../data/dayOffs";
 import { fields } from "../../../data/fields";
 import { genders } from "../../../data/genders";
 import BirthdayForm from "../../atoms/forms/BirthdayForm";
+import ChangeAvatar from "../../atoms/avatars/ChangeAvatar";
 
 const StyledCard = styled(Card)(({ theme }) => ({
   padding: theme.spacing(2),
-  maxWidth: 340,
+  width: "80%",
+  margin: "0 auto",
 }));
 
 const SignUpCard = React.memo(() => {
@@ -54,6 +55,20 @@ const SignUpCard = React.memo(() => {
       <StyledCard>
         <Authttl title="アカウント作成" />
         <CardContent>
+          <ChangeAvatar
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              uploadImage(e);
+              previewImage(e);
+            }}
+            imageUrl=""
+            text="プロフィール画像を設定"
+          />
+          {preview ? (
+            <PreviewCancelIcon
+              onClick={() => setPreview("")}
+              imageUrl={preview}
+            />
+          ) : null}
           <UserTextField
             label="名前"
             value={name}
@@ -140,18 +155,6 @@ const SignUpCard = React.memo(() => {
             ))}
           </UserFormControl>
           <BirthdayForm />
-          <PhotoCameraIcon
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              uploadImage(e);
-              previewImage(e);
-            }}
-          />
-          {preview ? (
-            <PreviewCancelIcon
-              onClick={() => setPreview("")}
-              imageUrl={preview}
-            />
-          ) : null}
           <div style={{ textAlign: "right" }}>
             <SubmitButton
               disabled={

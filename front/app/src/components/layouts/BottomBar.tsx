@@ -18,6 +18,12 @@ export const PostCreateContext = createContext(
     content: string;
     setContent: React.Dispatch<React.SetStateAction<string>>;
     handleSubmit: any;
+    postPreview: string;
+    setPostPreview: React.Dispatch<React.SetStateAction<string>>;
+    postImage: string;
+    setPostImage: React.Dispatch<React.SetStateAction<string>>;
+    uploadPostImage: any;
+    previewPostImage: any;
   }
 );
 
@@ -35,6 +41,12 @@ const BottomBar = React.memo(() => {
     handleSubmit,
     createSuccessOpen,
     setCreateSuccessOpen,
+    postPreview,
+    postImage,
+    setPostImage,
+    setPostPreview,
+    uploadPostImage,
+    previewPostImage,
   } = usePost();
 
   return (
@@ -49,6 +61,12 @@ const BottomBar = React.memo(() => {
         content,
         setContent,
         handleSubmit,
+        postPreview,
+        setPostPreview,
+        postImage,
+        setPostImage,
+        uploadPostImage,
+        previewPostImage,
       }}
     >
       <AppBar
@@ -75,7 +93,7 @@ const BottomBar = React.memo(() => {
         severity="error"
         message="投稿に失敗しました。"
       />
-      <AlertMessage // エラーが発生した場合はアラートを表示
+      <AlertMessage
         open={createSuccessOpen}
         setOpen={setCreateSuccessOpen}
         severity="success"

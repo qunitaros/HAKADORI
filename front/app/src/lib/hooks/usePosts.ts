@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import { AuthContext } from "../../App";
 import { fields } from "../../data/fields";
 import { CreatePostFormData, Post, UserPost } from "../../interfaces";
@@ -10,6 +10,9 @@ const inisialState: Post = {
     postField: 0,
     content: "",
     userId: 0,
+    postImage: {
+      url: "",
+    },
   },
   user: {
     id: 0,
@@ -39,6 +42,8 @@ const usePost = () => {
   const [postDetailOpen, setPostDetailOpen] = useState<boolean>(false);
   const [postField, setPostField] = useState<number>();
   const [content, setContent] = useState<string>("");
+  const [postImage, setPostImage] = useState<string>("");
+  const [postPreview, setPostPreview] = useState<string>("");
   const [alertMessageOpen, setAlertMessageOpen] = useState<boolean>(false);
   const [createPostFormOpen, setCreatePostFormOpen] = useState<boolean>(false);
   const [createSuccessOpen, setCreateSuccessOpen] = useState<boolean>(false);
@@ -49,6 +54,7 @@ const usePost = () => {
     formData.append("userId", String(currentUser?.id));
     formData.append("content", content);
     formData.append("postField", String(postField));
+    formData.append("postImage", postImage);
 
     return formData;
   };
@@ -68,6 +74,18 @@ const usePost = () => {
     }
     setLoading(false);
   };
+
+  // アップロードした画像のデータを取得
+  const uploadPostImage = useCallback((e) => {
+    const file = e.target.files[0];
+    setPostImage(file);
+  }, []);
+
+  // 画像プレビューを表示
+  const previewPostImage = useCallback((e) => {
+    const file = e.target.files[0];
+    setPostPreview(window.URL.createObjectURL(file));
+  }, []);
 
   //Post投稿機能
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -131,6 +149,12 @@ const usePost = () => {
     handleSubmit,
     CreatePostField,
     iso8601ToDateTime,
+    postImage,
+    setPostImage,
+    postPreview,
+    setPostPreview,
+    uploadPostImage,
+    previewPostImage,
   };
 };
 

@@ -27,7 +27,7 @@ const useSignUp = () => {
 
   // アップロードした画像のデータを取得
   const uploadImage = useCallback((e) => {
-    const file = e.target.file[0];
+    const file = e.target.files[0];
     setImage(file);
   }, []);
 
@@ -85,6 +85,7 @@ const useSignUp = () => {
           setBirthday(null);
           setField(undefined);
           setDayOff(undefined);
+          setImage("");
 
           console.log("Signed in successfully!");
         } else {
