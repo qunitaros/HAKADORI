@@ -3,11 +3,8 @@ import OnlyImage from "../../assets/StudyOnly.jpg";
 import MatchingImage from "../../assets/StudyMatching.jpg";
 import ReserchImage from "../../assets/StudyWith.jpg";
 import { styled } from "@mui/material/styles";
-import Header from "../layouts/Header";
 import Box from "@mui/material/Box";
 import StartButton from "../atoms/buttons/StartButton";
-import BottomBar from "../layouts/BottomBar";
-import BackToTopButton from "../atoms/buttons/BackToTopButton";
 
 const StyledMainContainer = styled("div")(() => ({
   backgroundPosition: "center",
@@ -152,9 +149,6 @@ const StyledMatchingTitle = styled("h1")(() => ({
 const Top = () => {
   return (
     <>
-      <header>
-        <Header />
-      </header>
       <StyledMainContainer>
         <Box
           sx={{
@@ -216,10 +210,6 @@ const Top = () => {
           </StyledMatchingTitle>
         </StyledMatchingTextContainer>
       </StyledMatchingContainer>
-      <BackToTopButton />
-      <footer>
-        <BottomBar />
-      </footer>
     </>
   );
 };

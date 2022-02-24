@@ -4,7 +4,7 @@ import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
-import MenuBookIcon from "@mui/icons-material/MenuBook";
+import MenuIcon from "@mui/icons-material/Menu";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import SchoolIcon from "@mui/icons-material/School";
@@ -60,7 +60,7 @@ const HeaderNav = React.memo(() => {
           onClick={toggleDrawer(true)}
           style={{ marginRight: "1rem" }}
         >
-          <MenuBookIcon style={{ color: "black" }} />
+          <MenuIcon style={{ color: "black" }} />
         </IconButton>
         <SwipeableDrawer
           anchor="top"

@@ -63,11 +63,10 @@ const Likes: React.FC = React.memo(() => {
                               <Typography
                                 variant="body2"
                                 component="p"
-                                color="secondary"
+                                sx={{ fontWeight: "bold", color: "#FF3333" }}
                               >
                                 {passiveLikeUser.passiveLike.name}
-                                さんとマッチングしました! <br />
-                                早速メッセージを送ってみよう!
+                                さんとマッチングしました!
                               </Typography>
                             </>
                           ) : (
