@@ -3,6 +3,9 @@ import React, { createContext } from "react";
 import useSignUp from "../../lib/hooks/useSignUp";
 import SignUpCard from "../organisms/cards/SignUpCard";
 import AlertMessage from "../utils/AlertMessage";
+import Grid from "@mui/material/Grid";
+import { styled } from "@mui/material/styles";
+import Container from "@mui/material/Container";
 
 export const SignUpContext = createContext(
   {} as {
@@ -33,6 +36,11 @@ export const SignUpContext = createContext(
     handleSubmit: any;
   }
 );
+
+const StyledContainer = styled(Container)(() => ({
+  paddingTop: "3rem",
+  paddingBottom: "6rem",
+}));
 
 // サインアップ用ページ
 const SignUp: React.FC = React.memo(() => {
@@ -93,13 +101,17 @@ const SignUp: React.FC = React.memo(() => {
         handleSubmit,
       }}
     >
-      <SignUpCard />
-      <AlertMessage // エラーが発生した場合はアラートを表示
-        open={alertMessageOpen}
-        setOpen={setAlertMessageOpen}
-        severity="error"
-        message="アカウントの作成に失敗しました。確認用パスワードが合っているか、空欄がないか確認してください。"
-      />
+      <StyledContainer>
+        <Grid container justifyContent="center">
+          <SignUpCard />
+          <AlertMessage // エラーが発生した場合はアラートを表示
+            open={alertMessageOpen}
+            setOpen={setAlertMessageOpen}
+            severity="error"
+            message="アカウントの作成に失敗しました。確認用パスワードが合っているか、空欄がないか確認してください。"
+          />
+        </Grid>
+      </StyledContainer>
     </SignUpContext.Provider>
   );
 });

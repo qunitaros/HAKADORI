@@ -9,11 +9,15 @@ import OpenUserButton from "../../atoms/buttons/OpenUserButton";
 import SmallAvatar from "../../atoms/avatars/SmallAvatar";
 
 const StyledCard = styled(Card)(() => ({
-  backgroundColor: "#e6e6e6",
+  backgroundColor: "#eee",
   color: "inhedit",
   opacity: "0.8",
   height: "220px",
   width: "80%",
+  ":hover": {
+    boxShadow: "2px 2px 1px 1px rgba(0,0,0,.7)",
+    top: "10px",
+  },
 }));
 
 interface LikesCardProps {

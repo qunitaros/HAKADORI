@@ -4,7 +4,6 @@ import {
   Switch,
   Route,
   Redirect,
-  RouteProps,
 } from "react-router-dom";
 
 import CircularProgress from "@mui/material/CircularProgress";
@@ -37,6 +36,10 @@ export const AuthContext = createContext(
   }
 );
 
+interface RouteProps {
+  children: React.ReactNode;
+}
+
 const App: React.FC = React.memo(() => {
   const {
     loading,
@@ -48,20 +51,12 @@ const App: React.FC = React.memo(() => {
     handleGetCurrentUser,
   } = useCurrentUser();
 
-  const PrivateRoute: React.FC<RouteProps> = ({ ...props }) => {
-    if (isSignedIn) {
-      return <Route {...props} />;
-    } else {
-      return <Redirect to="/signin" />; // fromに本来アクセス
-    }
+  const Private = ({ children }: RouteProps) => {
+    return isSignedIn ? <>{children}</> : <Redirect to="/signin" />;
   };
 
-  const UnAuthRoute: React.FC<RouteProps> = ({ ...props }) => {
-    if (isSignedIn) {
-      return <Redirect to="/home" />;
-    } else {
-      return <Route {...props} />;
-    }
+  const UnAuth = ({ children }: RouteProps) => {
+    return isSignedIn ? <Redirect to="/home" /> : <>{children}</>;
   };
 
   useEffect(() => {
@@ -83,25 +78,37 @@ const App: React.FC = React.memo(() => {
         }}
       >
         <Switch>
-          <Route exact path="/" component={Top} />
-          <CommonLayout>
-            {!loading ? (
-              <>
-                {/* <Route component={NotFound} /> */}
-                <UnAuthRoute exact path="/signup" component={SignUp} />
-                <UnAuthRoute exact path="/signin" component={SignIn} />
-                <PrivateRoute exact path="/home" component={Home} />
-                <PrivateRoute exact path="/users" component={Users} />
-                <PrivateRoute exact path="/user/:id" component={User} />
-                <PrivateRoute exact path="/likes" component={Likes} />
-                <PrivateRoute exact path="/chat_rooms" component={ChatRooms} />
-                <PrivateRoute path="/chat_room/:id" component={ChatRoom} />
-                <PrivateRoute exact path="/posts" component={Posts} />
-              </>
-            ) : (
+          {!loading ? (
+            <>
+              <UnAuth>
+                <CommonLayout>
+                  <Switch>
+                    <Route exact path="/" component={Top} />
+                    <Route exact path="/signup" component={SignUp} />
+                    <Route exact path="/signin" component={SignIn} />
+                  </Switch>
+                </CommonLayout>
+              </UnAuth>
+              <Private>
+                <CommonLayout>
+                  <Switch>
+                    <Route exact path="/home" component={Home} />
+                    <Route exact path="/users" component={Users} />
+                    <Route exact path="/user/:id" component={User} />
+                    <Route exact path="/likes" component={Likes} />
+                    <Route exact path="/chat_rooms" component={ChatRooms} />
+                    <Route path="/chat_room/:id" component={ChatRoom} />
+                    <Route exact path="/posts" component={Posts} />
+                    <Route component={NotFound} />
+                  </Switch>
+                </CommonLayout>
+              </Private>
+            </>
+          ) : (
+            <CommonLayout>
               <CircularProgress color="inherit" />
-            )}
-          </CommonLayout>
+            </CommonLayout>
+          )}
         </Switch>
       </AuthContext.Provider>
     </Router>

@@ -18,6 +18,10 @@ import UsersProfile from "../../atoms/contents/UsersProfile";
 const StyledCard = styled(Card)(() => ({
   width: "84%",
   marginBottom: "1rem",
+  ":hover": {
+    boxShadow: "2px 2px 1px 1px rgba(0,0,0,.7)",
+    top: "10px",
+  },
 }));
 
 interface UsersCardProps {
