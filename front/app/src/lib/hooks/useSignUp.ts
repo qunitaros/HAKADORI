@@ -67,15 +67,6 @@ const useSignUp = () => {
       if (password === passwordConfirmation) {
         if (res.status === 200) {
           // アカウント作成と同時にサインインさせてしまう
-          Cookies.set("_access_token", res.headers["access-token"]);
-          Cookies.set("_client", res.headers["client"]);
-          Cookies.set("_uid", res.headers["uid"]);
-
-          setIsSignedIn(true);
-          setCurrentUser(res.data.data);
-
-          history.push("/home");
-
           setName("");
           setEmail("");
           setPassword("");
@@ -86,6 +77,14 @@ const useSignUp = () => {
           setField(undefined);
           setDayOff(undefined);
           setImage("");
+          Cookies.set("_access_token", res.headers["access-token"]);
+          Cookies.set("_client", res.headers["client"]);
+          Cookies.set("_uid", res.headers["uid"]);
+
+          setIsSignedIn(true);
+          setCurrentUser(res.data.data);
+
+          history.push("/home");
 
           console.log("Signed in successfully!");
         } else {

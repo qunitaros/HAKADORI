@@ -7,7 +7,6 @@ import { getUsers } from "../api/users";
 const useUsers = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [users, setUsers] = useState<User[]>([]);
-  const [dialogOpen, setDialogOpen] = useState<boolean>(false);
 
   // 生年月日から年齢を計算する
   const userAge = (user: User): number | void => {
@@ -56,8 +55,6 @@ const useUsers = () => {
     userPrefecture,
     userField,
     handleGetUsers,
-    dialogOpen,
-    setDialogOpen,
   };
 };
 

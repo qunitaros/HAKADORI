@@ -7,9 +7,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { Post } from "../../interfaces";
 
 import usePost from "../../lib/hooks/usePosts";
-import PostButton from "../atoms/buttons/PostButton";
 import PostsCard from "../organisms/cards/PostsCard";
-import PostContentDialog from "../organisms/dialogs/PostContentDialog";
 
 export const PostsContext = createContext(
   {} as {
@@ -109,14 +107,11 @@ const Posts: React.FC = React.memo(() => {
             >
               投稿されていません。
             </Typography>
-            <PostButton onClick={() => setCreatePostFormOpen(true)} />
           </Grid>
         )
       ) : (
         <CircularProgress color="inherit" />
       )}
-
-      <PostContentDialog>{post.post.content}</PostContentDialog>
     </PostsContext.Provider>
   );
 });

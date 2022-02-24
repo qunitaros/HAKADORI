@@ -25,21 +25,9 @@ const useUser = (props) => {
     allowPasswordChange: true,
   };
 
-  const initialUserPostState: UserPost = {
-    id: 0,
-    postField: 0,
-    content: "",
-    userId: 0,
-    postImage: {
-      url: "",
-    },
-  };
-
   const [loading, setLoading] = useState<boolean>(true);
   const [user, setUser] = useState<UserData>(initialUserState);
   const [userPosts, setUserPosts] = useState<UserPost[] | undefined>([]);
-  const [userPost, setUserPost] = useState<UserPost>(initialUserPostState);
-  const [postDetailOpen, setPostDetailOpen] = useState<boolean>(false);
   const [postDeleteConfirm, setPostDeleteConfirm] = useState<boolean>(false);
 
   const id = parseInt(props.match.params.id);
@@ -123,10 +111,6 @@ const useUser = (props) => {
     loading,
     user,
     userPosts,
-    userPost,
-    setUserPost,
-    postDetailOpen,
-    setPostDetailOpen,
     handleGetUser,
     userAge,
     userDayOff,

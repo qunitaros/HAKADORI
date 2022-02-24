@@ -3,7 +3,7 @@ class Api::V1::PostsController < ApplicationController
   def index
     posts = []
     #PostにUserModelを付与
-    Post.all.each{|post| posts <<{ post: post, user: post.user }}
+    Post.all.order("created_at DESC").each{|post| posts <<{ post: post, user: post.user }}
     render json: { status: 200, posts: posts }
   end
 

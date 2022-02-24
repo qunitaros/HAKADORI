@@ -12,20 +12,16 @@ import { RouteComponentProps } from "react-router-dom";
 import useUser from "../../lib/hooks/useUser";
 import UserCard from "../organisms/cards/UserCard";
 import PostsCard from "../organisms/cards/PostsCard";
-import UserPostDialog from "../organisms/dialogs/UserPostDialog";
 import { AuthContext } from "../../App";
 import LikeButton from "../atoms/buttons/LikeButton";
 import useLikes from "../../lib/hooks/useLikes";
 import ConfirmDialog from "../organisms/dialogs/ConfirmDialog";
+import MatchingDialog from "../organisms/dialogs/MatchingDialog";
 
 export const UserContext = createContext(
   {} as {
     user: UserData;
     userPosts: UserPost[];
-    userPost: UserPost;
-    setUserPost: React.Dispatch<React.SetStateAction<UserPost>>;
-    postDetailOpen: boolean;
-    setPostDetailOpen: React.Dispatch<React.SetStateAction<boolean>>;
     postDeleteConfirm: boolean;
     setPostDeleteConfirm: React.Dispatch<React.SetStateAction<boolean>>;
     handleGetUser: any;
@@ -51,10 +47,6 @@ const User: React.FC<UserProps> = React.memo((props) => {
     loading,
     user,
     userPosts,
-    userPost,
-    setUserPost,
-    postDetailOpen,
-    setPostDetailOpen,
     handleGetUser,
     userAge,
     userDayOff,
@@ -67,7 +59,13 @@ const User: React.FC<UserProps> = React.memo((props) => {
     iso8601ToDateTime,
   } = useUser(props);
 
-  const { handleGetLikeUsers, isLikedUser, handleCreateLike } = useLikes();
+  const {
+    handleGetLikeUsers,
+    isLikedUser,
+    handleCreateLike,
+    matchingMessageOpen,
+    setMatchingMessageOpen,
+  } = useLikes();
 
   useEffect(() => {
     handleGetUser();
@@ -81,10 +79,6 @@ const User: React.FC<UserProps> = React.memo((props) => {
       value={{
         user,
         userPosts,
-        userPost,
-        setUserPost,
-        postDetailOpen,
-        setPostDetailOpen,
         postDeleteConfirm,
         setPostDeleteConfirm,
         handleDeletePost,
@@ -159,9 +153,10 @@ const User: React.FC<UserProps> = React.memo((props) => {
       ) : (
         <CircularProgress color="inherit" />
       )}
-      <UserPostDialog
-        postField={CreatePostField(userPost)}
-        postContent={userPost.content}
+      <MatchingDialog
+        userName={user.name}
+        open={matchingMessageOpen}
+        onClose={() => setMatchingMessageOpen(false)}
       />
     </UserContext.Provider>
   );

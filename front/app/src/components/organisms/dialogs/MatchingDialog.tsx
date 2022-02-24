@@ -4,28 +4,48 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import useWindowSize from "react-use/lib/useWindowSize";
+
+import Confetti from "react-confetti";
+
+import MatchingDialogHeader from "../../layouts/MatchingDialogHeader";
 
 interface MatchingDialogProps {
   open: boolean;
   onClose: () => void;
-  matchingCount: number;
+  userName: string;
 }
-
 const MatchingDialog = React.memo(
-  ({ open, onClose, matchingCount }: MatchingDialogProps) => {
+  ({ open, onClose, userName }: MatchingDialogProps) => {
+    const { width, height } = useWindowSize();
+
     return (
-      <Dialog open={open} keepMounted onClose={onClose}>
-        <DialogContent>
-          <Grid container justifyContent="center">
-            <Grid item>
-              <Typography variant="body1" component="p" gutterBottom>
-                現在{matchingCount}名の方とマッチング中です。
-                メッセージを送ってみましょう!
-              </Typography>
+      <>
+        {open ? (
+          <Confetti width={width} height={height} recycle={true} />
+        ) : (
+          <></>
+        )}
+
+        <Dialog open={open} keepMounted onClose={onClose}>
+          <MatchingDialogHeader />
+          <DialogContent>
+            <Grid container justifyContent="center">
+              <Grid item>
+                <Typography
+                  variant="body1"
+                  component="p"
+                  gutterBottom
+                  sx={{ color: "red" }}
+                >
+                  {userName}さんとマッチングしました! <br />
+                  早速メッセージを送ってみましょう!
+                </Typography>
+              </Grid>
             </Grid>
-          </Grid>
-        </DialogContent>
-      </Dialog>
+          </DialogContent>
+        </Dialog>
+      </>
     );
   }
 );

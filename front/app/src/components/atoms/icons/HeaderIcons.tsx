@@ -46,7 +46,7 @@ const HeaderIcon = ({ children, link, text }: HeaderIconButtonProps) => {
   return (
     <>
       <ListItem button sx={{ width: "100%" }}>
-        <Link to={link} style={{ textDecoration: "none" }}>
+        <Link to={link} style={{ textDecoration: "none", width: "100%" }}>
           <Box style={{ display: "flex", alignItems: "center" }}>
             <ListItemIcon>
               <StyledIcon size="large">
