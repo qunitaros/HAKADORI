@@ -35,7 +35,7 @@ const SignInCard = React.memo(() => {
 
   return (
     <StyledCard>
-      <StyledHeader title="サインイン" />
+      <StyledHeader title="ログイン" />
       <CardContent>
         <UserTextField
           label="メールアドレス"

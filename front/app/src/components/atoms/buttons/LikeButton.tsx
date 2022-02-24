@@ -21,10 +21,14 @@ const LikeButton = ({
       <Button
         variant={variant}
         onClick={onClick}
-        color="secondary"
         disabled={disabled}
         startIcon={startIcon}
-        style={{ marginTop: "1rem", marginBottom: "1rem" }}
+        style={{
+          marginTop: "1rem",
+          marginBottom: "1rem",
+          color: "red",
+          backgroundColor: "#fff",
+        }}
       >
         {children}
       </Button>

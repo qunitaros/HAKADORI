@@ -52,6 +52,7 @@ const UserEditDialog = React.memo(() => {
           onClose={() => setEditFormOpen(false)}
           title="プロフィールの編集"
         />
+
         <DialogContent>
           <ChangeAvatar
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {

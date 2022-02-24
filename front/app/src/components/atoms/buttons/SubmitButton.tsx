@@ -18,15 +18,17 @@ interface SubmitButtonProps {
 const SubmitButton = React.memo(
   ({ children, disabled, onClick }: SubmitButtonProps) => {
     return (
-      <StyledButton
-        type="submit"
-        variant="outlined"
-        color="secondary"
-        disabled={disabled}
-        onClick={onClick}
-      >
-        {children}
-      </StyledButton>
+      <>
+        <StyledButton
+          type="submit"
+          variant="outlined"
+          color="primary"
+          disabled={disabled}
+          onClick={onClick}
+        >
+          {children}
+        </StyledButton>
+      </>
     );
   }
 );

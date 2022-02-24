@@ -1,12 +1,12 @@
 import React, { useState, useContext } from "react";
 import IconButton from "@mui/material/IconButton";
 import PersonIcon from "@mui/icons-material/Person";
-import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import Menu from "@mui/material/Menu";
 import Box from "@mui/material/Box";
 import { AuthContext } from "../../../App";
 import SignedInHomeList from "../lists/SignedInHomeList";
 import SignedOutHomeList from "../lists/SignedOutHomeList";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 const HomeNav = React.memo(() => {
   const { currentUser, isSignedIn } = useContext(AuthContext);
@@ -14,6 +14,7 @@ const HomeNav = React.memo(() => {
   const [currentUserId, setCurrentUserId] = useState<number | undefined>(
     undefined
   );
+  const [currentUserImage, setCurrentUserImage] = useState<string>("");
   const [anchorEl, setAnchorEl] = useState<
     Element | ((element: Element) => Element)
   >(null);
@@ -22,20 +23,38 @@ const HomeNav = React.memo(() => {
       Element | ((element: Element) => Element)
     >;
   }) => {
-    setCurrentUserId(currentUser.id);
+    setCurrentUserId(isSignedIn ? currentUser.id : undefined);
+    setCurrentUserImage(isSignedIn ? currentUser.image.url : "");
     setAnchorEl(e.currentTarget);
   };
 
-  const handleCloseNav = () => {
-    setAnchorEl(null);
-  };
   return (
     <Box sx={{ flexGrow: 0 }}>
       <IconButton onClick={handleOpenNav} color="inherit">
         {isSignedIn ? (
           <PersonIcon style={{ color: "black" }} />
         ) : (
-          <ExitToAppIcon style={{ color: "black" }} />
+          <Box
+            color="inherit"
+            component="span"
+            sx={{
+              display: "flex",
+              borderRadius: "10px",
+              height: "2rem",
+              width: "8rem",
+              justifyContent: "center",
+              alignItems: "center",
+              fontSize: "1rem",
+              fontWeight: "bold",
+              transition: "0.4s",
+              ":hover": {
+                letterSpacing: "3px",
+              },
+            }}
+          >
+            START
+            <KeyboardArrowDownIcon />
+          </Box>
         )}
       </IconButton>
       <Menu
@@ -43,7 +62,7 @@ const HomeNav = React.memo(() => {
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
-        onClose={handleCloseNav}
+        onClose={() => setAnchorEl(null)}
         PaperProps={{
           elevation: 0,
           sx: {
@@ -75,11 +94,12 @@ const HomeNav = React.memo(() => {
       >
         {isSignedIn ? (
           <SignedInHomeList
-            handleCloseNav={() => handleCloseNav}
+            handleCloseNav={() => setAnchorEl(null)}
             currentUserId={currentUserId}
+            currentUserImage={currentUserImage}
           />
         ) : (
-          <SignedOutHomeList handleCloseNav={() => handleCloseNav} />
+          <SignedOutHomeList handleCloseNav={() => setAnchorEl(null)} />
         )}
       </Menu>
     </Box>

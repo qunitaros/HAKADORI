@@ -28,6 +28,8 @@ const useSignIn = () => {
 
       if (res.status === 200) {
         // 成功した場合はCookieに各値を格納
+        setEmail("");
+        setPassword("");
         Cookies.set("_access_token", res.headers["access-token"]);
         Cookies.set("_client", res.headers["client"]);
         Cookies.set("_uid", res.headers["uid"]);
@@ -36,10 +38,6 @@ const useSignIn = () => {
         setCurrentUser(res.data.data);
 
         history.push("/home");
-
-        setEmail("");
-        setPassword("");
-
         console.log("Signed in successfully!");
       } else {
         setAlertMessageOpen(true);

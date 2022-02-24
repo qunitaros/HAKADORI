@@ -1,4 +1,4 @@
-import React, { useEffect, createContext } from "react";
+import React, { useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -8,25 +8,10 @@ import { User } from "../../interfaces";
 import useUsers from "../../lib/hooks/useUsers";
 import UsersCard from "../organisms/cards/UsersCard";
 
-export const UsersContext = createContext(
-  {} as {
-    dialogOpen: boolean;
-    setDialogOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  }
-);
-
 // ユーザー一覧ページ
 const Users: React.FC = React.memo(() => {
-  const {
-    loading,
-    users,
-    userAge,
-    userPrefecture,
-    userField,
-    handleGetUsers,
-    dialogOpen,
-    setDialogOpen,
-  } = useUsers();
+  const { loading, users, userAge, userPrefecture, userField, handleGetUsers } =
+    useUsers();
 
   useEffect(() => {
     handleGetUsers();
@@ -34,7 +19,7 @@ const Users: React.FC = React.memo(() => {
   }, []);
 
   return (
-    <UsersContext.Provider value={{ dialogOpen, setDialogOpen }}>
+    <>
       <Grid container justifyContent="center">
         {!loading ? (
           users?.length > 0 ? (
@@ -79,7 +64,7 @@ const Users: React.FC = React.memo(() => {
           <CircularProgress color="inherit" />
         )}
       </Grid>
-    </UsersContext.Provider>
+    </>
   );
 });
 

@@ -25,7 +25,7 @@ const PhotoCameraIcon = ({ onChange }: PhotoCameraIconProps) => {
       />
       <label htmlFor="icon-button-file">
         <IconButton
-          color="secondary"
+          color="primary"
           aria-label="upload picture"
           component="span"
         >

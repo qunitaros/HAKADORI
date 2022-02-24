@@ -70,21 +70,23 @@ const BottomBar = React.memo(() => {
       }}
     >
       <AppBar
-        position="fixed"
+        position={isSignedIn ? "fixed" : "relative"}
         sx={{
           top: "auto",
           bottom: 0,
           color: "#000456",
-          backgroundColor: "wheat",
+          backgroundColor: "#eee",
+          boxShadow:
+            "3px 3px 6px -2px #555 3px 3px 8px rgba(255,255,255,0.8) inset",
         }}
       >
-        {isSignedIn ? (
-          <Toolbar>
+        <Toolbar>
+          {isSignedIn ? (
             <BottomBarButton onClick={() => setCreatePostFormOpen(true)} />
-          </Toolbar>
-        ) : (
-          <></>
-        )}
+          ) : (
+            <></>
+          )}
+        </Toolbar>
       </AppBar>
       <PostCreateDialog />
       <AlertMessage // エラーが発生した場合はアラートを表示

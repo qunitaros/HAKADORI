@@ -2,7 +2,6 @@ import React from "react";
 import Avatar from "@mui/material/Avatar";
 import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
 
 const StyledAvatar = styled(Avatar)(({ theme }) => ({
   width: theme.spacing(10),
@@ -10,8 +9,9 @@ const StyledAvatar = styled(Avatar)(({ theme }) => ({
 }));
 
 const StyledBox = styled(Grid)(() => ({
-  margin: "2rem 0",
   justifyContent: "center",
+  maxWidth: "150px",
+  margin: "2rem auto",
 }));
 
 const StyledInput = styled("input")(() => ({
@@ -33,22 +33,36 @@ const ChangeAvatar = ({ onChange, imageUrl, text }: ChangeAvatarProps) => {
         type="file"
         onChange={onChange}
       />
-      <label
-        htmlFor="avatar-file"
-        style={{
-          alignItems: "center",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <StyledAvatar aria-label="upload avatar" alt="avatar" src={imageUrl} />
-        <Button
-          style={{ paddingTop: "0.3rem", margin: "0 auto" }}
-          color="primary"
-          aria-label="upload avatar"
+      <label htmlFor="avatar-file">
+        <div
+          style={{
+            alignItems: "center",
+            display: "flex",
+            margin: "0 auto",
+            flexDirection: "column",
+            padding: 0,
+          }}
         >
-          {text}
-        </Button>
+          <StyledAvatar
+            aria-label="upload avatar"
+            alt="avatar"
+            src={imageUrl}
+          />
+          <p
+            style={{
+              paddingTop: "0.3rem",
+              margin: "0 auto",
+              fontSize: "0.8rem",
+              fontWeight: "bold",
+              color: "blue",
+              opacity: "0.7",
+            }}
+            color="primary"
+            aria-label="upload avatar"
+          >
+            {text}
+          </p>
+        </div>
       </label>
     </StyledBox>
   );

@@ -1,36 +1,27 @@
-import React, { useContext } from "react";
+import React from "react";
 
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
-import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import DynamicFeedIcon from "@mui/icons-material/DynamicFeed";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../../App";
 
 interface SignedInHomeListProps {
   handleCloseNav: () => void;
   currentUserId: number;
+  currentUserImage: string;
 }
 
 const SignedInHomeList = ({
   handleCloseNav,
   currentUserId,
+  currentUserImage,
 }: SignedInHomeListProps) => {
-  const { currentUser } = useContext(AuthContext);
-
   return (
     <>
       <MenuItem onClick={handleCloseNav} component={Link} to="/home">
-        {currentUser.image.url ? (
-          <Avatar alt="avatar" src={currentUser.image.url} />
-        ) : (
-          <Avatar>
-            <AccountBoxIcon />
-          </Avatar>
-        )}
-
+        <Avatar alt="avatar" src={currentUserImage} />
         <Typography>プロフィール</Typography>
       </MenuItem>
       <Divider />

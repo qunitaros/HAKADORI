@@ -5,11 +5,11 @@ import { styled } from "@mui/material/styles";
 
 import Header from "./Header";
 import BottomBar from "./BottomBar";
+import BackToTopButton from "../atoms/buttons/BackToTopButton";
 
 const StyledContainer = styled(Container)(() => ({
   paddingTop: "3rem",
   paddingBottom: "6rem",
-  backgroundColor: "#fffff9",
 }));
 
 interface CommonLayoutProps {
@@ -24,11 +24,12 @@ const CommonLayout = React.memo(({ children }: CommonLayoutProps) => {
         <Header />
       </header>
       <main>
-        <StyledContainer maxWidth="lg">
+        <StyledContainer>
           <Grid container justifyContent="center">
             {children}
           </Grid>
         </StyledContainer>
+        <BackToTopButton />
       </main>
       <footer>
         <BottomBar />
