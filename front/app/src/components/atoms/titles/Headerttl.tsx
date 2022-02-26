@@ -26,7 +26,7 @@ const Headerttl = React.memo(() => {
         component={Link}
         to={isSignedIn ? "/home" : "/"}
       >
-        HAKADRI
+        HAKADORI
       </Typography>
     </Grid>
   );
