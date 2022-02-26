@@ -1,6 +1,7 @@
 version: 2.1
 
-test_api:
+jobs:
+  test_api:
   docker:
     - image: cimg/ruby:3.1.0
       environment:
