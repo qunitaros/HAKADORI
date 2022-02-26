@@ -19,7 +19,7 @@ jobs:
           MYSQL_DATABASE: myapp_test
           MYSQL_USER: root
     environment:
-      BUDLE_JOBS: "4"
+      BUDLE_JOBS: "3"
       BUDLE_RETRY: "3"
       MYAPP_DATABASE_HOST: "127.0.0.1"
       RAILS_ENV: test
@@ -31,9 +31,6 @@ jobs:
       - run:
           name: Migration
           command: bundle exec rails db:migrate
-      - run:
-          name: Database setup
-          command: bundle exec rails db:schema:load --trace
       - run:
           name: Rspec
           command: bundle exec rspec
