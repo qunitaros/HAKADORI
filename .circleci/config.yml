@@ -8,7 +8,7 @@ jobs:
     working_directory: ~/hakadori/api
     steps:
       - checkout
-        path: ~/hakadori
+        path: ~/hakadori/api
       - ruby/bundle-install
   
   test:
@@ -27,7 +27,7 @@ jobs:
     working_directory: ~/hakadori/api
     steps: 
       - checkout: 
-        pash: ~/hakadori
+        path: ~/hakadori/api
       - ruby/bundle-install
       - run:
           name: Migration
