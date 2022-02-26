@@ -5,10 +5,10 @@ jobs:
   build:
     docker:
       - image: cimg/ruby:3.1.0
-    working_directory: ~/HAKADORI/api
+    working_directory: ~/hakadori/api
     steps:
       - checkout
-        path: ~/HAKADORI
+        path: ~/hakadori
       - ruby/bundle-install
   
   test:
@@ -24,10 +24,10 @@ jobs:
       BUDLE_RETRY: "3"
       MYAPP_DATABASE_HOST: "127.0.0.1"
       RAILS_ENV: test
-    working_directory: ~/HAKADORI/api
+    working_directory: ~/hakadori/api
     steps: 
       - checkout: 
-        pash: ~/HAKADORI
+        pash: ~/hakadori
       - ruby/bundle-install
       - run:
           name: rails db:migrate
