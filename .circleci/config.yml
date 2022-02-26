@@ -1,6 +1,5 @@
 version: 2.1
 
-
 jobs:
   build:
     docker:
@@ -10,23 +9,23 @@ jobs:
       - checkout:
         path: ~/hakadori/api
       - ruby/bundle-install
-  
+
   test:
     docker:
       - image: cimg/ruby:3.1.0
-      - image: image: cimg/mysql:8.0
-        environment: 
+      - image: cimg/mysql:8.0
+        environment:
           MYSQL_ROOT_PASSWORD: password
           MYSQL_DATABASE: myapp_test
           MYSQL_USER: root
-    environment: 
+    environment:
       BUDLE_JOBS: "4"
       BUDLE_RETRY: "3"
       MYAPP_DATABASE_HOST: "127.0.0.1"
       RAILS_ENV: test
     working_directory: ~/hakadori/api
-    steps: 
-      - checkout: 
+    steps:
+      - checkout:
         path: ~/hakadori/api
       - ruby/bundle-install
       - run:
@@ -45,5 +44,5 @@ workflows:
     jobs:
       - build
       - test:
-        requires: 
+        requires:
           - build
