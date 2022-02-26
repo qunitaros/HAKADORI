@@ -7,7 +7,7 @@ jobs:
       - image: cimg/ruby:3.1.0
     working_directory: ~/hakadori/api
     steps:
-      - checkout
+      - checkout:
         path: ~/hakadori/api
       - ruby/bundle-install
   
