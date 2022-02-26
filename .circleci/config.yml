@@ -51,9 +51,7 @@ jobs:
       # run tests
       - run:
           name: RSpec
-          command: |
-            bundle exec rspec $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings) \
-              || (printf "====== RETRYING...\n\n\n"; bundle exec rspec --only-failures)
+          command: bundle exec rspec
           working_directory: ~/hakadori/api
 
       # collect reports
