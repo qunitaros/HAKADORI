@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  ruby: circleci/ruby@1.4.0
+
 jobs:
   build:
     docker:
@@ -7,8 +10,8 @@ jobs:
     working_directory: ~/hakadori/api
     steps:
       - checkout:
-        path: ~/hakadori/api
-      - ruby/bundle-install
+          path: ~/hakadori/api
+      - ruby/install-deps
 
   test:
     docker:
@@ -26,8 +29,8 @@ jobs:
     working_directory: ~/hakadori/api
     steps:
       - checkout:
-        path: ~/hakadori/api
-      - ruby/bundle-install
+          path: ~/hakadori/api
+      - ruby/install-deps
       - run:
           name: Migration
           command: bundle exec rails db:migrate
@@ -41,5 +44,5 @@ workflows:
     jobs:
       - build
       - test:
-        requires:
-          - build
+          requires:
+            - build
