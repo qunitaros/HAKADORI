@@ -6,7 +6,7 @@ jobs:
       - image: cimg/ruby:3.1.0
         environment:
           RAILS_ENV: test
-          DB_HOST: 127.0.0.1
+          MYAPP_DATABASE_HOST: 127.0.0.1
       - image: cimg/mysql:8.0
 
     working_directory: ~/hakadori/api
