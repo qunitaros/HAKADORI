@@ -30,7 +30,7 @@ jobs:
         pash: ~/hakadori
       - ruby/bundle-install
       - run:
-          name: rails db:migrate
+          name: Migration
           command: bundle exec rails db:migrate
       - run:
           name: Database setup
