@@ -34,7 +34,7 @@ services:
       - WDS_SOCKET_PORT=0
     command: sh -c "cd app && yarn start"
     ports:
-      - "4000:3000"
+      - "4000:4000"
 volumes:
   mysql-data:
 # docker-compose run api rails new . --force --no-deps -d mysql --api --skip-test

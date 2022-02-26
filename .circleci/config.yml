@@ -1,70 +1,82 @@
 version: 2.1
+orbs:
+  ruby: circleci/ruby@1.1.2
+  node: circleci/node@2
 
 jobs:
-  test_api:
+  build:
     docker:
-      - image: cimg/ruby:3.1.0
-        environment:
-          RAILS_ENV: test
-          MYAPP_DATABASE_HOST: 127.0.0.1
-      - image: cimg/mysql:8.0
-
+      - image: cimg/ruby:3.0.3-node
     working_directory: ~/hakadori/api
-
     steps:
-      - checkout
+      - checkout:
+          path: ~/hakadori/api
+      - ruby/install-deps
 
-      # restore gem from cache
-      - restore_cache:
-          keys:
-            - gem-cache-v1-{{ checksum "~/hakadori/api/Gemfile.lock" }}
-            - gem-cache-v1-
-          working_directory: ~/hakadori/api
-
-      # gem install
+  test:
+    docker:
+      - image: cimg/ruby:3.0.3-node
+      - image: circleci/mysql:8.0
+        environment:
+          MYSQL_ROOT_PASSWORD: Qunitaros10
+          MYSQL_DATABASE: hakadori_test
+          MYSQL_USER: qunitaros
+          MYSQL_PASSWORD: Qunitaros10
+    environment:
+      BUNDLE_JOBS: "3"
+      BUNDLE_RETRY: "3"
+      APP_DATABASE_HOST: "127.0.0.1"
+      RAILS_ENV: test
+    working_directory: ~/hakadori/api
+    steps:
+      - checkout:
+          path: ~/hakadori/api
+      - ruby/install-deps
       - run:
+          name: MySQL が準備できるまで待機
           command: |
-            gem install bundler
-            bundle config set path 'vendor/bundle'
-            bundle install --jobs=4 --retry=3
-          working_directory: ~/hakadori/api
-
-      - save_cache:
-          key: gem-cache-v1-{{ checksum "~/hakadori/api/Gemfile.lock" }}
-          paths:
-            - ~/repo/backend/vendor/bundle
-          working_directory: ~/hakadori/api
-
-      # Database setup
+            for i in `seq 1 10`;
+            do
+              nc -z 127.0.0.1 3360 && echo Success && exit 0
+              echo -n .
+              sleep 1
+            done
+            echo Failed waiting for MySQL && exit 1
       - run:
-          command: bundle exec rails db:create
-          working_directory: ~/hakadori/api
+          name: データベースの作成
+          command: bundle exec rake db:create
       - run:
-          command: bundle exec rails db:migrate
-          working_directory: ~/hakadori/api
-
+          name: データベースのセットアップ
+          command: bundle exec rake db:migrate
       - run:
-          name: create directory to store test results
-          command: mkdir /tmp/test-results
-          working_directory: ~/hakadori/api
-
-      # run tests
-      - run:
-          name: RSpec
+          name: test
           command: bundle exec rspec
-          working_directory: ~/hakadori/api
 
-      # collect reports
-      - store_test_results:
-          path: /tmp/test-results
-      - store_artifacts:
-          path: /tmp/test-results
-          destination: test-results
-      - store_artifacts:
-          path: /home/circleci/repo/tmp/screenshots
+  # deploy:
+  #   docker:
+  #     - image: cimg/ruby:3.0.2-node
+  #   working_directory: ~/hakadori/api
+  #   steps:
+  #     - checkout:
+  #        path: ~/hakadori/api
+  #     - ruby/install-deps
+  #     - add_ssh_keys:
+  #         fingerprints: 35:5a:cb:c6:0e:b3:5b:5e:48:fb:dd:99:4c:90:cb:a3
+  #     - run:
+  #         name: 自動デプロイ
+  #         command: bundle exec cap production deploy
 
 workflows:
   version: 2
-  test:
+  build_and_test_and_deploy:
     jobs:
-      - test_api
+      - build
+      - test:
+          requires:
+            - build
+      # - deploy:
+      #     requires:
+      #       - test
+      #     filters:
+      #       branches:
+      #         only: master
