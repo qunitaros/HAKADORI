@@ -10,6 +10,7 @@ import { AuthContext } from "../../App";
 import HomeNav from "../organisms/navs/HomeNav";
 import HeaderNav from "../organisms/navs/HeaderNav";
 import Headerttl from "../atoms/titles/Headerttl";
+import HeaderMainIcon from "../atoms/icons/HeaderMainIcon";
 
 const StyledBox = styled(Box)(() => ({
   boxShadow: "3px 3px 6px -2px #555 3px 3px 8px rgba(255,255,255,0.8) inset",
@@ -29,7 +30,8 @@ const Header: React.FC = React.memo(() => {
             "3px 3px 6px -2px #555 3px 3px 8px rgba(255,255,255,0.8) inset",
         }}
       >
-        <Toolbar>
+        <Toolbar sx={{ verticalAlign: "middle" }}>
+          <HeaderMainIcon />
           <Headerttl />
           {!loading ? (
             <>
