@@ -6,51 +6,51 @@ orbs:
 jobs:
   build:
     docker:
-      - image: cimg/ruby:3.0.3-node
+      - image: circleci/ruby:3.0.3
     working_directory: ~/hakadori/api
     steps:
       - checkout:
           path: ~/hakadori/api
       - ruby/install-deps
 
-  test:
-    docker:
-      - image: cimg/ruby:3.0.3-node
-      - image: circleci/mysql:8.0
-        environment:
-          MYSQL_ROOT_PASSWORD: Qunitaros10
-          MYSQL_DATABASE: hakadori_test
-          MYSQL_USER: qunitaros
-          MYSQL_PASSWORD: Qunitaros10
-    environment:
-      BUNDLE_JOBS: "3"
-      BUNDLE_RETRY: "3"
-      APP_DATABASE_HOST: "127.0.0.1"
-      RAILS_ENV: test
-    working_directory: ~/hakadori/api
-    steps:
-      - checkout:
-          path: ~/hakadori/api
-      - ruby/install-deps
-      - run:
-          name: MySQL が準備できるまで待機
-          command: |
-            for i in `seq 1 10`;
-            do
-              nc -z 127.0.0.1 3360 && echo Success && exit 0
-              echo -n .
-              sleep 1
-            done
-            echo Failed waiting for MySQL && exit 1
-      - run:
-          name: データベースの作成
-          command: bundle exec rake db:create
-      - run:
-          name: データベースのセットアップ
-          command: bundle exec rake db:migrate
-      - run:
-          name: test
-          command: bundle exec rspec
+  # test:
+  #   docker:
+  #     - image: cimg/ruby:3.0.3-node
+  #     - image: circleci/mysql:8.0
+  #       environment:
+  #         MYSQL_ROOT_PASSWORD: Qunitaros10
+  #         MYSQL_DATABASE: hakadori_test
+  #         MYSQL_USER: qunitaros
+  #         MYSQL_PASSWORD: Qunitaros10
+  #   environment:
+  #     BUNDLE_JOBS: "3"
+  #     BUNDLE_RETRY: "3"
+  #     APP_DATABASE_HOST: "127.0.0.1"
+  #     RAILS_ENV: test
+  #   working_directory: ~/hakadori/api
+  #   steps:
+  #     - checkout:
+  #         path: ~/hakadori/api
+  #     - ruby/install-deps
+  #     - run:
+  #         name: MySQL が準備できるまで待機
+  #         command: |
+  #           for i in `seq 1 10`;
+  #           do
+  #             nc -z 127.0.0.1 3360 && echo Success && exit 0
+  #             echo -n .
+  #             sleep 1
+  #           done
+  #           echo Failed waiting for MySQL && exit 1
+  #     - run:
+  #         name: データベースの作成
+  #         command: bundle exec rake db:create
+  #     - run:
+  #         name: データベースのセットアップ
+  #         command: bundle exec rake db:migrate
+  #     - run:
+  #         name: test
+  #         command: bundle exec rspec
 
   # deploy:
   #   docker:
@@ -71,9 +71,9 @@ workflows:
   build_and_test_and_deploy:
     jobs:
       - build
-      - test:
-          requires:
-            - build
+      # - test:
+      #     requires:
+      #       - build
       # - deploy:
       #     requires:
       #       - test
