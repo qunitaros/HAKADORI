@@ -100,7 +100,9 @@ const usePost = () => {
         setCreatePostFormOpen(false);
 
         setContent("");
-        setPostField(0);
+        setPostField(undefined);
+
+        handleGetPosts();
 
         console.log("Create post successfully!");
       } else {

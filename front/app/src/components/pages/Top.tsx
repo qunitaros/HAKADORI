@@ -89,7 +89,7 @@ const StyledResearchTextContainer = styled("div")(() => ({
   marginTop: -40,
 }));
 
-const StyledResearchText = styled("h3")(() => ({
+const StyledResearchText = styled("div")(() => ({
   fontSize: 20,
   position: "absolute",
   left: "10%",
@@ -100,7 +100,7 @@ const StyledResearchText = styled("h3")(() => ({
   borderRadius: 50,
 }));
 
-const StyledResearchMerit = styled("h3")(() => ({
+const StyledResearchMerit = styled("p")(() => ({
   fontSize: 22,
   margin: "0.5rem auto",
   fontWeight: "bold",
@@ -163,7 +163,6 @@ const Top = () => {
             いい出会いで週末の勉強を <br />
             はかどらせよう。
           </StyledMainTitle>
-
           <StartButton />
         </Box>
       </StyledMainContainer>
