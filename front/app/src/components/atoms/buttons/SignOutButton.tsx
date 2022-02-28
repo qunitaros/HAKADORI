@@ -15,11 +15,12 @@ const SignOutButton = React.memo(({ onClick }: SignOutButtonProps) => {
     <StyledButton
       variant="outlined"
       onClick={onClick}
+      color="secondary"
       sx={{ color: "red", borderColor: "red" }}
       fullWidth
       startIcon={<ExitToAppIcon />}
     >
-      サインアウト
+      ログアウト
     </StyledButton>
   );
 });

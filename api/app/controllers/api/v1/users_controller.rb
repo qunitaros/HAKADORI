@@ -7,7 +7,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show 
-    posts = @user.posts.all
+    posts = @user.posts.all.order("created_at DESC")
     render json: { status: 200, user: @user, posts: posts }
   end
 
