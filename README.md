@@ -1,4 +1,4 @@
-![Main Image]https://user-images.githubusercontent.com/84252422/156070842-6458e688-1668-4ba0-9841-bb1331422df0.png)
+![Main Image](/front/app/src/assets/readme-main-image.png)
 
 # サービスの概要
 
