@@ -18,7 +18,7 @@ worker_timeout 3600 if ENV.fetch("RAILS_ENV", "development") == "development"
 #port ENV.fetch("PORT") { 3000 }
 
 # pumaを起動した際にソケット
-bind "unix:///var/www/test_app/tmp/sockets/puma.sock"
+bind "unix:///var/www/api/tmp/sockets/puma.sock"
 
 # Specifies the `environment` that Puma will run in.
 #
