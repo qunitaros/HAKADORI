@@ -32,6 +32,9 @@ gem 'devise_token_auth'
 # 画像アップロード機能
 gem 'carrierwave'
 
+#S3に画像を保存するためのgem
+gem 'fog-aws'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
