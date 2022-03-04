@@ -112,5 +112,5 @@ Rails.application.configure do
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
   #ホストの設定
-  config.hosts << "54.150.100.46"
+  config.hosts << "backend.hakadori-matching.com"
 end

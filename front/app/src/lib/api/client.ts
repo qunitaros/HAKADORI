@@ -14,7 +14,7 @@ const client = applyCaseMiddleware(
   axios.create({
     baseURL:
       process.env.NODE_ENV === "production"
-        ? "https://backend.hakadori-matching.net"
+        ? "https://backend.hakadori-matching.com"
         : "http://localhost:3003/api/v1",
   }),
   options
