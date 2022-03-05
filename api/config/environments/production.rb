@@ -113,4 +113,5 @@ Rails.application.configure do
 
   #ホストの設定
   config.hosts << "backend.hakadori-matching.com"
+  config.hosts << "54.150.100.46"
 end
