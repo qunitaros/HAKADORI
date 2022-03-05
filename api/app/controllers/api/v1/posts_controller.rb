@@ -9,7 +9,7 @@ class Api::V1::PostsController < ApplicationController
 
   def create
     post = Post.new(post_params)
-    if post.save
+    if post.save!
       render json: { status: 200, post: post }
     else
       render json: { status: 500, message: "作成に失敗しました。" }

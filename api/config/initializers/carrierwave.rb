@@ -3,12 +3,12 @@ require 'carrierwave/storage/file'
 require 'carrierwave/storage/fog'
 
 CarrierWave.configure do |config|
-  config.storage = :fog
+  config.cache_storage = :fog
   config.fog_provider = 'fog/aws'
   config.fog_credentials = {
     provider: 'AWS',
-    aws_access_key_id: ENV["AWS_ACCESS_KEY_ID"],
-    aws_secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"],
+    aws_access_key_id: 'AKIAZQNETPQ5DZQPIJE3',
+    aws_secret_access_key: '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',
     region: 'ap-northeast-1'
   }
 
