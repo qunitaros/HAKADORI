@@ -114,5 +114,4 @@ Rails.application.configure do
   #ホストの設定
   config.hosts << "backend.hakadori-matching.com"
   config.hosts << "54.150.100.46"
-  config.hosts << "hakadori-alb-1610162488.ap-northeast-1.elb.amazonaws.com"
 end
