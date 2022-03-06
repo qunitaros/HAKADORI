@@ -16,7 +16,7 @@ Rails.application.routes.draw do
         resources :sessions, only: %i[index]
       end
 
-      get :health_check, to: 'health_check#index'
+      get '/', to: 'health_check#index'
     end
   end
 end
