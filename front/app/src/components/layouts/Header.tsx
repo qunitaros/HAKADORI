@@ -22,7 +22,7 @@ const Header: React.FC = React.memo(() => {
   return (
     <StyledBox>
       <AppBar
-        position="static"
+        position="fixed"
         style={{
           color: "#000456",
           backgroundColor: "#eee",

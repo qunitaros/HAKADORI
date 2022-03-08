@@ -13,6 +13,10 @@ const StyledContainer = styled(Container)(() => ({
   paddingBottom: "6rem",
 }));
 
+const StyledMain = styled("main")(() => ({
+  marginTop: "3rem",
+}));
+
 interface CommonLayoutProps {
   children: React.ReactNode;
 }
@@ -26,7 +30,7 @@ const CommonLayout = React.memo(({ children }: CommonLayoutProps) => {
       <header>
         <Header />
       </header>
-      <main>
+      <StyledMain>
         {isSignedIn ? (
           <>
             <StyledContainer>
@@ -39,7 +43,7 @@ const CommonLayout = React.memo(({ children }: CommonLayoutProps) => {
           <>{children}</>
         )}
         <BackToTopButton />
-      </main>
+      </StyledMain>
       <footer>
         <BottomBar />
       </footer>

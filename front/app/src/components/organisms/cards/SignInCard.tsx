@@ -18,6 +18,7 @@ const StyledHeader = styled(CardHeader)(() => ({
 const StyledCard = styled(Card)(({ theme }) => ({
   padding: theme.spacing(2),
   maxWidth: 340,
+  backgroundColor: "#f5f5f5",
 }));
 
 const StyledBox = styled("div")(() => ({

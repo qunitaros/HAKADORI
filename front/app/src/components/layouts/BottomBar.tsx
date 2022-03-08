@@ -76,8 +76,6 @@ const BottomBar = React.memo(() => {
           bottom: 0,
           color: "#000456",
           backgroundColor: "#eee",
-          boxShadow:
-            "3px 3px 6px -2px #555 3px 3px 8px rgba(255,255,255,0.8) inset",
         }}
       >
         <Toolbar>

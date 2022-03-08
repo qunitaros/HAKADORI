@@ -14,6 +14,7 @@ import { AuthContext } from "../../../App";
 const StyledCard = styled(Card)(() => ({
   width: "84%",
   padding: "1rem",
+  backgroundColor: "#f5f5f5",
 }));
 
 const UserCard = React.memo(() => {

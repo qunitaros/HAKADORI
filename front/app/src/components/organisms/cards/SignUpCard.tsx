@@ -23,6 +23,7 @@ const StyledCard = styled(Card)(({ theme }) => ({
   padding: theme.spacing(2),
   width: "80%",
   margin: "0 auto",
+  backgroundColor: "#f5f5f5",
 }));
 
 const SignUpCard = React.memo(() => {
