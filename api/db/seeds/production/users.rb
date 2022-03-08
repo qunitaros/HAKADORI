@@ -1,6 +1,6 @@
 users = [
   { name: "yuji", 
-    prof:  "初めまして、yuujiです。将来海外で働いてみたいと思い、最近英語を勉強し始めました。是非とも一緒に勉強しましょう!", 
+    prof:  "初めまして、yujiです。将来海外で働いてみたいと思い、最近英語を勉強し始めました。是非とも一緒に勉強しましょう!", 
     gender: 0,
     image: "public/icons/english_man.jpg"
   },
