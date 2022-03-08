@@ -38,7 +38,10 @@ const CurrentUserProps = React.memo(() => {
         <Grid container justifyContent="center">
           <LargeAvatar imageUrl={currentUser?.image.url} />
         </Grid>
-        <UserProfileName>{currentUser?.name}</UserProfileName>
+        <UserProfileName
+          userName={currentUser?.name}
+          userGender={currentUser?.gender}
+        />
         <UserProfileContent
           age={currentUserAge()}
           prefecture={currentUserPrefecture()}

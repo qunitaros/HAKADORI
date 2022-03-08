@@ -27,7 +27,7 @@ const UserCard = React.memo(() => {
         <Grid container justifyContent="center">
           <LargeAvatar imageUrl={user?.image.url} />
         </Grid>
-        <UserProfileName>{user?.name}</UserProfileName>
+        <UserProfileName userName={user.name} userGender={user.gender} />
         {user.id !== currentUser.id ? (
           <UserProfileContent
             age={userAge()}

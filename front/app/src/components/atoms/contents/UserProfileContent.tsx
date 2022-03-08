@@ -3,8 +3,8 @@ import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
-import BoyIcon from "@mui/icons-material/Boy";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
+import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 
 const StyledGrid = styled(Grid)(({ theme }) => ({
   marginTop: theme.spacing(1),
@@ -38,7 +38,7 @@ const UserProfileContent = React.memo(
             休日: {dayOff}
           </Typography>
           <Divider style={{ marginTop: "1rem" }} textAlign="left">
-            <BoyIcon />
+            <PermContactCalendarIcon />
           </Divider>
           {profile ? (
             <Typography
