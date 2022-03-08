@@ -92,7 +92,7 @@ users.length.times do |n|
   user = User.find_or_initialize_by(email: email)
   prefecture = Random.rand(1..47)
   gender = users[n][:gender]
-  from = Time.parse("1970/01/01")
+  from = Time.parse("1990/01/01")
   to = Time.parse("2000/01/01")
   date = Random.rand(from..to)
   day_off = Random.rand(0..3)
