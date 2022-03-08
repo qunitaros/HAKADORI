@@ -18,9 +18,10 @@ import UsersProfile from "../../atoms/contents/UsersProfile";
 const StyledCard = styled(Card)(() => ({
   width: "84%",
   marginBottom: "1rem",
+  backgroundColor: "#f5f5f5",
   ":hover": {
-    boxShadow: "2px 2px 1px 1px rgba(0,0,0,.7)",
-    top: "10px",
+    boxShadow: "1px 1px 12px rgba(0,0,0,.65)",
+    backgroundColor: "#f9f9f9",
   },
 }));
 

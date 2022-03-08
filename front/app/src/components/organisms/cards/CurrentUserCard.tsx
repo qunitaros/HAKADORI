@@ -14,6 +14,7 @@ import UserProfileName from "../../atoms/titles/UserProfileName";
 const StyledCard = styled(Card)(() => ({
   width: "80%",
   marginBottom: "3rem",
+  backgroundColor: "#f5f5f5",
 }));
 
 const CurrentUserProps = React.memo(() => {
@@ -38,7 +39,10 @@ const CurrentUserProps = React.memo(() => {
         <Grid container justifyContent="center">
           <LargeAvatar imageUrl={currentUser?.image.url} />
         </Grid>
-        <UserProfileName>{currentUser?.name}</UserProfileName>
+        <UserProfileName
+          userName={currentUser?.name}
+          userGender={currentUser?.gender}
+        />
         <UserProfileContent
           age={currentUserAge()}
           prefecture={currentUserPrefecture()}

@@ -14,6 +14,7 @@ import { AuthContext } from "../../../App";
 const StyledCard = styled(Card)(() => ({
   width: "84%",
   padding: "1rem",
+  backgroundColor: "#f5f5f5",
 }));
 
 const UserCard = React.memo(() => {
@@ -27,7 +28,7 @@ const UserCard = React.memo(() => {
         <Grid container justifyContent="center">
           <LargeAvatar imageUrl={user?.image.url} />
         </Grid>
-        <UserProfileName>{user?.name}</UserProfileName>
+        <UserProfileName userName={user.name} userGender={user.gender} />
         {user.id !== currentUser.id ? (
           <UserProfileContent
             age={userAge()}

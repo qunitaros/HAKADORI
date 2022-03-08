@@ -14,9 +14,10 @@ import PostDeleteIcon from "../../atoms/icons/PostDeleteIcon";
 const StyledCard = styled(Card)((theme) => ({
   marginTop: "1rem",
   width: "80%",
+  backgroundColor: "#f5f5f5",
   ":hover": {
-    boxShadow: "2px 2px 1px 1px rgba(0,0,0,.7)",
-    top: "10px",
+    boxShadow: "1px 1px 12px rgba(0,0,0,.65)",
+    backgroundColor: "#f9f9f9",
   },
 }));
 
