@@ -27,14 +27,4 @@ RSpec.describe "API::V1::chat_rooms", type: :request do
       end
     end
   end
-
-  describe "POST /api/v1/chat_rooms" do
-    context "contentが存在するとき" do
-
-    end
-
-    context "contentが空のとき" do
-
-    end
-  end
 end
