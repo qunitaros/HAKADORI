@@ -56,12 +56,57 @@ RSpec.describe "API::V1::Users", type: :request do
   end
 
   describe "PUT /api/v1/users" do
-    context "情報が正しいとき" do
+    subject { put("/api/v1/users/#{@user.id}", params: @params, headers: headers) }
 
+    let(:headers) { current_user.create_new_auth_token }
+    let(:current_user) { create(:user) }
+    let(:other_user) { create(:user) }
+    context "パラメータが正しいとき" do
+      before do 
+        @user = current_user
+        sign_in(current_user)
+        @params = attributes_for(:user, field: 4, name: "hogehoge", profile: "hogehogehoge", prefecture: 3, day_off: 1) 
+      end
+
+      it "user情報を更新できること" do
+        subject
+        expect(response).to have_http_status(200)
+        expect(res["status"]).to eq(200)
+        expect(res["user"]["name"]).to eq("hogehoge")
+        expect(res["user"]["field"]).to eq(4)
+        expect(res["user"]["profile"]).to eq("hogehogehoge")
+        expect(res["user"]["prefecture"]).to eq(3)
+        expect(res["user"]["day_off"]).to eq(1)
+      end
     end
 
-    context "idが存在しないとき" do
+    context "パラメータが正しくないとき" do
+      before do 
+        @user = current_user
+        sign_in(current_user)
+        @params = attributes_for(:user, field: 4, name: "hogehoge", profile: "hogehogehoge", prefecture: 3, day_off: 1) 
+      end
 
+      it "emailは変更できないこと" do
+        @params = attributes_for(:user, email: "hogehogehoge@example.com") 
+        subject
+        expect(res["status"]).to eq(200)
+        expect(res["user"]["email"]).to_not eq("hogehogehoge@example.com") 
+      end
+
+      it "idは変更できないこと" do
+        @params = attributes_for(:user, id: current_user.id + 1) 
+        subject
+        expect(res["status"]).to eq(200)
+        expect(res["user"]["id"]).to_not eq(current_user.id + 1) 
+      end
+
+      it "birthdayは変更できないこと" do
+        @params = attributes_for(:user, birthday:"1998/03/03") 
+        subject
+        expect(res["status"]).to eq(200)
+        expect(res["user"]["birthday"]).to_not eq("1998/03/03") 
+      end
     end
   end
 end
