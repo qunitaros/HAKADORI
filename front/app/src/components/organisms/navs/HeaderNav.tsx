@@ -8,6 +8,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import SchoolIcon from "@mui/icons-material/School";
+import { Link } from "react-router-dom";
 
 import DialogHeader from "../../layouts/DialogHeader";
 import HeaderIcon from "../../atoms/icons/HeaderIcons";
@@ -37,18 +38,29 @@ const HeaderNav = React.memo(() => {
     >
       <DialogHeader onClose={() => setOpenNav(false)} title="" />
       <List>
-        <HeaderIcon link="/users" text="相手を探す">
-          <GroupAddIcon />
-        </HeaderIcon>
-        <HeaderIcon link="/likes" text="いいね">
-          <FavoriteIcon />
-        </HeaderIcon>
-        <HeaderIcon link="/chat_rooms" text="チャットルーム">
-          <QuestionAnswerIcon />
-        </HeaderIcon>
-        <HeaderIcon link="/posts" text="タイムライン">
-          <SchoolIcon />
-        </HeaderIcon>
+        <Link to="/users" style={{ textDecoration: "none", width: "100%" }}>
+          <HeaderIcon link="/users" text="相手を探す">
+            <GroupAddIcon />
+          </HeaderIcon>
+        </Link>
+        <Link to="/likes" style={{ textDecoration: "none", width: "100%" }}>
+          <HeaderIcon link="/likes" text="いいね">
+            <FavoriteIcon />
+          </HeaderIcon>
+        </Link>
+        <Link
+          to="/chat_rooms"
+          style={{ textDecoration: "none", width: "100%" }}
+        >
+          <HeaderIcon link="/chat_rooms" text="チャットルーム">
+            <QuestionAnswerIcon />
+          </HeaderIcon>
+        </Link>
+        <Link to="/posts" style={{ textDecoration: "none", width: "100%" }}>
+          <HeaderIcon link="/posts" text="タイムライン">
+            <SchoolIcon />
+          </HeaderIcon>
+        </Link>
       </List>
     </Box>
   );

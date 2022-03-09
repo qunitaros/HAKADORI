@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 
 import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
@@ -10,10 +9,7 @@ import { styled } from "@mui/material/styles";
 import { SignInContext } from "../../pages/SignIn";
 import SubmitButton from "../../atoms/buttons/SubmitButton";
 import UserTextField from "../../atoms/forms/UserTextfield";
-
-const StyledHeader = styled(CardHeader)(() => ({
-  textAlign: "center",
-}));
+import Authttl from "../../atoms/titles/Authttl";
 
 const StyledCard = styled(Card)(({ theme }) => ({
   padding: theme.spacing(2),
@@ -36,7 +32,7 @@ const SignInCard = React.memo(() => {
 
   return (
     <StyledCard>
-      <StyledHeader title="ログイン" />
+      <Authttl title="ログイン" />
       <CardContent>
         <UserTextField
           label="メールアドレス"

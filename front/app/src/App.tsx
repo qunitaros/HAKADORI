@@ -52,7 +52,7 @@ const App: React.FC = React.memo(() => {
   } = useCurrentUser();
 
   const Private = ({ children }: RouteProps) => {
-    return isSignedIn ? <>{children}</> : <Redirect to="/signin" />;
+    return isSignedIn ? <>{children}</> : <Redirect to="/" />;
   };
 
   const UnAuth = ({ children }: RouteProps) => {

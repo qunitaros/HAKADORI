@@ -2,6 +2,7 @@ import React from "react";
 import Avatar from "@mui/material/Avatar";
 import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 
 const StyledAvatar = styled(Avatar)(({ theme }) => ({
   width: theme.spacing(10),
@@ -48,20 +49,26 @@ const ChangeAvatar = ({ onChange, imageUrl, text }: ChangeAvatarProps) => {
             alt="avatar"
             src={imageUrl}
           />
-          <p
-            style={{
+          <Typography
+            sx={{
               paddingTop: "0.3rem",
               margin: "0 auto",
               fontSize: "0.8rem",
               fontWeight: "bold",
               color: "blue",
               opacity: "0.7",
+              background:
+                "linear-gradient(currentColor 0 0) 0 100% /var(--d, 0) 2px no-repeat",
+              transition: "0.5s",
+              ":hover": {
+                "--d": "100%",
+              },
             }}
             color="primary"
             aria-label="upload avatar"
           >
             {text}
-          </p>
+          </Typography>
         </div>
       </label>
     </StyledBox>
