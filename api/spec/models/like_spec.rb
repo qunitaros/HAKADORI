@@ -12,13 +12,11 @@ RSpec.describe Like, type: :model do
 
       it "to_user_idがなければ無効であること" do
         like.to_user_id = nil
-        # expect(like.errors[:to_user_id]).to include("can't be blank")
         expect(like).to be_invalid
       end
 
       it "from_user_idがなければ無効であること" do
         like.from_user_id = nil
-        #expect(like.errors[:from_user_id]).to include("can't be blank")
         expect(like).to be_invalid
       end
     end

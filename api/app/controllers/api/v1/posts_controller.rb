@@ -9,7 +9,7 @@ class Api::V1::PostsController < ApplicationController
 
   def create
     post = Post.new(post_params)
-    if post.save!
+    if post.save
       render json: { status: 200, post: post }
     else
       render json: { status: 500, message: "作成に失敗しました。" }
@@ -18,8 +18,13 @@ class Api::V1::PostsController < ApplicationController
 
   def destroy 
     @post = Post.find(params[:id])
-    @post.destroy
-    render json: { status: 200, post: @post }
+    
+    if @post.user_id == current_api_v1_user.id
+      @post.destroy
+      render json: { status: 200, post: @post }
+    else
+      render json: { status: 500, message: "削除に失敗しました。" }
+    end
   end
 
  
