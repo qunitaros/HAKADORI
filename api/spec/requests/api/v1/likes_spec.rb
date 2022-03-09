@@ -23,7 +23,7 @@ RSpec.describe "API::V1::Likes", type: :request do
     end
 
     context "likeが存在しないとき" do
-      it "空のオブジェクトが返される" do
+      it "空のオブジェクトが返されること" do
         subject
         expect(res["active_likes"]).to be_empty
         expect(res["passive_likes"]).to be_empty
@@ -33,12 +33,41 @@ RSpec.describe "API::V1::Likes", type: :request do
   end
 
   describe "POST /api/v1/likes" do
-    context "contentが存在するとき" do
+    subject { post("/api/v1/likes", params: @params, headers: headers) }
 
+    let(:headers) { current_user.create_new_auth_token }
+    let(:current_user) { create(:user) }
+    let(:other_user) { create(:user) }
+
+    context "パラメータが正しいとき" do
+      before do
+        @params = { from_user_id: current_user.id, to_user_id: other_user.id }
+      end
+
+      it "likeを作成できること" do
+        expect { subject }.to change(Like, :count).by(+1)
+        expect(res["status"]).to eq(200)
+        expect(res["like"]["from_user_id"]).to eq(current_user.id)
+        expect(res["like"]["to_user_id"]).to eq(other_user.id)
+        expect(res["is_matched"]).to eq(false)
+      end
     end
 
-    context "contentが空のとき" do
+    context "passive_likeが存在するとき" do
+      before do
+        @params = { from_user_id: current_user.id, to_user_id: other_user.id }
+        create(:like, from_user_id: other_user.id, to_user_id: current_user.id)
+      end
 
+      it "マッチング状態がtrueになること" do
+        subject
+        expect(res["status"]).to eq(200)
+        expect(res["is_matched"]).to eq(true)
+      end
+
+      it "chat_roomが作られること" do
+        expect { subject }.to change(ChatRoom, :count).by(+1).and change(ChatRoomUser, :count).by(+2)
+      end
     end
   end
 end
