@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
@@ -46,19 +45,15 @@ const HeaderIcon = ({ children, link, text }: HeaderIconButtonProps) => {
   return (
     <>
       <ListItem button sx={{ width: "100%" }}>
-        <Link to={link} style={{ textDecoration: "none", width: "100%" }}>
-          <Box style={{ display: "flex", alignItems: "center" }}>
-            <ListItemIcon>
-              <StyledIcon size="large">
-                {children}
-                <ArrowRight
-                  sx={{ position: "absolute", right: 4, opacity: 0 }}
-                />
-              </StyledIcon>
-            </ListItemIcon>
-            <ListItemText primary={text} style={{ color: "black" }} />
-          </Box>
-        </Link>
+        <Box style={{ display: "flex", alignItems: "center" }}>
+          <ListItemIcon>
+            <StyledIcon size="large">
+              {children}
+              <ArrowRight sx={{ position: "absolute", right: 4, opacity: 0 }} />
+            </StyledIcon>
+          </ListItemIcon>
+          <ListItemText primary={text} style={{ color: "black" }} />
+        </Box>
       </ListItem>
       <Divider />
     </>
