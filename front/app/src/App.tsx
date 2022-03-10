@@ -23,6 +23,7 @@ import User from "./components/pages/User";
 import Likes from "./components/pages/Likes";
 import Posts from "./components/pages/Posts";
 import Top from "./components/pages/Top";
+import AlertMessage from "./components/utils/AlertMessage";
 
 export const AuthContext = createContext(
   {} as {
@@ -33,6 +34,13 @@ export const AuthContext = createContext(
     currentUser: UserData | undefined;
     setCurrentUser: React.Dispatch<React.SetStateAction<UserData | undefined>>;
     handleGetCurrentUser: any;
+    guestLogin: any;
+    guestUser: boolean;
+    setGuestUser: React.Dispatch<React.SetStateAction<boolean>>;
+    guestAlertMessageOpen: boolean;
+    setGuestAlertMessageOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    guestDialogOpen: boolean;
+    setGuestDialogOpen: React.Dispatch<React.SetStateAction<boolean>>;
   }
 );
 
@@ -49,6 +57,13 @@ const App: React.FC = React.memo(() => {
     currentUser,
     setCurrentUser,
     handleGetCurrentUser,
+    guestLogin,
+    guestUser,
+    setGuestUser,
+    guestAlertMessageOpen,
+    setGuestAlertMessageOpen,
+    guestDialogOpen,
+    setGuestDialogOpen,
   } = useCurrentUser();
 
   const Private = ({ children }: RouteProps) => {
@@ -75,6 +90,13 @@ const App: React.FC = React.memo(() => {
           currentUser,
           setCurrentUser,
           handleGetCurrentUser,
+          guestLogin,
+          guestUser,
+          setGuestUser,
+          guestAlertMessageOpen,
+          setGuestAlertMessageOpen,
+          guestDialogOpen,
+          setGuestDialogOpen,
         }}
       >
         <Switch>
@@ -87,6 +109,12 @@ const App: React.FC = React.memo(() => {
                     <Route exact path="/signup" component={SignUp} />
                     <Route exact path="/signin" component={SignIn} />
                   </Switch>
+                  <AlertMessage
+                    open={guestAlertMessageOpen}
+                    setOpen={setGuestAlertMessageOpen}
+                    severity="error"
+                    message="ゲストユーザーでのログインに失敗しました。"
+                  />
                 </CommonLayout>
               </UnAuth>
               <Private>
