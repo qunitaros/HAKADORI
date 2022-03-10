@@ -9,7 +9,7 @@ import SignedOutHomeList from "../lists/SignedOutHomeList";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 const HomeNav = React.memo(() => {
-  const { currentUser, isSignedIn } = useContext(AuthContext);
+  const { currentUser, isSignedIn, guestLogin } = useContext(AuthContext);
 
   const [currentUserId, setCurrentUserId] = useState<number | undefined>(
     undefined
@@ -70,7 +70,7 @@ const HomeNav = React.memo(() => {
             filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
             mt: 1.5,
             "& .MuiAvatar-root": {
-              width: 32,
+              width: 47,
               height: 32,
               ml: -0.5,
               mr: 1,
@@ -99,7 +99,13 @@ const HomeNav = React.memo(() => {
             currentUserImage={currentUserImage}
           />
         ) : (
-          <SignedOutHomeList handleCloseNav={() => setAnchorEl(null)} />
+          <SignedOutHomeList
+            handleCloseNav={() => setAnchorEl(null)}
+            guestLogin={() => {
+              setAnchorEl(null);
+              guestLogin();
+            }}
+          />
         )}
       </Menu>
     </Box>

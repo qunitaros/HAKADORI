@@ -86,6 +86,20 @@ users = [
   }
 ]
 
+User.create!(
+  name: "琢磨",
+  email: "guest@example.com",
+  password: "hogehoge",
+  password_confirmation: "hogehoge",
+  prefecture: 33,
+  gender: 0,
+  field: 1,
+  day_off: 0,
+  birthday: "1997/01/01",
+  profile: "ゲストユーザーです! よろしくお願いします!!",
+  image:File.open("public/icons/guest.jpg")
+)
+
 users.length.times do |n|
   name = users[n][:name]
   email = "user#{n}@example.com"

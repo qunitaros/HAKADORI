@@ -9,9 +9,13 @@ import { Link } from "react-router-dom";
 
 interface SignedOutHomeListProps {
   handleCloseNav: () => void;
+  guestLogin: any;
 }
 
-const SignedOutHomeList = ({ handleCloseNav }: SignedOutHomeListProps) => {
+const SignedOutHomeList = ({
+  handleCloseNav,
+  guestLogin,
+}: SignedOutHomeListProps) => {
   return (
     <>
       <MenuItem onClick={handleCloseNav} component={Link} to="/signin">
@@ -23,6 +27,11 @@ const SignedOutHomeList = ({ handleCloseNav }: SignedOutHomeListProps) => {
       <MenuItem onClick={handleCloseNav} component={Link} to="/signup">
         <AssignmentIndIcon />
         <Typography style={{ marginLeft: "0.5rem" }}>新規登録</Typography>
+      </MenuItem>
+      <Divider />
+      <MenuItem onClick={guestLogin}>
+        <AssignmentIndIcon />
+        <Typography style={{ marginLeft: "0.5rem" }}>ゲストユーザー</Typography>
       </MenuItem>
     </>
   );
