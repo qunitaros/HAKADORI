@@ -36,8 +36,11 @@ export const AuthContext = createContext(
     handleGetCurrentUser: any;
     guestLogin: any;
     guestUser: boolean;
+    setGuestUser: React.Dispatch<React.SetStateAction<boolean>>;
     guestAlertMessageOpen: boolean;
     setGuestAlertMessageOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    guestDialogOpen: boolean;
+    setGuestDialogOpen: React.Dispatch<React.SetStateAction<boolean>>;
   }
 );
 
@@ -56,8 +59,11 @@ const App: React.FC = React.memo(() => {
     handleGetCurrentUser,
     guestLogin,
     guestUser,
+    setGuestUser,
     guestAlertMessageOpen,
     setGuestAlertMessageOpen,
+    guestDialogOpen,
+    setGuestDialogOpen,
   } = useCurrentUser();
 
   const Private = ({ children }: RouteProps) => {
@@ -86,8 +92,11 @@ const App: React.FC = React.memo(() => {
           handleGetCurrentUser,
           guestLogin,
           guestUser,
+          setGuestUser,
           guestAlertMessageOpen,
           setGuestAlertMessageOpen,
+          guestDialogOpen,
+          setGuestDialogOpen,
         }}
       >
         <Switch>

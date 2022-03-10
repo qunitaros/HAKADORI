@@ -126,7 +126,7 @@ User.create!(
   field: 1,
   day_off: 0,
   birthday: "1997/01/01",
-  profile: "ゲストユーザーです! よろしくお願いします!!",
+  profile: "よろしくお願いします!!",
   image:File.open("public/icons/guest.jpg")
 )
 

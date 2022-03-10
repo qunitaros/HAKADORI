@@ -10,8 +10,14 @@ import { signOut } from "../api/auth";
 import { updateUser } from "../api/users";
 
 const useHome = () => {
-  const { isSignedIn, setIsSignedIn, currentUser, setCurrentUser } =
-    useContext(AuthContext);
+  const {
+    isSignedIn,
+    setIsSignedIn,
+    currentUser,
+    setCurrentUser,
+    setGuestUser,
+    setGuestDialogOpen,
+  } = useContext(AuthContext);
   const history = useHistory();
 
   const [editFormOpen, setEditFormOpen] = useState<boolean>(false);
@@ -116,7 +122,10 @@ const useHome = () => {
         Cookies.remove("_client");
         Cookies.remove("_uid");
 
+        setGuestUser(false);
+        setGuestDialogOpen(false);
         setIsSignedIn(false);
+
         history.push("/signin");
 
         console.log("Succeeded in sign out");

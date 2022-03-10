@@ -2,16 +2,15 @@ import Cookies from "js-cookie";
 import { useState } from "react";
 import { SignInData, User } from "../../interfaces/index";
 import { getCurrentUser, signIn } from "../api/auth";
-import { useHistory } from "react-router-dom";
 
 const useCurrentUser = () => {
-  const history = useHistory();
   const [loading, setLoading] = useState<boolean>(true);
   const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
   const [currentUser, setCurrentUser] = useState<User | undefined>();
   const [guestUser, setGuestUser] = useState<boolean>(false);
   const [guestAlertMessageOpen, setGuestAlertMessageOpen] =
     useState<boolean>(false);
+  const [guestDialogOpen, setGuestDialogOpen] = useState<boolean>(false);
 
   // 認証済みのユーザーがいるかどうかチェック
   // 確認できた場合はそのユーザーの情報を取得
@@ -24,6 +23,9 @@ const useCurrentUser = () => {
         if (res?.data.status === 200) {
           setIsSignedIn(true);
           setCurrentUser(res?.data.currentUser);
+          res?.data.currentUser.id === 18
+            ? setGuestUser(true)
+            : setGuestUser(false);
         } else {
           console.log(res?.data.status);
         }
@@ -34,7 +36,6 @@ const useCurrentUser = () => {
       setIsSignedIn(false);
       console.log(err);
     }
-
     setLoading(false);
   };
 
@@ -54,17 +55,18 @@ const useCurrentUser = () => {
         Cookies.set("_client", res.headers["client"]);
         Cookies.set("_uid", res.headers["uid"]);
 
+        setGuestUser(true);
         setIsSignedIn(true);
         setCurrentUser(res.data.data);
-        setGuestUser(true);
 
-        history.push("/home");
-        console.log("Signed in successfully!");
+        console.log("Signed in GuestUser!");
       } else {
+        setGuestUser(false);
         setGuestAlertMessageOpen(true);
       }
     } catch (err) {
       console.log(err);
+      setGuestUser(false);
       setGuestAlertMessageOpen(true);
     }
   };
@@ -79,8 +81,11 @@ const useCurrentUser = () => {
     handleGetCurrentUser,
     guestLogin,
     guestUser,
+    setGuestUser,
     guestAlertMessageOpen,
     setGuestAlertMessageOpen,
+    guestDialogOpen,
+    setGuestDialogOpen,
   };
 };
 

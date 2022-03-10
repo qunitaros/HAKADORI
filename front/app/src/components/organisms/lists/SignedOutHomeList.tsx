@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import LoginIcon from "@mui/icons-material/Login";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
+import AirlineSeatReclineExtraTwoToneIcon from "@mui/icons-material/AirlineSeatReclineExtraTwoTone";
 import { Link } from "react-router-dom";
 
 interface SignedOutHomeListProps {
@@ -30,7 +31,7 @@ const SignedOutHomeList = ({
       </MenuItem>
       <Divider />
       <MenuItem onClick={guestLogin}>
-        <AssignmentIndIcon />
+        <AirlineSeatReclineExtraTwoToneIcon />
         <Typography style={{ marginLeft: "0.5rem" }}>ゲストユーザー</Typography>
       </MenuItem>
     </>
