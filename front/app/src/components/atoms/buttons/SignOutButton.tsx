@@ -9,20 +9,23 @@ const StyledButton = styled(Button)(({ theme }) => ({
 
 interface SignOutButtonProps {
   onClick: () => void;
+  children: string;
 }
-const SignOutButton = React.memo(({ onClick }: SignOutButtonProps) => {
-  return (
-    <StyledButton
-      variant="outlined"
-      onClick={onClick}
-      color="secondary"
-      sx={{ color: "red", borderColor: "red" }}
-      fullWidth
-      startIcon={<ExitToAppIcon />}
-    >
-      ログアウト
-    </StyledButton>
-  );
-});
+const SignOutButton = React.memo(
+  ({ onClick, children }: SignOutButtonProps) => {
+    return (
+      <StyledButton
+        variant="outlined"
+        onClick={onClick}
+        color="secondary"
+        sx={{ color: "red", borderColor: "red" }}
+        fullWidth
+        startIcon={<ExitToAppIcon />}
+      >
+        {children}
+      </StyledButton>
+    );
+  }
+);
 
 export default SignOutButton;

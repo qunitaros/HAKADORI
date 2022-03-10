@@ -9,7 +9,8 @@ import SignedOutHomeList from "../lists/SignedOutHomeList";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 const HomeNav = React.memo(() => {
-  const { currentUser, isSignedIn } = useContext(AuthContext);
+  const { currentUser, isSignedIn, guestLogin, setGuestUser } =
+    useContext(AuthContext);
 
   const [currentUserId, setCurrentUserId] = useState<number | undefined>(
     undefined
@@ -99,7 +100,14 @@ const HomeNav = React.memo(() => {
             currentUserImage={currentUserImage}
           />
         ) : (
-          <SignedOutHomeList handleCloseNav={() => setAnchorEl(null)} />
+          <SignedOutHomeList
+            handleCloseNav={() => setAnchorEl(null)}
+            guestLogin={() => {
+              setAnchorEl(null);
+              setGuestUser(true);
+              guestLogin();
+            }}
+          />
         )}
       </Menu>
     </Box>

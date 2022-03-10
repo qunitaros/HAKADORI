@@ -10,6 +10,7 @@ import SignOutButton from "../../atoms/buttons/SignOutButton";
 import { HomeContext } from "../../pages/Home";
 import UserProfileContent from "../../atoms/contents/UserProfileContent";
 import UserProfileName from "../../atoms/titles/UserProfileName";
+import { AuthContext } from "../../../App";
 
 const StyledCard = styled(Card)(() => ({
   width: "80%",
@@ -28,12 +29,18 @@ const CurrentUserProps = React.memo(() => {
     currentUser,
   } = useContext(HomeContext);
 
+  const { guestUser, setGuestDialogOpen } = useContext(AuthContext);
+
+  const onClickSettingIcon = () => {
+    return guestUser ? setGuestDialogOpen(true) : setEditFormOpen(true);
+  };
+
   return (
     <StyledCard>
       <CardContent>
         <Grid container justifyContent="flex-end">
           <Grid item>
-            <SettingIcon onClick={() => setEditFormOpen(true)} />
+            <SettingIcon onClick={() => onClickSettingIcon()} />
           </Grid>
         </Grid>
         <Grid container justifyContent="center">
@@ -50,7 +57,7 @@ const CurrentUserProps = React.memo(() => {
           dayOff={currentUserDayOff()}
           profile={currentUser?.profile}
         />
-        <SignOutButton onClick={handleSignOut} />
+        <SignOutButton onClick={handleSignOut}>ログアウト</SignOutButton>
       </CardContent>
     </StyledCard>
   );

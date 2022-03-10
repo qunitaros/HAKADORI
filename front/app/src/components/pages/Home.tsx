@@ -1,4 +1,4 @@
-import React, { createContext } from "react";
+import React, { createContext, useContext } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 
 import useHome from "../../lib/hooks/useHome";
@@ -6,6 +6,8 @@ import { User } from "../../interfaces";
 import CurrentUserCard from "../organisms/cards/CurrentUserCard";
 import UserEditDialog from "../organisms/dialogs/UserEditDialog";
 import AlertMessage from "../utils/AlertMessage";
+import GuestDialog from "../organisms/dialogs/GuestDialog";
+import { AuthContext } from "../../App";
 
 export const HomeContext = createContext(
   {} as {
@@ -67,6 +69,8 @@ const Home: React.FC = () => {
     currentUser,
   } = useHome();
 
+  const { guestDialogOpen, setGuestDialogOpen } = useContext(AuthContext);
+
   return (
     <HomeContext.Provider
       value={{
@@ -110,6 +114,11 @@ const Home: React.FC = () => {
         setOpen={setUpdateAlertMessageOpen}
         severity="error"
         message="プロフィールの更新に失敗しました。"
+      />
+      <GuestDialog
+        open={guestDialogOpen}
+        onClose={() => setGuestDialogOpen(false)}
+        onClick={handleSignOut}
       />
     </HomeContext.Provider>
   );
