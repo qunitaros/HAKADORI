@@ -16,7 +16,7 @@ const MessageContent = React.memo(
             ? "30px 30px 30px 0px"
             : "30px 30px 0px 30px"
         }
-        bgcolor={messageUserId === otherUserId ? "#000000" : "#ffb6c1"}
+        bgcolor={messageUserId === otherUserId ? "#d3d3d3" : "#ffb6c1"}
         color={messageUserId === otherUserId ? "#000000" : "#ffffff"}
         m={1}
         border={10}
