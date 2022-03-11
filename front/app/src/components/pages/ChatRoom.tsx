@@ -18,7 +18,7 @@ const StyledWrapper = styled("form")(() => ({
   padding: "2px 4px",
   display: "flex",
   alignItems: "center",
-  maxWidth: "380px",
+  minWidth: "380px",
 }));
 
 type ChatRoomProps = RouteComponentProps<{ id: string }>;
@@ -44,12 +44,15 @@ const ChatRoom: React.FC<ChatRoomProps> = React.memo((props) => {
   return (
     <>
       {!loading ? (
-        <div style={{ maxWidth: "720px" }}>
-          <Grid
-            container
-            justifyContent="center"
-            style={{ marginBottom: "1rem" }}
-          >
+        <div
+          style={{
+            backgroundColor: "#efefef",
+            padding: "2rem",
+            borderRadius: "40px",
+            minHeight: "500px",
+          }}
+        >
+          <Grid container justifyContent="center" sx={{ marginBottom: "1rem" }}>
             <Grid item>
               <LargeAvatar imageUrl={otherUser?.image.url || ""} />
 
@@ -84,7 +87,7 @@ const ChatRoom: React.FC<ChatRoomProps> = React.memo((props) => {
               </Grid>
             );
           })}
-          <Grid container justifyContent="center" style={{ marginTop: "2rem" }}>
+          <Grid container justifyContent="center" sx={{ marginTop: "4rem" }}>
             <StyledWrapper noValidate autoComplete="off">
               <MessageForm
                 value={content}

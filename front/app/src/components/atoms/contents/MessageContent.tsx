@@ -16,10 +16,10 @@ const MessageContent = React.memo(
             ? "30px 30px 30px 0px"
             : "30px 30px 0px 30px"
         }
-        bgcolor={messageUserId === otherUserId ? "#d3d3d3" : "#ffb6c1"}
-        color={messageUserId === otherUserId ? "#000000" : "#ffffff"}
+        bgcolor={messageUserId === otherUserId ? "#ffb6c1" : "#ddeeff"}
+        color="#000000"
         m={1}
-        border={10}
+        border={0}
         style={{ padding: "1rem 0.5rem 1rem 1rem" }}
       >
         <Typography variant="body1" component="p">
