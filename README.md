@@ -86,6 +86,8 @@ zoom での合同勉強や、電話でわからないことを聞く、といっ
 
 # インフラ構成図
 
+![Infrra Image](/front/app/src/assets/aws-infra.png)
+
 ---
 
 # 機能一覧
