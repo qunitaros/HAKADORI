@@ -203,6 +203,7 @@ GEM
     rspec-support (3.10.3)
     ruby-vips (2.1.4)
       ffi (~> 1.12)
+    sd_notify (0.1.1)
     spring (4.0.0)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
@@ -241,6 +242,7 @@ DEPENDENCIES
   rack-cors
   rails (~> 6.1.4, >= 6.1.4.4)
   rspec-rails
+  sd_notify
   spring
   spring-commands-rspec
   tzinfo-data
