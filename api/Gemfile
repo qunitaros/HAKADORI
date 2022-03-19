@@ -35,6 +35,10 @@ gem 'carrierwave'
 #S3に画像を保存するためのgem
 gem 'fog-aws'
 
+# systemdへ起動完了通知を送るgem
+gem "sd_notify"
+
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
