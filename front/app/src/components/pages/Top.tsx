@@ -14,6 +14,18 @@ const StyledMainContainer = styled("div")(() => ({
   backgroundSize: "cover",
   width: "100%",
   height: 800,
+  ":before": {
+    backgroundColor: "black",
+    opacity: "0.4",
+    position: "absolute",
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+  },
+  "@media screen and (max-width:600px)": {
+    height: 400,
+  },
 }));
 
 const StyledMainTitle = styled("h1")(() => ({
@@ -28,6 +40,10 @@ const StyledMainTitle = styled("h1")(() => ({
   color: "#fff",
   justifyContent: "center",
   alignItems: "center",
+  "@media screen and (max-width:600px)": {
+    top: "20%",
+    fontSize: 22,
+  },
 }));
 
 const StyledQuestionContainer = styled("div")(() => ({
@@ -42,6 +58,9 @@ const StyledQuestionContainer = styled("div")(() => ({
   justifyContent: "space-around",
   gap: 4,
   flexWrap: "wrap",
+  "@media screen and (max-width:600px)": {
+    height: 400,
+  },
 }));
 
 const StyledQuestionTextContainer = styled("div")(() => ({
@@ -58,14 +77,22 @@ const StyledQuestionTitle = styled("h2")(() => ({
   fontSize: 30,
   fontWeight: "bold",
   color: "#110",
+  "@media screen and (max-width:600px)": {
+    fontSize: 27,
+  },
 }));
 
 const StyledQuestionDescription = styled("p")(() => ({
   fontSize: 20,
+  color: "#000",
   position: "absolute",
   left: "10%",
   top: "50%",
-  color: "#110",
+  "@media screen and (max-width:600px)": {
+    fontSize: 18,
+    top: "55%",
+    width: "54%",
+  },
 }));
 
 const StyledResearchContainer = styled("div")(() => ({
@@ -80,6 +107,9 @@ const StyledResearchContainer = styled("div")(() => ({
   justifyContent: "space-around",
   gap: 4,
   flexWrap: "wrap",
+  "@media screen and (max-width:600px)": {
+    height: 400,
+  },
 }));
 
 const StyledResearchTextContainer = styled("div")(() => ({
@@ -95,15 +125,23 @@ const StyledResearchText = styled("div")(() => ({
   left: "10%",
   top: "30%",
   color: "#fff",
-  backgroundColor: "#444",
+  backgroundColor: "rgba(125, 125, 125, 0.7)",
   padding: "1.5rem",
   borderRadius: 50,
+  "@media screen and (max-width:600px)": {
+    top: "20%",
+    left: "5%",
+    fontSize: 17,
+  },
 }));
 
 const StyledResearchMerit = styled("p")(() => ({
   fontSize: 22,
   margin: "0.5rem auto",
   fontWeight: "bold",
+  "@media screen and (max-width:600px)": {
+    fontSize: 18,
+  },
 }));
 
 const StyledMatchingContainer = styled("div")(() => ({
@@ -118,8 +156,11 @@ const StyledMatchingContainer = styled("div")(() => ({
   justifyContent: "space-around",
   gap: 4,
   flexWrap: "wrap",
-  backgroundColor: "rgba(255,255,255,0.6)",
+  backgroundColor: "rgba(255,255,255,0.5)",
   backgroundBlendMode: "lighten",
+  "@media screen and (max-width:600px)": {
+    height: 400,
+  },
 }));
 
 const StyledMatchingTextContainer = styled("div")(() => ({
@@ -144,6 +185,10 @@ const StyledMatchingTitle = styled("h1")(() => ({
   justifyContent: "center",
   alignItems: "center",
   textAlign: "center",
+  "@media screen and (max-width:600px)": {
+    fontSize: 26,
+    border: "0.4rem solid",
+  },
 }));
 
 const Top = () => {
@@ -173,12 +218,8 @@ const Top = () => {
             勉強に勤しむあなたへ。
           </StyledQuestionTitle>
           <StyledQuestionDescription>
-            目標のため、他の人が休んでいる週末も <br />
-            勉強しているあなたはすごい人です。 <br />
-            <br />
-            でも、モチベーションが
-            <br />
-            上がらない日が続いていませんか？
+            仕事のため、転職のための勉強、 <br />
+            モチベーションが上がらない日がありませんか？
           </StyledQuestionDescription>
         </StyledQuestionTextContainer>
       </StyledQuestionContainer>
