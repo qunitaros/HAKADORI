@@ -2,7 +2,7 @@ class Api::V1::UsersController < ApplicationController
   before_action :set_user, only: %i[show update]
 
   def index
-    users = User.where.not(id: current_api_v1_user.id, gender: current_api_v1_user.gender).order("created_at DESC")
+    users = User.where.not(id: current_api_v1_user.id).order("created_at DESC")
     render json: { status: 200, users: users }
   end
 
